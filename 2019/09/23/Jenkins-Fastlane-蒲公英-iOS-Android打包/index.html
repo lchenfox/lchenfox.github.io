@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/09/11/C6JfdemONPYoRHA.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/11/eKa54XmDkqhGrxM.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/12/28EUzOMVWySrqQu.png">
-<meta property="og:updated_time" content="2019-09-24T14:32:38.360Z">
+<meta property="og:updated_time" content="2019-09-24T14:34:29.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins + Fastlane + 蒲公英 + iOS + Android打包">
 <meta name="twitter:description" content="一 前言本教程结合Jenkins、Fastlane和蒲公英对iOS和Android实现自动化打包并上传蒲公英，详细说明了打包的jenkins配置、fastlane脚本配置并上传到蒲公英。然而，针对安装jenkins并没有详细的大量篇幅说明，若安装jenkins出现问题，可自行Google或去官方网站查询，资料很多，这里并不一一列举。 二 环境本文主要针对React Native项目对iOS和And">
@@ -239,22 +239,8 @@
 </ul>
 <p><img src="https://i.loli.net/2019/09/12/28EUzOMVWySrqQu.png" alt="1251568258617_.pic_好的.jpg"></p>
 <p><code>shell脚本</code>如下（可直接复制粘贴使用，需要修改的地方以下有说明）：</p>
-<ul>
-<li>使环境变量配置生效<br>source ~/.bash_profile<br>case $Platform in<br>  iOS)<pre><code>echo &quot;❣️❣️❣️开始iOS打包，成功后自动上传到蒲公英&quot;
-# 解锁Mac上的钥匙串（123456789是你自己的开机密码），LiuDeHua是你自己的用户名，可用pwd命令查看
-security unlock-keychain -p 123456789 /Users/LiuDeHua/Library/Keychains/login.keychain
-# 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包
-cd /Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios
-# 这里主要是为了移除上一次打的ipa包，留着没用，你也可以选择保留   
-#（注：由于我在Fastlane文件导出的包名与打包时间相关，每次都不一样，所以每打一次就会不断增加ipa包）     
-rm -rf /Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios/build</code></pre>  ;;<br>  Android)<pre><code>echo &quot;❣️❣️❣️️开始Android打包，成功后自动上传到蒲公英&quot;
-# 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包
-cd /Users/langke/jenkins/workspace/CIProject/JenkinsDemo/android</code></pre>  ;;<br>  *)<pre><code>echo &quot;❌❌❌ Arguments error! Please check your shell script!!!&quot;
-exit</code></pre>  ;;<br>esac<h1 id="更新bundle命令（fastlane官方建议的），如果没使用bundle，这一行直接去掉"><a href="#更新bundle命令（fastlane官方建议的），如果没使用bundle，这一行直接去掉" class="headerlink" title="更新bundle命令（fastlane官方建议的），如果没使用bundle，这一行直接去掉"></a>更新bundle命令（fastlane官方建议的），如果没使用bundle，这一行直接去掉</h1>/usr/local/bin/bundle update<h1 id="打包本地的fastlane脚本，如果没使用bundle，去掉-usr-local-bin-bundle-exec即可"><a href="#打包本地的fastlane脚本，如果没使用bundle，去掉-usr-local-bin-bundle-exec即可" class="headerlink" title="打包本地的fastlane脚本，如果没使用bundle，去掉/usr/local/bin/bundle exec即可"></a>打包本地的fastlane脚本，如果没使用bundle，去掉/usr/local/bin/bundle exec即可</h1>/usr/local/bin/bundle exec fastlane UploadToPgyer</li>
-</ul>
-<blockquote>
-<p>注：以上的路径，比如 <code>/Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios</code> 都可以自己利用<code>terminal</code>进入到你的工程根目录下，然后使用 <code>pwd</code> 命令查看并复制粘贴即可，每个人的用户名、项目名一般都不一样，因此路径也不一样，但原理都是一样的。</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 使环境变量配置生效</span><br><span class="line">source ~/.bash_profile</span><br><span class="line">case $Platform in</span><br><span class="line">    iOS)</span><br><span class="line">         echo &quot;❣️❣️❣️开始iOS打包，成功后自动上传到蒲公英&quot;</span><br><span class="line">         # 解锁Mac上的钥匙串（123456789是你自己的开机密码），LiuDeHua是你自己的用户名，可用pwd命令查看</span><br><span class="line">		 security unlock-keychain -p 123456789 /Users/LiuDeHua/Library/Keychains/login.keychain</span><br><span class="line">		 # 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包</span><br><span class="line">		 cd /Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios</span><br><span class="line">		 # 这里主要是为了移除上一次打的ipa包，留着没用，你也可以选择保留   </span><br><span class="line">		 #（注：由于我在Fastlane文件导出的包名与打包时间相关，每次都不一样，所以每打一次就会不断增加ipa包）     </span><br><span class="line">		 rm -rf /Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios/build</span><br><span class="line">    ;;</span><br><span class="line">    Android)</span><br><span class="line">         echo &quot;❣️❣️❣️️开始Android打包，成功后自动上传到蒲公英&quot;</span><br><span class="line">         # 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包</span><br><span class="line">		 cd /Users/langke/jenkins/workspace/CIProject/JenkinsDemo/android</span><br><span class="line">    ;;</span><br><span class="line">    *)</span><br><span class="line">    	echo &quot;❌❌❌ Arguments error! Please check your shell script!!!&quot;</span><br><span class="line">    	exit</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br><span class="line"># 更新bundle命令（fastlane官方建议的），如果没使用bundle，这一行直接去掉</span><br><span class="line">/usr/local/bin/bundle update</span><br><span class="line"># 打包本地的fastlane脚本，如果没使用bundle，去掉/usr/local/bin/bundle exec即可 </span><br><span class="line">/usr/local/bin/bundle exec fastlane UploadToPgyer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; 注意：以上的路径，比如 `/Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios` 都可以自己利用`terminal`进入到你的工程根目录下，然后使用 `pwd` 命令查看并复制粘贴即可，每个人的用户名、项目名一般都不一样，因此路径也不一样，但原理都是一样的。</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><strong>7.2.6 构建后操作（不需要，可跳过）</strong></li>
 </ul>

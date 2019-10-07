@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="陈龙 的博客">
 <meta property="og:description" content="创建博客1hexo new &amp;quot;博客标题&amp;quot;  发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选） 1hexo clean  发布和部署 1hexo g -d   以上命令其实和：1. hexo g，2. hexo d 是一样的。  更换主题推荐人气最佳的next主题，其他更换主题的方式都差不多的  1.安装  1git clone https://github.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-07T13:31:32.639Z">
+<meta property="og:updated_time" content="2019-10-07T13:59:44.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo基本使用">
 <meta name="twitter:description" content="创建博客1hexo new &amp;quot;博客标题&amp;quot;  发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选） 1hexo clean  发布和部署 1hexo g -d   以上命令其实和：1. hexo g，2. hexo d 是一样的。  更换主题推荐人气最佳的next主题，其他更换主题的方式都差不多的  1.安装  1git clone https://github.">
@@ -292,6 +292,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -375,6 +397,14 @@
 <li>2.2.2 编辑刚新建的页面，将页面的类型设置为 <code>tags</code> ，主题将自动为这个页面显示标签云。</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 标签</span><br><span class="line">date: 2019-10-07 21:27:11</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="三-添加头像"><a href="#三-添加头像" class="headerlink" title="三 添加头像"></a>三 添加头像</h3><p>编辑主题的 <code>_config.yml</code>，新增字段<code>avatar</code>， 值设置成头像的链接地址。</p>
+<p>其中，头像的链接地址可以是：<br>    1    完整的互联网 <code>URL</code>，例如：<code>https://avatars1.githubusercontent.com/u/32269?v=3&amp;s=460</code><br>    2    站点内的地址，例如：<br>    ◦    <code>/uploads/avatar.jpg</code> 需要将你的头像图片放置在 站点的 <code>source/uploads/</code>（可能需要新建uploads目录）<br>    ◦    <code>/images/avatar.jpg</code> 需要将你的头像图片放置在 主题的 <code>source/images/</code> 目录下。</p>
+<p>在根目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi themes/next/_config.yml</span><br></pre></td></tr></table></figure>
+
+<p>找到并打开<code>avatar: /images/avatar.jpg</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line"># in theme directory(source/images): /images/avatar.gif</span><br><span class="line"># in site  directory(source/uploads): /uploads/avatar.gif</span><br><span class="line">avatar: /images/avatar.jpg</span><br></pre></td></tr></table></figure>
 
 
       
@@ -494,6 +524,15 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
 
@@ -524,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建博客"><span class="nav-number">1.</span> <span class="nav-text">创建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布博客"><span class="nav-number">2.</span> <span class="nav-text">发布博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换主题"><span class="nav-number">3.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改主题配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改主题配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-修改主题布局"><span class="nav-number">4.1.</span> <span class="nav-text">一 修改主题布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-增加标签和分类"><span class="nav-number">4.2.</span> <span class="nav-text">二 增加标签和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-分类"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-标签"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 标签</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建博客"><span class="nav-number">1.</span> <span class="nav-text">创建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布博客"><span class="nav-number">2.</span> <span class="nav-text">发布博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换主题"><span class="nav-number">3.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改主题配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改主题配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-修改主题布局"><span class="nav-number">4.1.</span> <span class="nav-text">一 修改主题布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-增加标签和分类"><span class="nav-number">4.2.</span> <span class="nav-text">二 增加标签和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-分类"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-标签"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-添加头像"><span class="nav-number">4.3.</span> <span class="nav-text">三 添加头像</span></a></li></ol></li></ol></div>
             
 
           </div>

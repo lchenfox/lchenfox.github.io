@@ -345,73 +345,26 @@
       
         
           
-            <h2 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;博客标题&quot;</span><br></pre></td></tr></table></figure>
+          创建博客1hexo new &quot;博客标题&quot;
 
-<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><p>先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选）
+1hexo clean
 
-<p>发布和部署</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>以上命令其实和：1. <code>hexo g</code>，2. <code>hexo d</code> 是一样的。</p>
-</blockquote>
-<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>推荐人气最佳的<code>next</code>主题，其他更换主题的方式都差不多的</p>
-<ul>
-<li>1.安装</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next.git themes/next</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>2.修改</li>
-</ul>
-<p>打开根目录下配置文件<code>_config.yml</code>, 找到<code>theme</code>项，修改为以下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h2><h3 id="一-修改主题布局"><a href="#一-修改主题布局" class="headerlink" title="一 修改主题布局"></a>一 修改主题布局</h3><p>在根目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi themes/next/_config.yml</span><br></pre></td></tr></table></figure>
-
-<p>找到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
-
-<p>根据自己需要，打开相应的<code>scheme</code>项，即可浏览相应的效果。我比较喜欢<code>scheme: Pisces</code>，左侧是栏目，右侧显示内容。</p>
-<h3 id="二-增加标签和分类"><a href="#二-增加标签和分类" class="headerlink" title="二 增加标签和分类"></a>二 增加<code>标签和分类</code></h3><p>在根目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi themes/next/_config.yml</span><br></pre></td></tr></table></figure>
-
-<p>找到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  #about: /about/ || user</span><br><span class="line">  tags: /tags/ || tags</span><br><span class="line">  categories: /categories/ || th</span><br><span class="line">  archives: /archives/ || archive</span><br><span class="line">  #schedule: /schedule/ || calendar</span><br><span class="line">  #sitemap: /sitemap.xml || sitemap</span><br><span class="line">  #commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
-
-<p>打开主题配置文件里面的<code>menu项</code>，接着打开相应的子配置项<code>tags</code>和<code>categories</code>。</p>
-<h4 id="2-1-分类"><a href="#2-1-分类" class="headerlink" title="2.1 分类"></a>2.1 分类</h4><ul>
-<li>2.1.1 新建一个页面，命名为 <code>categories</code> 。命令如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>2.1.2 编辑刚新建的页面，将页面的类型设置为 <code>categories</code> ，主题将自动为这个页面显示所有分类。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2019-10-07 21:27:11</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-标签"><a href="#2-2-标签" class="headerlink" title="2.2 标签"></a>2.2 标签</h4><ul>
-<li>2.2.1 新建一个页面，命名为<code>tags</code> 。命令如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>2.2.2 编辑刚新建的页面，将页面的类型设置为 <code>tags</code> ，主题将自动为这个页面显示标签云。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 标签</span><br><span class="line">date: 2019-10-07 21:27:11</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h3 id="三-添加头像"><a href="#三-添加头像" class="headerlink" title="三 添加头像"></a>三 添加头像</h3><p>编辑主题的 <code>_config.yml</code>，新增字段<code>avatar</code>， 值设置成头像的链接地址。</p>
-<p>其中，头像的链接地址可以是：<br>    1    完整的互联网 <code>URL</code>，例如：<code>https://avatars1.githubusercontent.com/u/32269?v=3&amp;s=460</code><br>    2    站点内的地址，例如：<br>    ◦    <code>/uploads/avatar.jpg</code> 需要将你的头像图片放置在 站点的 <code>source/uploads/</code>（可能需要新建uploads目录）<br>    ◦    <code>/images/avatar.jpg</code> 需要将你的头像图片放置在 主题的 <code>source/images/</code> 目录下。</p>
-<p>在根目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi themes/next/_config.yml</span><br></pre></td></tr></table></figure>
-
-<p>找到并打开<code>avatar: /images/avatar.jpg</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line"># in theme directory(source/images): /images/avatar.gif</span><br><span class="line"># in site  directory(source/uploads): /uploads/avatar.gif</span><br><span class="line">avatar: /images/avatar.jpg</span><br></pre></td></tr></table></figure>
+发布和部署
+1hexo g -d
 
 
-          
+以上命令其实和：1. hexo g，2. hexo d 是一样的。
+
+更换主题推荐人气最佳的next主
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/23/hexo-简单命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -551,190 +504,15 @@
       
         
           
-            <h2 id="一-前言"><a href="#一-前言" class="headerlink" title="一 前言"></a>一 前言</h2><p>本教程结合<code>Jenkins</code>、<code>Fastlane</code>和<code>蒲公英</code>对<code>iOS</code>和<code>Android</code>实现自动化打包并上传蒲公英，详细说明了打包的<code>jenkins配置</code>、<code>fastlane脚本配置</code>并上传到蒲公英。然而，针对安装<code>jenkins</code>并没有详细的大量篇幅说明，若安装<code>jenkins</code>出现问题，可自行<code>Google</code>或<code>去官方网站</code>查询，资料很多，这里并不一一列举。</p>
-<h2 id="二-环境"><a href="#二-环境" class="headerlink" title="二 环境"></a>二 环境</h2><p>本文主要针对<code>React Native</code>项目对<code>iOS</code>和<code>Android</code>进行打包，笔者也亲自实践过原生项目的打包，除了路径不一样，其余都是一模一样的。</p>
-<p>环境如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">React Native Environment Info:</span><br><span class="line">    System:</span><br><span class="line">      OS: macOS 10.14.5</span><br><span class="line">      CPU: (4) x64 Intel(R) Core(TM) i3-8100B CPU @ 3.60GHz</span><br><span class="line">      Memory: 166.11 MB / 8.00 GB</span><br><span class="line">      Shell: 5.3 - /bin/zsh</span><br><span class="line">    Binaries:</span><br><span class="line">      Node: 11.5.0 - /usr/local/bin/node</span><br><span class="line">      Yarn: 1.17.3 - ~/.yarn/bin/yarn</span><br><span class="line">      npm: 6.4.1 - /usr/local/bin/npm</span><br><span class="line">      Watchman: 4.9.0 - /usr/local/bin/watchman</span><br><span class="line">    SDKs:</span><br><span class="line">      iOS SDK:</span><br><span class="line">        Platforms: iOS 12.2, macOS 10.14, tvOS 12.2, watchOS 5.2</span><br><span class="line">      Android SDK:</span><br><span class="line">        API Levels: 23, 26, 27, 28</span><br><span class="line">        Build Tools: 23.0.1, 26.0.1, 27.0.3, 28.0.2, 28.0.3</span><br><span class="line">        System Images: android-23 | Intel x86 Atom_64, android-23 | Google APIs Intel x86 Atom, android-23 | Google APIs Intel x86 Atom_64, android-27 | Intel x86 Atom_64, android-27 | Google APIs Intel x86 Atom, android-27 | Google Play Intel x86 Atom</span><br><span class="line">    IDEs:</span><br><span class="line">      Android Studio: 3.3 AI-182.5107.16.33.5314842</span><br><span class="line">      Xcode: 10.2.1/10E1001 - /usr/bin/xcodebuild</span><br><span class="line">    npmPackages:</span><br><span class="line">      react: ^16.6.0-alpha.8af6728 =&gt; 16.6.0-alpha.8af6728</span><br><span class="line">      react-native: 0.57.4 =&gt; 0.57.4</span><br><span class="line">    npmGlobalPackages:</span><br><span class="line">      react-native-cli: 2.0.1</span><br><span class="line">      react-native-update-cli: 0.1.0</span><br></pre></td></tr></table></figure>
-
-<h2 id="三-安装"><a href="#三-安装" class="headerlink" title="三 安装"></a>三 安装</h2><h4 id="3-1-安装Jenkins"><a href="#3-1-安装Jenkins" class="headerlink" title="3.1 安装Jenkins"></a>3.1 安装<code>Jenkins</code></h4><ul>
-<li>3.1.1 升级ruby</li>
-</ul>
-<blockquote>
-<p>由于<code>fastlane</code>依赖<code>ruby环境</code>，默认情况下，<code>Mac</code>下得<code>ruby</code>或者版本比较低，这取决于你的系统，但是建议对其进行升级到最新版本，以免后续出错。</p>
-</blockquote>
-<p><em>3.1.1.1 查看当前<code>ruby</code>版本：</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -v</span><br></pre></td></tr></table></figure>
-
-<p><em>3.1.1.2 安装<code>rvm</code>(Ruby Version Manager)</em></p>
-<p><strong>注：</strong><a href="https://docs.fastlane.tools/best-practices/continuous-integration/jenkins/" target="_blank" rel="noopener">fastlane官方建议</a>使用<a href="https://github.com/rbenv/rbenv" target="_blank" rel="noopener">rbenv</a>来安装和管理<code>ruby</code>。事实上，使用<code>rvm</code>已经足够，取决于个人的选择。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\curl -sSL https://get.rvm.io | bash -s stable --ruby</span><br></pre></td></tr></table></figure>
-
-<p><em>3.1.1.3 退出终端，重新打开，查看是否安装成功</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm -v</span><br></pre></td></tr></table></figure>
-
-<p><em>3.1.1.4 列举出ruby所有版本</em> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm list known</span><br></pre></td></tr></table></figure>
-
-<p><em>3.1.1.5 升级ruby</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 版本号 // 注意：这个版本号是你刚才列举出来的ruby所有版本号之一，一般选择最新的即可</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>3.1.2 安装<code>Jenkins</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew update &amp;&amp; brew install jenkins</span><br></pre></td></tr></table></figure>
-
-<p>若遇到问题，请查看<a href="https://jenkins.io/zh/doc/book/installing/" target="_blank" rel="noopener">Jenkins官网</a> 或 自行<code>Google</code>。</p>
-<blockquote>
-<p>注：不推荐直接下载<code>pkg</code>包直接安装。</p>
-</blockquote>
-<h4 id="3-2-安装xcode打包所需命令行工具"><a href="#3-2-安装xcode打包所需命令行工具" class="headerlink" title="3.2 安装xcode打包所需命令行工具"></a>3.2 安装<code>xcode</code>打包所需命令行工具</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-3-安装fastlane"><a href="#3-3-安装fastlane" class="headerlink" title="3.3 安装fastlane"></a>3.3 安装<code>fastlane</code></h4><ul>
-<li>方式一，使用<code>Homebrew</code>安装</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install fastlane</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>方式二， 使用<code>RubyGems</code>安装</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install fastlane -NV</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>对于方式二，若遇到无执行权限，可尝试：<code>sudo gem install fastlane -NV</code>。</p>
-</blockquote>
-<h4 id="3-4-设置环境变量"><a href="#3-4-设置环境变量" class="headerlink" title="3.4 设置环境变量"></a>3.4 设置环境变量</h4><p>将一下命令添加到你的<code>~/.bashrc</code>, <code>~/.bash_profile</code>, <code>~/.profile</code> 或者 <code>~/.zshrc</code>中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LC_ALL=en_US.UTF-8</span><br><span class="line">export LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注：添加的目的是保证<code>fastlane</code>能够在<code>utf-8</code>编码环境下执行，否则在未设置<code>utf-8</code>为默认编码的系统上，<code>fastlane</code>运行可能会出现错误❌。</p>
-</blockquote>
-<p>接着使其生效：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注：如果你是添加到<code>~/.bashrc</code>中，就使用<code>source ~/.bashrc</code>; 若你是添加到<code>~/.bash_profile</code>中，就使用<code>source ~/.bash_profile</code>，以此类推。</p>
-</blockquote>
-<h2 id="四-初始化"><a href="#四-初始化" class="headerlink" title="四 初始化"></a>四 初始化</h2><h4 id="4-1-使用Gemfile-可选，但是建议安装"><a href="#4-1-使用Gemfile-可选，但是建议安装" class="headerlink" title="4.1 使用Gemfile(可选，但是建议安装)"></a>4.1 使用<code>Gemfile</code>(可选，但是建议安装)</h4><blockquote>
-<p>注：这只是<code>fastlane</code>官方推荐，原因如果我们使用<code>Gemfile</code>文件的话，我们可以使用它来定义<code>fastlane</code>的相关依赖，其次这也可以让我们现在所使用到的<code>fastlane</code>版本一目了然，并且还可以加快<code>fastlane</code>命令的执行，这<strong>不是必须的步骤！！！</strong></p>
-</blockquote>
-<ul>
-<li>4.1.1 在工程根目录下（xxx.xcodeproj所在目录）创建<code>Gemfile</code></li>
-</ul>
-<blockquote>
-<p>（一般是根目录，如果是<code>React Native</code>项目，则在<code>ios</code>目录下， <code>Android</code>的话进入<code>.../android</code>目录下， <code>Android</code>没有<code>scheme.xcodeproj</code>）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch Gemfile</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>4.1.2 将以下内容添加到刚才创建的<code>Gemfile</code>文件中</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source &quot;https://rubygems.org&quot;</span><br><span class="line"></span><br><span class="line">gem &quot;fastlane&quot;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>4.1.3 安装<code>bundle</code>命令</li>
-</ul>
-<p>请依次执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bundle install</span><br><span class="line"></span><br><span class="line">bundle update</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注1：如果以上执行没有权限，请在前面添加 <code>sudo</code> 命令。以上会生成 <code>Gemfile</code> 和 <code>Gemfile.lock</code> 文件，可以提交到版本控制系统<code>git</code>中。</p>
-</blockquote>
-<blockquote>
-<p>注2：后面执行<code>fastlane</code>命令的时候，我们就可以使用 <code>bundle exec fastlane [lane]</code>， 后面的 <code>[lane]</code> 代表你在<code>Fastfile</code>文件里面配置的<code>lane项</code>，比如：<code>bundle exec fastlane topgyer</code>命令中的<code>toppgyer</code>。</p>
-</blockquote>
-<blockquote>
-<p>注3: 如果要更新<code>fastlane</code>，也可以使用: <code>[sudo] bundle update fastlane</code>命令。</p>
-</blockquote>
-<h4 id="4-2-初始化fastlane"><a href="#4-2-初始化fastlane" class="headerlink" title="4.2 初始化fastlane"></a>4.2 初始化<code>fastlane</code></h4><blockquote>
-<p><code>cd</code>到 <code>scheme.xcodeproj</code>所在目录（一般是根目录，如果是<code>React Native</code>项目，则在<code>ios</code>目录下， <code>Android</code>的话进入<code>.../android</code>目录下， <code>Android</code>没有<code>scheme.xcodeproj</code>）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastlane init</span><br></pre></td></tr></table></figure>
-
-<p>出现：<code>What would you like to use fastlane for?</code></p>
-<p>答：4</p>
-<blockquote>
-<p>根据提示选择相应的提示项，一路往下走即可。</p>
-</blockquote>
-<h2 id="五-添加插件"><a href="#五-添加插件" class="headerlink" title="五 添加插件"></a>五 添加插件</h2><p>这里我们添加的是<code>蒲公英</code>插件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastlane add_plugin pgyer</span><br></pre></td></tr></table></figure>
-
-<h2 id="六-修改配置"><a href="#六-修改配置" class="headerlink" title="六 修改配置"></a>六 修改配置</h2><h4 id="6-1-iOS"><a href="#6-1-iOS" class="headerlink" title="6.1 iOS"></a>6.1 iOS</h4><p><code>cd</code>到<code>ios/fastlane</code>目录下，修改<code>Fastfile</code>文件，替换所有内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"># 打包平台</span><br><span class="line">default_platform(:ios)</span><br><span class="line"></span><br><span class="line">platform :ios do</span><br><span class="line">desc &quot;上传ad-hoc的ipa包到蒲公英平台&quot; </span><br><span class="line"></span><br><span class="line">  lane :UploadToPgyer do|option|</span><br><span class="line">    # 自动增加Build</span><br><span class="line">    increment_build_number</span><br><span class="line">    </span><br><span class="line">    # ❣️编译的scheme，也就是 “xxx.xcodeproj” 中的 “xxx”(必须一致！！！)</span><br><span class="line">    scheme_name = &quot;工程名&quot;</span><br><span class="line"></span><br><span class="line">    # 获取项目中的 Version 和 Build</span><br><span class="line">    version = get_info_plist_value(path: &quot;./#&#123;scheme_name&#125;/Info.plist&quot;, key: &quot;CFBundleShortVersionString&quot;)</span><br><span class="line">    build = get_info_plist_value(path: &quot;./#&#123;scheme_name&#125;/Info.plist&quot;, key: &quot;CFBundleVersion&quot;)</span><br><span class="line">    </span><br><span class="line">    # 导出ipa包路径（这里放在当前所在的build目录下，打包成功后，ipa包就可以在这里找到哦）</span><br><span class="line">    output_directory = &quot;./build&quot;</span><br><span class="line">    </span><br><span class="line">    # 导出ipa的名称：例如（wanke_1.0.0_5_20190910111549.ipa），也可以写死，这是灵活的，取决于你的需要。</span><br><span class="line">    # ① wanke：这是你的工程名；1.0.0：这是你的版本号（取决于你在xcode中的设置）</span><br><span class="line">    # ② 20190910111549：这是详细时间，形式为：年-月-日-小时-分钟-秒。代表的是你本次打包的时间。</span><br><span class="line">    output_name = &quot;#&#123;scheme_name&#125;_#&#123;version&#125;_#&#123;build&#125;_#&#123;Time.now.strftime(&apos;%Y%m%d%H%M%S&apos;)&#125;.ipa&quot;</span><br><span class="line"></span><br><span class="line">    # 打包时输出提示，可随便修改，或者不要都行</span><br><span class="line">    puts &quot;-----开始打包-----&quot;</span><br><span class="line">    </span><br><span class="line">    gym(</span><br><span class="line">      export_method: &quot;ad-hoc&quot;,  # 导出方式：ad-hoc（测试包）、app-store（上传到App Store包）、enterprise（企业测试包）</span><br><span class="line">      export_xcargs: &quot;-allowProvisioningUpdates&quot;,</span><br><span class="line">      export_options:&#123;</span><br><span class="line">         provisioningProfiles: &#123;</span><br><span class="line">            &quot;cn.com.kkk&quot; =&gt; &quot;iPhone Distribution: kkk. (77777XXRRR)&quot;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      scheme: scheme_name,</span><br><span class="line">      clean: true, # 每次打包都清空上一次的编译信息</span><br><span class="line">      output_directory: output_directory,</span><br><span class="line">      output_name: output_name</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    # 打包时输出提示，可随便修改，或者不要都行</span><br><span class="line">    puts &quot;-----开始上传到蒲公英平台-----&quot;</span><br><span class="line">    </span><br><span class="line">    # ❣️蒲公英平台的 API Key 和 User Key（直接复制过来即可）</span><br><span class="line">    pgyer(api_key: &quot;蒲公英API Key&quot;, user_key: &quot;蒲公英User Key&quot;)</span><br><span class="line">  end</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>iOS注意：<code>Fastfile</code>文件中加❣️的地方为必填项，其他地方基本不用改动即可直接打包，如果想自己改动或添加其他参数也可以，自行<code>Google</code>或去官方查看命令！！！</p>
-</blockquote>
-<h4 id="6-2-Android"><a href="#6-2-Android" class="headerlink" title="6.2 Android"></a>6.2 Android</h4><p><code>cd</code>到<code>anddroid/fastlane</code>目录下，修改<code>Fastfile</code>文件，替换所有内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">default_platform(:android)</span><br><span class="line"></span><br><span class="line">platform :android do</span><br><span class="line">  desc &quot;上传android的apk包到蒲公英平台&quot;</span><br><span class="line">  lane :UploadToPgyer do</span><br><span class="line">     gradle(task: &apos;clean&apos;)</span><br><span class="line">     gradle(task: &quot;assembleRelease&quot;)</span><br><span class="line">    # ❣️蒲公英平台的 API Key 和 User Key（直接复制过来即可）</span><br><span class="line">    pgyer(api_key: &quot;蒲公英API Key&quot;, user_key: &quot;蒲公英User Key&quot;)</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Android注意：<code>Fastfile</code>文件中加❣️的地方为必填项，其他地方基本不用改动即可直接打包，如果想自己改动或添加其他参数也可以，自行<code>Google</code>或去官方查看命令！！！</p>
-</blockquote>
-<h2 id="七-打包上传"><a href="#七-打包上传" class="headerlink" title="七 打包上传"></a>七 打包上传</h2><h4 id="7-1-本地直接打包"><a href="#7-1-本地直接打包" class="headerlink" title="7.1 本地直接打包"></a>7.1 本地直接打包</h4><blockquote>
-<p>（一般是根目录，如果是<code>React Native</code>项目，则在<code>ios</code>目录下， <code>Android</code>的话进入<code>.../android</code>目录下， <code>Android</code>没有<code>scheme.xcodeproj</code>）</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastlane UploadToPgyer</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-2-使用Jenkins打包"><a href="#7-2-使用Jenkins打包" class="headerlink" title="7.2 使用Jenkins打包"></a>7.2 使用<code>Jenkins</code>打包</h4><blockquote>
-<p>说明：在使用<code>Jenkins</code>打包之前，请先尝试<code>7.1</code>能够在本地打包成功，因为<code>Jenkins</code>只是一个工具，最终执行还是本地<code>fastfile</code>文件中的脚本，若本地打包失败，意味着你在<code>jenkins</code>上配置出来打包必然失败。</p>
-</blockquote>
-<p><code>jenkins</code>安装好后，配置以及创建项目这里就直接忽略，有问题自行<code>Google</code>。接下来直接进入配置项。</p>
-<ul>
-<li><strong>7.2.1 <code>general</code></strong></li>
-</ul>
-<p><img src="https://i.loli.net/2019/09/12/d6vytZ87IHOgPVw.png" alt="1241568256881_.pic_好的.jpg"></p>
-<ul>
-<li><strong>7.2.2 源码管理</strong></li>
-</ul>
-<p><img src="https://i.loli.net/2019/09/11/C6JfdemONPYoRHA.png" alt="496131568186987_.pic_好的.jpg"></p>
-<ul>
-<li><p><strong>7.2.3 构建触发器（不需要，可跳过）</strong></p>
-</li>
-<li><p><strong>7.2.4 构建环境</strong></p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2019/09/11/eKa54XmDkqhGrxM.png" alt="496141568187214_.pic.jpg"></p>
-<ul>
-<li><strong>7.2.5 构建</strong></li>
-</ul>
-<p><img src="https://i.loli.net/2019/09/12/28EUzOMVWySrqQu.png" alt="1251568258617_.pic_好的.jpg"></p>
-<p><code>shell脚本</code>如下（可直接复制粘贴使用，需要修改的地方以下有说明）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 使环境变量配置生效</span><br><span class="line">source ~/.bash_profile</span><br><span class="line">case $Platform in</span><br><span class="line">    iOS)</span><br><span class="line">         echo &quot;❣️开始iOS打包，成功后自动上传到蒲公英&quot;</span><br><span class="line">         # 解锁Mac上的钥匙串（123456789是你自己的开机密码），LiuDeHua是你自己的用户名，可用pwd命令查看</span><br><span class="line">		 security unlock-keychain -p 123456789 /Users/LiuDeHua/Library/Keychains/login.keychain</span><br><span class="line">		 # 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包</span><br><span class="line">		 cd /Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios</span><br><span class="line">		 # 这里主要是为了移除上一次打的ipa包，留着没用，你也可以选择保留   </span><br><span class="line">		 #（注：由于我在Fastlane文件导出的包名与打包时间相关，每次都不一样，所以每打一次就会不断增加ipa包）     </span><br><span class="line">		 rm -rf /Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios/build</span><br><span class="line">    ;;</span><br><span class="line">    Android)</span><br><span class="line">         echo &quot;❣️开始Android打包，成功后自动上传到蒲公英&quot;</span><br><span class="line">         # 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包</span><br><span class="line">		 cd /Users/langke/jenkins/workspace/CIProject/JenkinsDemo/android</span><br><span class="line">    ;;</span><br><span class="line">    *)</span><br><span class="line">    	echo &quot;❌Arguments error! Please check your shell script!!!&quot;</span><br><span class="line">    	exit</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line"># 更新bundle命令（fastlane官方建议的），如果没使用bundle，这一行直接去掉</span><br><span class="line">/usr/local/bin/bundle update</span><br><span class="line"># 打包本地的fastlane脚本，如果没使用bundle，去掉/usr/local/bin/bundle exec即可 </span><br><span class="line">/usr/local/bin/bundle exec fastlane UploadToPgyer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; 注意：以上的路径，比如 `/Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios` 都可以自己利用`terminal`进入到你的工程根目录下，然后使用 `pwd` 命令查看并复制粘贴即可，每个人的用户名、项目名一般都不一样，因此路径也不一样，但原理都是一样的。</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>7.2.6 构建后操作（不需要，可跳过）</strong></li>
-</ul>
-<h2 id="八-Jenkins打包报错"><a href="#八-Jenkins打包报错" class="headerlink" title="八 Jenkins打包报错"></a>八 Jenkins打包报错</h2><ul>
-<li>❌  <code>(iOS)</code>  error: Can’t find ‘node’ binary to build React Native bundle</li>
-</ul>
-<blockquote>
-<p>这个报错一般针对<code>React Native</code>工程，原生项目不会。</p>
-</blockquote>
-<p>✅ 打开<code>xcode</code>, <code>Build Phases</code> -&gt; <code>Bundle React Native code and images</code></p>
-<p>里面的脚本默认看起来是下面这个样子👇</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NODE_BINARY=/usr/local/bin/node</span><br><span class="line">../node_modules/react-native/scripts/react-native-xcode.sh</span><br></pre></td></tr></table></figure>
-
-<p>在<code>terminal</code>上输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which node</span><br></pre></td></tr></table></figure>
-
-<p>比如我电脑上💻的输出结果是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/node</span><br></pre></td></tr></table></figure>
-
-<p>将<code>/usr/local/bin/node</code>替换脚本中的<code>node</code>即可，即最终结果看起来如下👇：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export NODE_BINARY=node</span><br><span class="line">../node_modules/react-native/scripts/react-native-xcode.sh</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>❌ ❌ <code>Android</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FAILURE: Build failed with an exception.</span><br><span class="line"> </span><br><span class="line">What went wrong:</span><br><span class="line">Execution failed for task &apos;:app:bundleReleaseJsAndAssets&apos;.</span><br><span class="line">A problem occurred starting process &apos;command &apos;node&apos;&apos;</span><br></pre></td></tr></table></figure>
-
-<p>✅✅ 本地进入到项目的 <code>./android</code>目录下，执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew --stop</span><br></pre></td></tr></table></figure>
-
-<p>答案源自: <a href="https://github.com/facebook/react-native/issues/6875#issuecomment-215854946" target="_blank" rel="noopener">github</a></p>
-<p>然后重新尝试打包，应该就<code>OK</code>了。</p>
-
-          
+          一 前言本教程结合Jenkins、Fastlane和蒲公英对iOS和Android实现自动化打包并上传蒲公英，详细说明了打包的jenkins配置、fastlane脚本配置并上传到蒲公英。然而，针对安装jenkins并没有详细的大量篇幅说明，若安装jenkins出现问题，可自行Google或去官方网站
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/23/Jenkins-Fastlane-蒲公英-iOS-Android打包/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -852,21 +630,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/22/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -1,4 +1,10 @@
-# 一 Python基础之数据类型和变量
+
+---
+title: 一 Python基础之数据类型和变量
+date: 2019-10-27 19:34:10
+categories: Python
+tags: python
+---
 
 ### 前言
 

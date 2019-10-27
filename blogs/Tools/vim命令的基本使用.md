@@ -1,4 +1,9 @@
-# vim命令使用
+---
+title: vim命令的基本使用
+date: 2019-10-27 19:39:18
+categories: Tools
+tags: vim, 命令行
+---
 
 ### 前言
 

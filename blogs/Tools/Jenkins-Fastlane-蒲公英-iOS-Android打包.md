@@ -1,4 +1,10 @@
-# Jenkins + Fastlane + 蒲公英（iOS + Android打包）
+---
+title: Jenkins + Fastlane + 蒲公英 + iOS + Android打包
+date: 2019-09-23 20:19:07
+categories: Tools
+tags: jenkins, fastlane, iOS, Android, 自动化
+---
+
 
 ## 一 前言
 
@@ -294,11 +300,11 @@ fastlane UploadToPgyer
 
 - **7.2.1 `general`**
 
-![1241568256881_.pic_hd.jpg](https://i.loli.net/2019/09/12/d6vytZ87IHOgPVw.png)
+![1241568256881_.pic_好的.jpg](https://i.loli.net/2019/09/12/d6vytZ87IHOgPVw.png)
      
 - **7.2.2 源码管理**
 
-![496131568186987_.pic_hd.jpg](https://i.loli.net/2019/09/11/C6JfdemONPYoRHA.png)
+![496131568186987_.pic_好的.jpg](https://i.loli.net/2019/09/11/C6JfdemONPYoRHA.png)
 
 - **7.2.3 构建触发器（不需要，可跳过）**
 
@@ -308,16 +314,18 @@ fastlane UploadToPgyer
 
 - **7.2.5 构建**
 
-![1251568258617_.pic_hd.jpg](https://i.loli.net/2019/09/12/28EUzOMVWySrqQu.png)
+![1251568258617_.pic_好的.jpg](https://i.loli.net/2019/09/12/28EUzOMVWySrqQu.png)
+
 
 `shell脚本`如下（可直接复制粘贴使用，需要修改的地方以下有说明）：
 
 ```
+
 # 使环境变量配置生效
 source ~/.bash_profile
 case $Platform in
     iOS)
-         echo "❣️❣️❣️开始iOS打包，成功后自动上传到蒲公英"
+         echo "❣️开始iOS打包，成功后自动上传到蒲公英"
          # 解锁Mac上的钥匙串（123456789是你自己的开机密码），LiuDeHua是你自己的用户名，可用pwd命令查看
 		 security unlock-keychain -p 123456789 /Users/LiuDeHua/Library/Keychains/login.keychain
 		 # 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包
@@ -327,22 +335,25 @@ case $Platform in
 		 rm -rf /Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios/build
     ;;
     Android)
-         echo "❣️❣️❣️️开始Android打包，成功后自动上传到蒲公英"
+         echo "❣️开始Android打包，成功后自动上传到蒲公英"
          # 这个目录就是jenkins拉取的工程所在的目录，只有这个目录下可以打包
 		 cd /Users/langke/jenkins/workspace/CIProject/JenkinsDemo/android
     ;;
     *)
-    	echo "❌❌❌ Arguments error! Please check your shell script!!!"
+    	echo "❌Arguments error! Please check your shell script!!!"
     	exit
     ;;
 esac
+
 # 更新bundle命令（fastlane官方建议的），如果没使用bundle，这一行直接去掉
 /usr/local/bin/bundle update
 # 打包本地的fastlane脚本，如果没使用bundle，去掉/usr/local/bin/bundle exec即可 
 /usr/local/bin/bundle exec fastlane UploadToPgyer
-```
 
-> 注：以上的路径，比如 `/Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios` 都可以自己利用`terminal`进入到你的工程根目录下，然后使用 `pwd` 命令查看并复制粘贴即可，每个人的用户名、项目名一般都不一样，因此路径也不一样，但原理都是一样的。
+
+> 注意：以上的路径，比如 `/Users/LiuDeHua/jenkins/workspace/CIProject/JenkinsDemo/ios` 都可以自己利用`terminal`进入到你的工程根目录下，然后使用 `pwd` 命令查看并复制粘贴即可，每个人的用户名、项目名一般都不一样，因此路径也不一样，但原理都是一样的。
+
+```
 
 - **7.2.6 构建后操作（不需要，可跳过）**
 
@@ -393,27 +404,11 @@ A problem occurred starting process 'command 'node''
 
 ✅✅ 本地进入到项目的 `./android`目录下，执行
 
-- 方法一
-
 ```
 ./gradlew --stop
 ```
 
 答案源自: [github](https://github.com/facebook/react-native/issues/6875#issuecomment-215854946)
-
-如果失败请尝试`方法二`
-
-在`android/app/build.gradle`里添加`nodeExecutableAndArgs : ["/usr/local/bin/node"]`，如下:
-
-- 方法二
-
-```
-project.ext.react = [
-    entryFile: "index.js",
-    nodeExecutableAndArgs : ["/usr/local/bin/node"] // add this line to jenkins package
-]
-```
-
 
 然后重新尝试打包，应该就`OK`了。
 

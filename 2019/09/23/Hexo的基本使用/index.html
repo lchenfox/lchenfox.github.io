@@ -82,14 +82,14 @@
 <meta name="description" content="创建博客1hexo new &amp;quot;博客标题&amp;quot;  发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选） 1hexo clean  发布和部署 1hexo g -d   以上命令其实和：1. hexo g，2. hexo d 是一样的。  更换主题推荐人气最佳的next主题，其他更换主题的方式都差不多的  1.安装  1git clone https://github.">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo基本使用">
-<meta property="og:url" content="http://yoursite.com/2019/09/23/hexo-简单命令/index.html">
+<meta property="og:title" content="Hexo的基本使用">
+<meta property="og:url" content="http://yoursite.com/2019/09/23/Hexo的基本使用/index.html">
 <meta property="og:site_name" content="陈龙 的博客">
 <meta property="og:description" content="创建博客1hexo new &amp;quot;博客标题&amp;quot;  发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选） 1hexo clean  发布和部署 1hexo g -d   以上命令其实和：1. hexo g，2. hexo d 是一样的。  更换主题推荐人气最佳的next主题，其他更换主题的方式都差不多的  1.安装  1git clone https://github.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-27T12:00:31.313Z">
+<meta property="og:updated_time" content="2019-11-04T12:25:38.824Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo基本使用">
+<meta name="twitter:title" content="Hexo的基本使用">
 <meta name="twitter:description" content="创建博客1hexo new &amp;quot;博客标题&amp;quot;  发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选） 1hexo clean  发布和部署 1hexo g -d   以上命令其实和：1. hexo g，2. hexo d 是一样的。  更换主题推荐人气最佳的next主题，其他更换主题的方式都差不多的  1.安装  1git clone https://github.">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/23/hexo-简单命令/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/23/Hexo的基本使用/">
 
 
 
 
 
-  <title>hexo基本使用 | 陈龙 的博客</title>
+  <title>Hexo的基本使用 | 陈龙 的博客</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/hexo-简单命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/Hexo的基本使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陈龙">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo基本使用</h1>
+          <h1 class="post-title" itemprop="name headline">Hexo的基本使用</h1>
         
 
         <div class="post-meta">
@@ -395,7 +395,17 @@
 <p>在文章头部，添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">categories: iOS</span><br></pre></td></tr></table></figure>
 
-<p>这样就关联到了<code>iOS</code>标签了。</p>
+<p>这样就关联到了<code>iOS</code>分类了。</p>
+<ul>
+<li>2.1.4 二级分类</li>
+</ul>
+<p>有时候可能需要添加二级分类，比如<code>iOS</code>下面有<code>Swift</code>和<code>Objective-C</code>， 那么二级分类也很简单，直接在文章的头部的分类中依次添加一级分类、二级分类。比如</p>
+<p><code>iOS</code>分类下有一个<code>Swift</code>分类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hello, swift!</span><br><span class="line">date: 2019-11-04 20:01:18</span><br><span class="line">categories: </span><br><span class="line">- iOS</span><br><span class="line">- Swift</span><br><span class="line">tags: Swift</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p><code>iOS</code>分类下再有一个<code>Objective-C</code>分类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hello, Objective-C!</span><br><span class="line">date: 2019-11-04 20:01:18</span><br><span class="line">categories: </span><br><span class="line">- iOS</span><br><span class="line">- Objective-C</span><br><span class="line">tags: OC</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
 <h4 id="2-2-标签"><a href="#2-2-标签" class="headerlink" title="2.2 标签"></a>2.2 标签</h4><ul>
 <li>2.2.1 新建一个页面，命名为<code>tags</code> 。命令如下：</li>
 </ul>

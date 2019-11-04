@@ -12,17 +12,17 @@ tags: python
 创建一个`demo.py`文件，添加如下内容：
 
 ```
-  1 age = 19
-  2 if age:
-  3     print('age exists')
-  4
-  5 weight = 119
-  6 if weight > 150:
-  7     print('you are obese!')
-  8 elif weight > 100:
-  9     print('Great, you are handsome!')
- 10 else:
- 11     print('Um...you are too thin!')
+age = 19
+if age:
+    print('age exists')
+
+weight = 119
+if weight > 150:
+    print('you are obese!')
+elif weight > 100:
+    print('Great, you are handsome!')
+else:
+    print('Um...you are too thin!')
 ```
 
 可以尝试执行一下，输出结果：
@@ -42,13 +42,13 @@ Great, you are handsome!
 使用`for ... in ... `循环，我们可以遍历出`list`或`tuple`的元素，例如
 
 ```
-  1 names = ['Jhone', 'Alice', 'Joe']
-  2 for name in names:
-  3     print('name is %s' % name)
-  4
-  5 ages = (1, 2, 3, 4, 5)
-  6 for age in ages:
-  7     print('age is {0}'.format(age))
+names = ['Jhone', 'Alice', 'Joe']
+for name in names:
+    print('name is %s' % name)
+
+ages = (1, 2, 3, 4, 5)
+for age in ages:
+    print('age is {0}'.format(age))
 ```
 
 执行结果：

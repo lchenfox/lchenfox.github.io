@@ -1,5 +1,5 @@
 ---
-title: hexo基本使用
+title: Hexo的基本使用
 date: 2019-09-23 20:27:53
 categories: Hexos
 tags: hexo
@@ -116,7 +116,37 @@ menu:
 categories: iOS
 ```
 
-这样就关联到了`iOS`标签了。
+这样就关联到了`iOS`分类了。
+
+- 2.1.4 二级分类
+
+有时候可能需要添加二级分类，比如`iOS`下面有`Swift`和`Objective-C`， 那么二级分类也很简单，直接在文章的头部的分类中依次添加一级分类、二级分类。比如
+
+`iOS`分类下有一个`Swift`分类
+
+```
+---
+title: Hello, swift!
+date: 2019-11-04 20:01:18
+categories: 
+- iOS
+- Swift
+tags: Swift
+---
+```
+
+`iOS`分类下再有一个`Objective-C`分类
+
+```
+---
+title: Hello, Objective-C!
+date: 2019-11-04 20:01:18
+categories: 
+- iOS
+- Objective-C
+tags: OC
+---
+```
 
 #### 2.2 标签
 

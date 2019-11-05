@@ -63,9 +63,9 @@ Submitting apps designed to mislead or harm customers or evade the review proces
 
 显然，苹果的大意如下：
 
-- 1. App隐藏了功能
-- 2. 审核通过后，具备修改应用程序的行为或功能的能力
-- 3. 检测到APP获取远程资源，或许会调用私有API及私有方法，利用动态特性给动态方法传递参数，如`dlopen()、dlsym()、respondsToSelector:、performSelector:、method_exchange()`，易受`MiTM`攻击，下发恶意脚本等等
+- 1.App隐藏了功能
+- 2.审核通过后，具备修改应用程序的行为或功能的能力
+- 3.检测到APP获取远程资源，或许会调用私有API及私有方法，利用动态特性给动态方法传递参数，如`dlopen()、dlsym()、respondsToSelector:、performSelector:、method_exchange()`，易受`MiTM`攻击，下发恶意脚本等等
 
 回复很官方，也没有明确指出是**热更新**的原因，但是有部分人收到被拒的理由里面明确致命了使用`Hot Update`热更新。
 

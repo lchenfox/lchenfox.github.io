@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="陈龙 的博客">
 <meta property="og:description" content="前言 今年，综合了一些考虑，选择了 GitHub: react-native-pushy 作为热更新，在前面的两个版本使用了热更新，但是没有被拒，上线都比较顺利，直到这个版本，第二天直接被苹果拒绝！前有WaxPatch和JSPatch等热修复框架，因为会调用私有API、篡改原生代码的能力而被苹果拒之门外，接着苹果允许React Native的这种不会修改原生代码、只更新js代码和一些资源文件的热修">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-05T03:11:18.138Z">
+<meta property="og:updated_time" content="2019-11-05T03:17:18.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native使用react-native-pushy热更新审核被拒">
 <meta name="twitter:description" content="前言 今年，综合了一些考虑，选择了 GitHub: react-native-pushy 作为热更新，在前面的两个版本使用了热更新，但是没有被拒，上线都比较顺利，直到这个版本，第二天直接被苹果拒绝！前有WaxPatch和JSPatch等热修复框架，因为会调用私有API、篡改原生代码的能力而被苹果拒之门外，接着苹果允许React Native的这种不会修改原生代码、只更新js代码和一些资源文件的热修">
@@ -372,18 +372,9 @@
 <p>Submitting apps designed to mislead or harm customers or evade the review process may result in the termination of your Apple Developer Program account. Review the Terms &amp; Conditions of the Apple Developer Program to learn more about our policies regarding termination.</p>
 <p>显然，苹果的大意如下：</p>
 <ul>
-<li><ol>
-<li>App隐藏了功能</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>审核通过后，具备修改应用程序的行为或功能的能力</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>检测到APP获取远程资源，或许会调用私有API及私有方法，利用动态特性给动态方法传递参数，如<code>dlopen()、dlsym()、respondsToSelector:、performSelector:、method_exchange()</code>，易受<code>MiTM</code>攻击，下发恶意脚本等等</li>
-</ol>
-</li>
+<li>1.App隐藏了功能</li>
+<li>2.审核通过后，具备修改应用程序的行为或功能的能力</li>
+<li>3.检测到APP获取远程资源，或许会调用私有API及私有方法，利用动态特性给动态方法传递参数，如<code>dlopen()、dlsym()、respondsToSelector:、performSelector:、method_exchange()</code>，易受<code>MiTM</code>攻击，下发恶意脚本等等</li>
 </ul>
 <p>回复很官方，也没有明确指出是<strong>热更新</strong>的原因，但是有部分人收到被拒的理由里面明确致命了使用<code>Hot Update</code>热更新。</p>
 <h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><hr>

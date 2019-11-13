@@ -5,7 +5,7 @@ categories: Python
 tags: python
 ---
 
-### 函数调用
+### 调用
 
 函数的调用非常简单，`python`提供了很多内置函数供我们使用，比如：
 
@@ -50,7 +50,7 @@ tags: python
 '0x63'
 ```
 
-### 函数定义
+### 定义
 
 ##### 使用`def`定义函数
 
@@ -121,4 +121,224 @@ def fuck():
 ```
 
 这样执行`python文件`，就可以执行里面的程序而不会因为一个`空函数`而报错。
+
+##### 类型检查
+
+数据类型检查直接使用内置函数`isinstance()函数`，例如：
+
+```
+def test1(a):
+	if isinstance(a, (int, float)):
+		print('you passed an int type')
+	else:
+		raise TypeError('What the fucking are you doing?')
+
+def test2(b):
+	if not isinstance(b, (str)):
+		print('the parameter you passed is not str type')
+```
+
+```
+>>> from demo import test1
+>>> test1(1)
+you passed an int type
+>>> test1(2.2)
+you passed an int type
+>>> test1('1')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Users/langke/Desktop/demo.py", line 5, in test1
+    raise TypeError('What the fucking are you doing?')
+TypeError: What the fucking are you doing?
+
+>>> from demo import test2
+>>> test2(1)
+the parameter you passed is not str type
+```
+
+##### 函数返回多个值
+
+`python`的函数返回多个值的时候，事实上是返回一个元组（`tuple`），例如：
+
+```
+def func1(a, b):
+	a = pow(a, 2)
+	b = pow(b, 2)
+	return a, b
+```
+
+执行：
+
+```
+➜  Desktop python3
+Python 3.7.4 (default, Sep  7 2019, 18:27:02)
+[Clang 10.0.1 (clang-1001.0.46.4)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from demo import func1
+>>> m, n = func1(3, 4)
+>>> print(m)
+9
+>>> print(n)
+16
+>>> func1(5, 7)
+(25, 49)
+```
+
+### 参数
+
+##### 位置参数
+
+*位置参数*就是正常的参数传递，别想复杂了，例如：
+
+```
+def fuckYou(name):
+	print('name is %s' % name)
+```
+
+在上面的`fuckYou函数`中，`name`就是所谓的*位置参数*。
+
+##### 默认参数
+
+*默认参数*就是在函数调用的时候，给部分参数设置一个默认的初始值的参数。这个其实也很好理解，现在很多语言都提供默认参数了，比如`JavaScript`、`Swift`等等，*默认参数*在有的时候可以简化我们的代码。例如：
+
+```
+def fuck(name, gender = 'girl', age = 18):
+	print('name is {0}, gender is {1}, age is {2}'.format(name, gender, age))
+```
+
+```
+>>> from demo import fuck
+>>> fuck('langke')
+name is langke, gender is girl, age is 18
+>>> fuck('Alice', 'boy')
+name is Alice, gender is boy, age is 18
+>>> fuck('Joe', age = 38)
+name is Joe, gender is girl, age is 38
+```
+
+> 注：在`python`中，当提供多个默认参数，并且在调用的时候，如果不按顺序调用后面的某个默认参数，就需要指定需要改变的那个默认参数名，比如上面的调用`fuck('Joe', age = 38)`，需要改变默认参数`age`的值，但是默认参数`age`前面的默认参数`gender`保持不变（继续使用默认参数值），那么就需要指定`age`这个参数名，否则，直接传入参数的话，在函数内部就会一一对应。
+
+另外，当使用默认参数的时候，也要注意，一般情况下，默认参数尽量是*不可变参数值*，如果是可变的话（比如数组，数组是一个引用类型对象），那么就会造成数据修改。例如：
+
+```
+def appendElement(arr = []):
+	arr.append('python')
+	return arr
+```
+
+执行结果：
+
+```
+>>> from demo import appendElement
+>>> appendElement()
+['python']
+>>> appendElement()
+['python', 'python']
+>>> appendElement()
+['python', 'python', 'python']
+```
+
+当然，我们也可以使用`None`空值来改造一下可变的对象参数：
+
+```
+def appendElement(arr = None):
+	if arr is None:
+		arr = []
+	arr.append('python')
+	return arr
+```
+
+执行结果：
+
+```
+>>> appendElement()
+['python']
+>>> appendElement()
+['python']
+>>> appendElement()
+['python']
+```
+
+因此，为了安全起见，建议一般默认参数都是用*不可变对象*，如果非要使用*可变对象*，一定要做好安全检查。
+
+##### 可变参数
+
+*可变参数*就是可以传入任意个数参数，对参数不限制。在`python`中，*可变参数*可以在参数名前面加`*`号来表示这个一个*可变参数*，传入的*可变参数*在内部会转换成一个*元组（tuple）*。例如：
+
+```
+def sum(*params):
+	print('params type is %s' % type(params))
+	sum = 0
+	for param in params:
+		sum += param
+	return sum
+```
+
+执行：
+
+```
+>>> from demo import sum
+>>> sum()
+params type is <class 'tuple'>
+0
+>>> sum(1, 2)
+params type is <class 'tuple'>
+3
+>>> sum(1, 2, 3)
+params type is <class 'tuple'>
+6
+```
+
+那如果我们要传入一个*数组*或*元组*将其中的元素作为*可变参数*传入怎么办呢？同样地，我们还是可以在要传入的*数组*或*元组*前面加`*`号，表示将*数组*或*元组*中的元素作为*可变参数*。例如：
+
+```
+>>> sum(*[1, 2, 3])
+params type is <class 'tuple'>
+6
+>>> sum(*(4, 5, 6))
+params type is <class 'tuple'>
+15
+```
+
+哇，就是这么吊！
+
+##### 关键字参数
+
+*关键字参数*在参数名前面加`**`表示可传入一个*关键字参数*，传入*关键字参数后*，内部会组装成一个*字典（dict）*。例如：
+
+```
+def obtainInfo(name, age, **params):
+	print('params type is %s' % type(params))
+	print('name: %s\nage: %d\nparams: %s' % (name, age, params))
+```
+
+执行：
+
+```
+>>> obtainInfo('langke', 18)
+params type is <class 'dict'>
+name: langke
+age: 18
+params: {}
+>>> obtainInfo('langke', 18, gender = 'boy', height = 1.88)
+params type is <class 'dict'>
+name: langke
+age: 18
+params: {'gender': 'boy', 'height': 1.88}
+```
+
+类似地，我们也可以在*字典（dict）*前面加`**`作为*关键字参数*传入：
+
+```
+dicParams = {
+	'gender': 'boy',
+	'height': 1.88
+}
+>>> obtainInfo('langke', 18, **dicParams)
+params type is <class 'dict'>
+name: langke
+age: 18
+params: {'gender': 'boy', 'height': 1.88}
+```
+
 

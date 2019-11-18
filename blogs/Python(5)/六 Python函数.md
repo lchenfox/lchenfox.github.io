@@ -341,4 +341,152 @@ age: 18
 params: {'gender': 'boy', 'height': 1.88}
 ```
 
+我们也可以对*关键字参数*进行判断某个`key`是否存在，例如：
+
+```
+def person(name, age, **params):
+	if 'city' in params:
+		print('city exists')
+	print(name, age, params)
+person('langke', 18, city = 'Hangzhou')
+```
+
+执行及结果：
+
+```
+➜  Desktop python3 demo.py 
+city exists
+langke 18 {'city': 'Hangzhou'}
+```
+
+##### 命名关键字参数
+
+*命名关键字参数*使用`*`号来分割前后参数，`*`号后面的参数就叫做*命名关键字参数*。例如：
+
+```
+def person(name, age, *, city, height):
+	print('name:{0}, age:{1}, city:{2}, height:{3}'.format(name, age, city, height))
+```
+
+其中，`city`和`height`就是*命名关键字参数*，而且所有的*命名关键字参数必须指定传入值*。例如：
+
+```
+>>> person('langke', 18, city = 'Hangzhou', height = 163)
+name:langke, age:18, city:Hangzhou, height:163
+```
+
+如果少了某个*关键字参数*，就会报错。例如：
+
+```
+>>> person('langke', 18, city = 'Hangzhou')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: person() missing 1 required keyword-only argument: 'height'
+```
+
+关键字参数可以互换位置，但是必须要注意的是，关键字参数和关键字参数前面的位置参数不能调换。例如：
+
+关键字参数`city`和`height`交换位置：
+
+
+```
+>>> person('langke', 18, height = 163, city = 'Hangzhou')
+name:langke, age:18, city:Hangzhou, height:163
+```
+
+*关键字参数*和*位置参数*交换位置，比如把*关键字参数`height`*放在*位置参数`age`*位置就报错：
+
+```
+>>> person('langke', height = 163, 18, city = 'Hangzhou')
+  File "<stdin>", line 1
+SyntaxError: positional argument follows keyword argument
+```
+
+若函数中已经有*可变参数*，那么*命名关键字参数*就不再需要`*`号了。例如：
+
+```
+def person(name, age, *args, city, height):
+	print(args)
+	print('name:{0}, age:{1}, city:{2}, height:{3}'.format(name, age, city, height))
+```
+
+调用函数：
+
+```
+>>> person('langke', 18, city = 'Hangzhou', height = 163)
+()
+name:langke, age:18, city:Hangzhou, height:163
+
+>>> person('langke', 18, *[1, 2, 3], city = 'Hangzhou', height = 163)
+(1, 2, 3)
+name:langke, age:18, city:Hangzhou, height:163
+
+>>> person('langke', 18, 1, 2, 3, city = 'Hangzhou', height = 163)
+(1, 2, 3)
+name:langke, age:18, city:Hangzhou, height:163
+```
+
+最后，*命名关键字参数*可以有默认值（类似默认参数）。例如：
+
+```
+def person(name, age, *, city = 'Hangzhou', height):
+	print('name:{0}, age:{1}, city:{2}, height:{3}'.format(name, age, city, height))
+```
+
+执行：
+
+```
+>>> person('langke', 18, height = 163)
+name:langke, age:18, city:Hangzhou, height:163
+```
+
+##### 参数组合
+
+*参数组合*也就是使用*位置参数*、*默认参数*、*可变参数*、*命名关键字参数*、*关键字参数*结合起来使用，但是参数定义的顺序必须是：*位置参数*、*默认参数*、*可变参数*、*命名关键字参数*、*关键字参数*。例如：
+
+```
+def f1(a, b, c=0, *args, **kw):
+    print('a =', a, 'b =', b, 'c =', c, 'args =', args, 'kw =', kw)
+
+def f2(a, b, c=0, *, d, **kw):
+    print('a =', a, 'b =', b, 'c =', c, 'd =', d, 'kw =', kw)
+```
+
+调用：
+
+```
+>>> f1(1, 2)
+a = 1 b = 2 c = 0 args = () kw = {}
+
+>>> f1(1, 2, c=3)
+a = 1 b = 2 c = 3 args = () kw = {}
+
+>>> f1(1, 2, 3, 'a', 'b')
+a = 1 b = 2 c = 3 args = ('a', 'b') kw = {}
+
+>>> f1(1, 2, 3, 'a', 'b', x=99)
+a = 1 b = 2 c = 3 args = ('a', 'b') kw = {'x': 99}
+
+>>> f2(1, 2, d=99, ext=None)
+a = 1 b = 2 c = 0 d = 99 kw = {'ext': None}
+```
+
+最后一点要注意的是，调用上面的函数我们也可以只使用`元组（tuple）`和`数组（list）`的方式传入参数：
+
+```
+>>> args = (1, 2, 3, 4)
+>>> kw = {'d': 99, 'x': '#'}
+>>> f1(*args, **kw)
+a = 1 b = 2 c = 3 args = (4,) kw = {'d': 99, 'x': '#'}
+
+>>> args = (1, 2, 3)
+>>> kw = {'d': 88, 'x': '#'}
+>>> f2(*args, **kw)
+a = 1 b = 2 c = 3 d = 88 kw = {'x': '#'}
+```
+
+所以，对于任意函数，都可以通过类似`func(*args, **kw)`的形式调用它，无论它的参数是如何定义的。
+
+### 递归
+
 

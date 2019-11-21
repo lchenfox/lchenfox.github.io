@@ -88,7 +88,7 @@
 <meta property="og:description" content="前言KVC(Key-Value-Coding)即键值编码，在iOS中应用及其广泛，我们通常使用KVC来设置值和获取值，知道KVC的基本运作原理对我们在日常开发中修复bug起到很好的作用。 KVC之取值valueForKey首先，来看一个简单问题，创建一个Person类。 Person.h: 12345#import &amp;lt;Foundation/Foundation.h&amp;gt;@interface">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/11/20/VjYRdXILghfma6Z.png">
-<meta property="og:updated_time" content="2019-11-21T14:09:52.326Z">
+<meta property="og:updated_time" content="2019-11-21T14:16:24.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KVC底层原理">
 <meta name="twitter:description" content="前言KVC(Key-Value-Coding)即键值编码，在iOS中应用及其广泛，我们通常使用KVC来设置值和获取值，知道KVC的基本运作原理对我们在日常开发中修复bug起到很好的作用。 KVC之取值valueForKey首先，来看一个简单问题，创建一个Person类。 Person.h: 12345#import &amp;lt;Foundation/Foundation.h&amp;gt;@interface">
@@ -471,6 +471,7 @@
 <p>优先级：<code>setName</code> &gt; <code>setIsName</code>，也即是 <code>setKey</code> &gt; <code>setIsKey</code>。</p>
 <p>和<code>KVC</code>取值是一个道理，若有以上所说的<code>2</code>个<code>setter</code>方法，则优先执行<code>setter</code>方法，忽略成员变量在初始化时的值。没有<code>setter</code>方法，就判断<code>+ (BOOL)accessInstanceVariablesDirectly</code>的返回值是否为<code>NO</code>，若为<code>NO</code>，调用<code>- (void)setValue:(id)value forUndefinedKey:(NSString *)key</code>抛出异常（没有重写该方法则崩溃），若为<code>YES</code>，就去查找相应的成员变量并赋值。</p>
 <h2 id="手动写一个KVC"><a href="#手动写一个KVC" class="headerlink" title="手动写一个KVC"></a>手动写一个KVC</h2><p>参照<code>KVC</code>的设值和取值的基本流程，我们也可以自己手动写一个属于自己的<code>KVC</code>。具体说明这里就不介绍了，有兴趣可直接查看源码，都是一些简单的业务逻辑判断，利用<code>OC</code>的<code>runtime机制</code>，实现出相应的<code>KVC</code>效果。</p>
+<p><a href="https://github.com/lchenfox/OC_KVCDemo" target="_blank" rel="noopener">查看KVC源码</a></p>
 
       
     </div>

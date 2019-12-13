@@ -1,5 +1,5 @@
 ---
-title: RN之[pod install]: Error installing DoubleConversion
+title: RN之[pod install] Error installing DoubleConversion
 date: 2019-12-13 14:17:05
 categories: React Native
 tags: 

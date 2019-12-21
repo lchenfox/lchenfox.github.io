@@ -1668,6 +1668,23 @@
 <blockquote>
 <p>提示：在部署插件过程中或在<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">leancloud官网</a>注册的时候，要把账号密码记下来，比如我就是放在手机的备忘录中，不然后期部署可能会有麻烦。</p>
 </blockquote>
+<h3 id="五-添加本地搜索"><a href="#五-添加本地搜索" class="headerlink" title="五 添加本地搜索"></a>五 添加本地搜索</h3><p>添加百度/谷歌/本地 自定义站点内容搜索</p>
+<ul>
+<li>安装 <code>hexo-generator-searchdb</code>，在站点的根目录下执行以下命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编辑 <code>站点配置文件</code>，新增以下内容到任意位置：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编辑 <code>主题配置文件</code>，启用本地搜索功能：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Local search</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+
+<p>更多可以查看：<a href="http://theme-next.iissnan.com/third-party-services.html#share-system" target="_blank" rel="noopener">第三方服务</a></p>
 <p>本文已涉及或未涉及的配置详情可见：<a href="https://github.com/iissnan/hexo-theme-next/wiki" target="_blank" rel="noopener">hexo-theme-next主题在github的使用配置文档说明</a></p>
 ]]></content>
       <categories>

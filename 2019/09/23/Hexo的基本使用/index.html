@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="陈龙 的博客">
 <meta property="og:description" content="创建博客1hexo new &amp;quot;博客标题&amp;quot;  发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选） 1hexo clean  发布和部署 1hexo g -d   以上命令其实和：1. hexo g，2. hexo d 是一样的。  更换主题推荐人气最佳的next主题，其他更换主题的方式都差不多的  1.安装  1git clone https://github.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T13:05:33.241Z">
+<meta property="og:updated_time" content="2019-12-21T13:25:59.623Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo的基本使用">
 <meta name="twitter:description" content="创建博客1hexo new &amp;quot;博客标题&amp;quot;  发布博客先清理缓存，一般可能会由于本地缓存而导致发布没有生效（可选） 1hexo clean  发布和部署 1hexo g -d   以上命令其实和：1. hexo g，2. hexo d 是一样的。  更换主题推荐人气最佳的next主题，其他更换主题的方式都差不多的  1.安装  1git clone https://github.">
@@ -474,6 +474,23 @@
 <blockquote>
 <p>提示：在部署插件过程中或在<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">leancloud官网</a>注册的时候，要把账号密码记下来，比如我就是放在手机的备忘录中，不然后期部署可能会有麻烦。</p>
 </blockquote>
+<h3 id="五-添加本地搜索"><a href="#五-添加本地搜索" class="headerlink" title="五 添加本地搜索"></a>五 添加本地搜索</h3><p>添加百度/谷歌/本地 自定义站点内容搜索</p>
+<ul>
+<li>安装 <code>hexo-generator-searchdb</code>，在站点的根目录下执行以下命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编辑 <code>站点配置文件</code>，新增以下内容到任意位置：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编辑 <code>主题配置文件</code>，启用本地搜索功能：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Local search</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+
+<p>更多可以查看：<a href="http://theme-next.iissnan.com/third-party-services.html#share-system" target="_blank" rel="noopener">第三方服务</a></p>
 <p>本文已涉及或未涉及的配置详情可见：<a href="https://github.com/iissnan/hexo-theme-next/wiki" target="_blank" rel="noopener">hexo-theme-next主题在github的使用配置文档说明</a></p>
 
       
@@ -651,7 +668,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建博客"><span class="nav-number">1.</span> <span class="nav-text">创建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布博客"><span class="nav-number">2.</span> <span class="nav-text">发布博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换主题"><span class="nav-number">3.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改主题配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改主题配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-修改主题布局"><span class="nav-number">4.1.</span> <span class="nav-text">一 修改主题布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-增加标签和分类"><span class="nav-number">4.2.</span> <span class="nav-text">二 增加标签和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-分类"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-标签"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-添加头像"><span class="nav-number">4.3.</span> <span class="nav-text">三 添加头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-文章截断"><span class="nav-number">4.4.</span> <span class="nav-text">四 文章截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-添加文章阅读次数"><span class="nav-number">4.5.</span> <span class="nav-text">五 添加文章阅读次数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建博客"><span class="nav-number">1.</span> <span class="nav-text">创建博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布博客"><span class="nav-number">2.</span> <span class="nav-text">发布博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换主题"><span class="nav-number">3.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改主题配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改主题配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-修改主题布局"><span class="nav-number">4.1.</span> <span class="nav-text">一 修改主题布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-增加标签和分类"><span class="nav-number">4.2.</span> <span class="nav-text">二 增加标签和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-分类"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.1 分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-标签"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2 标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-添加头像"><span class="nav-number">4.3.</span> <span class="nav-text">三 添加头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-文章截断"><span class="nav-number">4.4.</span> <span class="nav-text">四 文章截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-添加文章阅读次数"><span class="nav-number">4.5.</span> <span class="nav-text">五 添加文章阅读次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-添加本地搜索"><span class="nav-number">4.6.</span> <span class="nav-text">五 添加本地搜索</span></a></li></ol></li></ol></div>
             
 
           </div>

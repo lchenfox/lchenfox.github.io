@@ -201,6 +201,43 @@ auto_excerpt:
   length: 150
 ```
 
+### 五 添加文章阅读次数
+
+详细请查看：[添加文章阅读次数](https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md) ，若访问出现问题，查看：[Leancloud访客统计插件重大安全漏洞修复指南](https://leaferx.online/2018/02/11/lc-security/)。
+
+> 提示：在部署插件过程中或在[leancloud官网](https://www.leancloud.cn/)注册的时候，要把账号密码记下来，比如我就是放在手机的备忘录中，不然后期部署可能会有麻烦。
+
+### 五 添加本地搜索
+
+添加百度/谷歌/本地 自定义站点内容搜索
+
+- 安装 `hexo-generator-searchdb`，在站点的根目录下执行以下命令：
+
+```
+$ npm install hexo-generator-searchdb --save
+```
+
+- 编辑 `站点配置文件`，新增以下内容到任意位置：
+
+```
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+```
+
+- 编辑 `主题配置文件`，启用本地搜索功能：
+
+```
+# Local search
+local_search:
+  enable: true
+```
+
+更多可以查看：[第三方服务](http://theme-next.iissnan.com/third-party-services.html#share-system)
+
+
 
 本文已涉及或未涉及的配置详情可见：[hexo-theme-next主题在github的使用配置文档说明](https://github.com/iissnan/hexo-theme-next/wiki)
 

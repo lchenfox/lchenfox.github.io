@@ -362,7 +362,7 @@ The error encountered was: ERR_NGROK_702
 
 ## 总结
 
-使用`verdaccio + ngrok`配置起来比较方便，也能迎合`npm`的相关命令，安装和操作都特别简单，`verdaccio`也提供本地缓存，这个很棒。但是速度这一块以及`ngrok`产生的代理源不固定，团队协作安装较为麻烦，这个有时候真的不能忍受（可以看上面的优缺点）。但是，如果能接受的话，这也不失为一个选择。如果你有比`ngrok`更好用的反代理或者其他工具，请告诉我。下一章我会介绍如何通过`npm + github`的方式来创建`npm`私有仓库。
+使用`verdaccio + ngrok`配置起来比较方便，也能迎合`npm`的相关命令，安装和操作都特别简单，`verdaccio`也提供本地缓存，这个很棒。但是速度这一块以及`ngrok`产生的代理源不固定，团队协作安装较为麻烦，这个有时候真的不能忍受（可以看上面的优缺点）。但是，如果能接受的话，这也不失为一个选择。如果你有比`ngrok`更好用的反代理或者其他工具，请告诉我。下一章我会介绍[基于github实现npm私有库的搭建](http://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more)。
 
 
 参考文章：[Testing your npm package before releasing it using Verdaccio + ngrok](https://medium.com/strapi/testing-your-npm-package-before-releasing-it-using-verdaccio-ngrok-28e2832c850a)

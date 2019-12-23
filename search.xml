@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>基于github实现npm私有库的搭建</title>
+    <url>/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在上一篇文章<a href="https://www.clcoder.com/2019/12/20/verdaccio%20+%20ngrok%E5%8F%91%E5%B8%83npm%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/" target="_blank" rel="noopener">verdaccio+ngrok发布npm私有仓库</a>中，我们介绍了如何使用<code>verdaccio + ngrok</code>来搭建我们的<code>npm</code>私有库，虽然基本实现了我们想要的效果，但是那种方式并不一定是最好的，也未必被一部分人接受，毕竟其一些缺陷还是有些麻烦，难以管理。今天，我们将介绍另一种搭建<code>npm私有库</code>的方式：<code>npm + github</code>来实现搭建<code>npm私有库</code>。</p>
+<h2 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h2><h4 id="在github上创建一个私有仓库，如下图"><a href="#在github上创建一个私有仓库，如下图" class="headerlink" title="在github上创建一个私有仓库，如下图"></a>在<code>github</code>上创建一个私有仓库，如下图</h4><p><img src="https://i.loli.net/2019/12/23/4sAjfh18EuTdgxe.png" alt="private_repo.png"></p>
+<h4 id="克隆github仓库到本地"><a href="#克隆github仓库到本地" class="headerlink" title="克隆github仓库到本地"></a>克隆<code>github</code>仓库到本地</h4><p><img src="https://i.loli.net/2019/12/23/V23ozIhFWsrNS6x.png" alt="git clone.png"></p>
+<h4 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h4><p>进入到刚才克隆下来的仓库目录，这里演示的路径是<code>/Users/langke/TestReactNative/github-npm-dir/rn-npm-demo</code>，其中<code>/Users/langke/TestReactNative/github-npm-dir</code>是我本地文件夹路径，你可以随便选一个自己的路径即可，<code>/rn-npm-demo</code>就是克隆下来的仓库。使用<code>npm init --scope=公司名</code>来初始化仓库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">➜  rn-npm-demo git:(master) ✗ npm init --scope=mycompany</span><br><span class="line">This utility will walk you through creating a package.json file.</span><br><span class="line">It only covers the most common items, and tries to guess sensible defaults.</span><br><span class="line"></span><br><span class="line">See `npm help json` for definitive documentation on these fields</span><br><span class="line">and exactly what they do.</span><br><span class="line"></span><br><span class="line">Use `npm install &lt;pkg&gt;` afterwards to install a package and</span><br><span class="line">save it as a dependency in the package.json file.</span><br><span class="line"></span><br><span class="line">Press ^C at any time to quit.</span><br><span class="line">package name: (@mycompany/rn-npm-demo)</span><br><span class="line">version: (1.0.0)</span><br><span class="line">description: A private npm package demo</span><br><span class="line">entry point: (index.js)</span><br><span class="line">test command:</span><br><span class="line">git repository: (https://github.com/lchenfox/rn-npm-demo.git)</span><br><span class="line">keywords:</span><br><span class="line">author: langke</span><br><span class="line">license: (ISC)</span><br><span class="line">About to write to /Users/langke/TestReactNative/github-npm-dir/rn-npm-demo/package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;@mycompany/rn-npm-demo&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;A private npm package demo&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;repository&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;git+https://github.com/lchenfox/rn-npm-demo.git&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;langke&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;bugs&quot;: &#123;</span><br><span class="line">    &quot;url&quot;: &quot;https://github.com/lchenfox/rn-npm-demo/issues&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;homepage&quot;: &quot;https://github.com/lchenfox/rn-npm-demo#readme&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Is this OK? (yes) yes</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：在<code>npm init --scope=公司名</code>来初始化仓库的过程中，你只需要填写<code>description</code>和<code>author</code>项，甚至这两项都是可选的，其他的信息你不需要填写直接一路回车就好。<code>name</code>也就是我们的<code>npm</code>包名，当使用<code>npm init --scope=公司名</code>来初始化时，默认的生成的包名是<code>@公司名/githun上的仓库名称</code>，比如上面我填写的公司名是<code>mycompany</code>，<code>rn-npm-demo</code>是<code>github</code>上面的仓库名，所以最终创建的默认的<code>npm</code>包名就是<code>@mycompany/rn-npm-demo</code>。如果你填写了其他的名称，那么最终的包名将不再是<code>@mycompany/rn-npm-demo</code>，而是你填了什么，就是什么！不过，不建议填写这一项，因为我们使用<code>npm init --scope=公司名</code>的目的就是为了使用<code>公司名</code>来区分我们自己创建的私有库和其他的<code>npm</code>库，比如我一看到导入的是带有<code>@mycompany</code>的<code>npm</code>包，那么我一看就知道这是公司自己写的私有库，如果重新填写了<code>name</code>项，那使用<code>npm init --scope=公司名</code>就没有多大意义了。</p>
+</blockquote>
+<h4 id="创建index-js文件"><a href="#创建index-js文件" class="headerlink" title="创建index.js文件"></a>创建<code>index.js</code>文件</h4><p>创建<code>index.js</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi index.js</span><br></pre></td></tr></table></figure>
+
+<p>并添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exports.putMsg = function() &#123;</span><br><span class="line">	console.warn(&quot;Great! you got a private npm package on github!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>ls</code>命令来查看当前仓库所有的文件，应该如下<code>4</code>个文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">➜  rn-npm-demo git:(master) ✗ ls</span><br><span class="line">LICENSE      README.md    index.js     package.json</span><br></pre></td></tr></table></figure>
+
+<h4 id="提交到远程"><a href="#提交到远程" class="headerlink" title="提交到远程"></a>提交到远程</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">➜  rn-npm-demo git:(master) ✗ git add . &amp;&amp; git commit -m &quot;init commit&quot; &amp;&amp; git push</span><br><span class="line">[master 6dd0afa] init commit</span><br><span class="line"> 2 files changed, 22 insertions(+)</span><br><span class="line"> create mode 100644 index.js</span><br><span class="line"> create mode 100644 package.json</span><br><span class="line">Enumerating objects: 5, done.</span><br><span class="line">Counting objects: 100% (5/5), done.</span><br><span class="line">Delta compression using up to 4 threads</span><br><span class="line">Compressing objects: 100% (4/4), done.</span><br><span class="line">Writing objects: 100% (4/4), 686 bytes | 686.00 KiB/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0)</span><br><span class="line">To github.com:lchenfox/rn-npm-demo.git</span><br><span class="line">   9cbf75a..6dd0afa  master -&gt; master</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装方式-npm-vs-yarn"><a href="#安装方式-npm-vs-yarn" class="headerlink" title="安装方式 npm vs yarn"></a>安装方式 npm vs yarn</h2><h4 id="使用npm"><a href="#使用npm" class="headerlink" title="使用npm"></a>使用npm</h4><ul>
+<li>不需要添加<code>ssh key</code>（任何人都可以安装）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install https://github.com/lchenfox/rn-npm-demo.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install git+https://github.com/lchenfox/rn-npm-demo.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install lchenfox/rn-npm-demo</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install github:lchenfox/rn-npm-demo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>必须添加<code>ssh key</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install git+ssh://git@github.com:lchenfox/rn-npm-demo.git</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装具体的版本</li>
+</ul>
+<p>如果需要安装具体的版本，必须要打<code>tag</code>，每一个<code>tag</code>就代表一个版本，因此建议是每一次修改都要增加<code>tag版本号</code>。比如已经有一个打好的<code>tag</code>版本为<code>2.0</code>，要安装具体<code>2.0</code>版本，可以</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install https://github.com/lchenfox/private_demo.git#2.0</span><br></pre></td></tr></table></figure>
+
+
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install git+https://github.com/lchenfox/private_demo.git#2.0</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用yarn"><a href="#使用yarn" class="headerlink" title="使用yarn"></a>使用yarn</h4><ul>
+<li>不需要添加<code>ssh key</code>（任何人都可以安装）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add https://github.com/lchenfox/rn-npm-demo.git</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add git+https://github.com/lchenfox/rn-npm-demo.git</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>必须添加<code>ssh key</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add lchenfox/rn-npm-demo</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add github:lchenfox/rn-npm-demo</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yarn add git+ssh://git@github.com:lchenfox/rn-npm-demo.git</span><br></pre></td></tr></table></figure>
+
+<h4 id="针对以上必须添加ssh-key的命令使用权限时，如何处理呢？"><a href="#针对以上必须添加ssh-key的命令使用权限时，如何处理呢？" class="headerlink" title="针对以上必须添加ssh key的命令使用权限时，如何处理呢？"></a>针对以上<strong>必须添加<code>ssh key</code>的命令</strong>使用权限时，如何处理呢？</h4><p>第一种方式是直接将电脑上的<code>ssh key（公钥）</code>添加到<code>github</code>私有仓库所有者，这样你就可以访问所有仓库（包含私有仓库）的权限，如下：</p>
+<p><img src="https://i.loli.net/2019/12/23/rBLmD2jpiCPGOqw.png" alt="sshkey.png"></p>
+<p>另一种方式是直接将电脑上的<code>ssh key（公钥）</code>添加到<code>github</code>的私有仓库，这样你仅仅只能够访问这个私有仓库，如下（推荐，为了安全，限制权限）：</p>
+<p><img src="https://i.loli.net/2019/12/23/UnFskeNHtG6OBvr.png" alt="ssh-key.png"></p>
+<blockquote>
+<p>事实上，还有第三种方式，如上图，在私有仓库里面还有一个<code>Collaborators</code>，你可以为这个仓库添加团队成员，这样又分2种情况，第一种情况：如果被添加的成员使用<code>CLI（命令行模式）</code>，那么他也要将他自己电脑上的<code>ssh key</code>添加到他自己的<code>github</code>的<code>SSH and GPG keys</code>中（上面的第一种方式）；第二种情况：被添加的成员不喜欢使用<code>CLI（命令行模式）</code>，而是使用<code>IDE（比如WebStorm）</code>登录他自己的<code>github</code>账号来执行<code>pull</code>、<code>push</code>、<code>npm install</code>等等操作，那么<strong>他就没有必要将他自己电脑上的<code>ssh key</code>添加到他自己的<code>github</code>的<code>SSH and GPG keys</code>中</strong>。这听起来似乎很别扭，但是事实就是如此，因为他直接使用他自己的账号访问自己仓库并没有任何问题，但是使用<code>CLI</code>模式的话，就跟他是否登录<code>github</code>没有关系了。简单来说就是，只要使用<code>CLI</code>模式，不管是被添加的成员还是仓库持有者，都必须添加<code>ssh key</code>。</p>
+</blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>和正常使用<code>npm install</code>一样，不同的是后面跟的不是具体的包名，而是一个<code>github</code>上的<code>https</code>链接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install https://github.com/lchenfox/rn-npm-demo.git</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第一次安装可能会有点慢，我这里用了大概<code>3</code>分钟时间才安装成功。</p>
+</blockquote>
+<p>查看一下<code>package.json</code>文件，我们可以看到</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">➜  testnpm cat package.json</span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;@mycompany/rn-npm-demo&quot;: &quot;git+https://github.com/lchenfox/rn-npm-demo.git&quot;,</span><br><span class="line">    &quot;react&quot;: &quot;16.8.3&quot;,</span><br><span class="line">    &quot;react-native&quot;: &quot;0.59.9&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2019/12/23/jbiN5sLc3r1mgtd.png" alt="success.png"></p>
+<p>可以看到<code>@mycompany/rn-npm-demo</code>这个我们自己的<code>npm</code>私有库已经安装成功。</p>
+<blockquote>
+<p>提示：使用<code>npm install https://github.com/lchenfox/rn-npm-demo.git</code>和<code>yarn add https://github.com/lchenfox/rn-npm-demo.git</code>生成的在<code>node_modules</code>中的依赖<code>package.json</code>（也就是<code>node_modules/@mycompany/rn-npm-demo/package.json</code>）内容是不一样的，<code>npm install</code>会自动给你配置一些其他路径或参数，用<code>yarn add</code>的方式生成的方式看起来比较正常，虽然都不影响正常安装使用，但是我个人更推荐使用<code>yarn</code>工具来安装依赖，在速度、效率上都比<code>npm</code>要好，当然，这取决于你的喜好！</p>
+</blockquote>
+<p>现在，在你的项目中导入使用试试</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#123;putMsg&#125; from &apos;@mycompany/rn-npm-demo&apos;;</span><br><span class="line"></span><br><span class="line">putMsg(); // Great! you got a private npm package on github!</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过本文，我们基本了解了如何以<code>npm + github</code>的形式来搭建<code>npm</code>私有库，但是同样地，它也有着优缺点。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>基于<code>github</code>私有库来搭建<code>npm</code>私有库，搭建简单</li>
+<li>管理方便，只需要维护<code>github</code>私有库，不需要本地搭建服务器、数据库等</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>在<code>package.json</code>设置<code>private</code>为<code>true</code>(为了保证不小心发布到<code>npm</code>官方库）</li>
+<li>安装之后，想要更新，只能重新<code>npm install xxx</code></li>
+<li>发布的时候不能使用<code>npm</code>的相关命令，比如<code>npm version patch</code>、<code>npm publish</code></li>
+<li>有时候拉取都比较慢，有时容易失败</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+        <tag>npm</tag>
+        <tag>私有仓库</tag>
+        <tag>npm-github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>verdaccio+ngrok发布npm私有仓库</title>
     <url>/2019/12/20/verdaccio%20+%20ngrok%E5%8F%91%E5%B8%83npm%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</url>
     <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在上一篇(<a href="https://www.clcoder.com/2019/12/18/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0npm%E5%AE%98%E6%96%B9%E4%BB%93%E5%BA%93/#more" target="_blank" rel="noopener">如何发布代码到npm官方仓库</a>)文章中，我们介绍了如何将自己的代码发布到<code>npm</code>官方仓库，通过那种方式，我们可以将自己写的任何组件开源给别人用，和我们日常在<code>github</code>上使用的三方库是一个道理。我们也说过，我们发布的组件或包都是开源的，任何人都可以访问并且可以在<a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm官方仓库</a>搜索到的，虽然<code>npm</code>官方提供的收费版也可以发布私有仓库，特别方便，但是，太<code>TM</code>贵了！所以，今天我们来继续介绍另一种不使用<code>npm官方提供的收费版私有仓库</code>的方式，来搭建属于我们自己的仅仅公司内部可使用的<code>npm</code>私有仓库 – <code>verdaccio &amp; ngrok</code>。</p>

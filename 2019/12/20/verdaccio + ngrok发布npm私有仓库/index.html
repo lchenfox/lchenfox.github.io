@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/12/20/FO8SRPxKa3yXdtM.png">
 <meta property="og:image" content="https://i.loli.net/2019/12/20/XNHfdu1MDsSKgWm.png">
 <meta property="og:image" content="https://i.loli.net/2019/12/20/DZ5vGkVdRqtFzLb.png">
-<meta property="og:updated_time" content="2019-12-21T10:55:17.418Z">
+<meta property="og:updated_time" content="2019-12-23T08:12:33.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="verdaccio+ngrok发布npm私有仓库">
 <meta name="twitter:description" content="介绍在上一篇(如何发布代码到npm官方仓库)文章中，我们介绍了如何将自己的代码发布到npm官方仓库，通过那种方式，我们可以将自己写的任何组件开源给别人用，和我们日常在github上使用的三方库是一个道理。我们也说过，我们发布的组件或包都是开源的，任何人都可以访问并且可以在npm官方仓库搜索到的，虽然npm官方提供的收费版也可以发布私有仓库，特别方便，但是，太TM贵了！所以，今天我们来继续介绍另一种">
@@ -514,7 +514,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Too Many Connections</span><br><span class="line">Too many connections! The tunnel session &apos;1VF8JMx9QsgS6GcWS9gPBZyQQO4&apos; has violated </span><br><span class="line">the rate-limit policy of 20 connections per minute by initiating 37 connections in </span><br><span class="line">the last 60 seconds. Please decrease your inbound connection volume or upgrade to </span><br><span class="line">a paid plan for additional capacity.</span><br><span class="line"></span><br><span class="line">The error encountered was: ERR_NGROK_702</span><br></pre></td></tr></table></figure>
 
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用<code>verdaccio + ngrok</code>配置起来比较方便，也能迎合<code>npm</code>的相关命令，安装和操作都特别简单，<code>verdaccio</code>也提供本地缓存，这个很棒。但是速度这一块以及<code>ngrok</code>产生的代理源不固定，团队协作安装较为麻烦，这个有时候真的不能忍受（可以看上面的优缺点）。但是，如果能接受的话，这也不失为一个选择。如果你有比<code>ngrok</code>更好用的反代理或者其他工具，请告诉我。下一章我会介绍如何通过<code>npm + github</code>的方式来创建<code>npm</code>私有仓库。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用<code>verdaccio + ngrok</code>配置起来比较方便，也能迎合<code>npm</code>的相关命令，安装和操作都特别简单，<code>verdaccio</code>也提供本地缓存，这个很棒。但是速度这一块以及<code>ngrok</code>产生的代理源不固定，团队协作安装较为麻烦，这个有时候真的不能忍受（可以看上面的优缺点）。但是，如果能接受的话，这也不失为一个选择。如果你有比<code>ngrok</code>更好用的反代理或者其他工具，请告诉我。下一章我会介绍<a href="http://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more" target="_blank" rel="noopener">基于github实现npm私有库的搭建</a>。</p>
 <p>参考文章：<a href="https://medium.com/strapi/testing-your-npm-package-before-releasing-it-using-verdaccio-ngrok-28e2832c850a" target="_blank" rel="noopener">Testing your npm package before releasing it using Verdaccio + ngrok</a></p>
 
       

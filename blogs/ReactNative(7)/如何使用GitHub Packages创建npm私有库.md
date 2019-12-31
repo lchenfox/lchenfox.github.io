@@ -494,5 +494,7 @@ printHello2(); // hello2
 
 使用`GitHub Packages`来创建和托管`npm`包非常方便，我们可以使用`npm`的相关命令，发布、安装方式基本和`npm`一样，使用这种方式来创建属于我们自己的私有库，维护起来也很简单，和之前的几种方式比起来，我个人觉得这种方式很适合搭建(或许只能说创建？)公司内部的`npm`私有库。
 
-更多详情，请查看官方：[Managing packages with GitHub Packages](https://help.github.com/en/github/managing-packages-with-github-packages)。
+注意：虽然我们使用了`.npmrc`文件，但是，不要把`//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4`提供到`github`仓库，因为`GitHub`官方为了安全考虑，不允许提交到仓库，如果你提交了，`GitHub`会自动检测，并且撤销这个`token`，那么你下次安装、发布都没用了，只能重新生成`token`!!! 你可以添加在`.gitignore`文件里面添加忽略`.npmrc`文件就好了，也就是说`.npmrc`文件只能放在本地！
+
+更多详情，比如如何在一个项目从多个`GitHub`账号拉取多个不同来源的`npm`依赖包，请查看官方：[Installing packages from other organizations](https://help.github.com/en/github/managing-packages-with-github-packages/configuring-npm-for-use-with-github-packages#installing-packages-from-other-organizations)、[Managing packages with GitHub Packages](https://help.github.com/en/github/managing-packages-with-github-packages)。
 

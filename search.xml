@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>真机调试</title>
+    <title>【iOS】真机调试,The executable was signed with invalid entitlements</title>
     <url>/2020/02/27/%5BiOS%5D%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95-The%20executable%20was%20signed%20with%20invalid%20entitlements./</url>
-    <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>[iOS]真机调试,The executable was signed with invalid entitlements</p>
-<p>昨天新创建了一个<code>Demo</code>工程，准备测试<code>iOS</code>的<code>Access WiFi Information</code>权限功能，使用<code>iPhone X</code>真机调试的时候，发现根本没法运行，于是将<code>Access WiFi Information</code>权限关掉，并且删除了之前打开<code>Access WiFi Information</code>权限而自动生成的<code>xxx.entitlements</code>权限证书文件，发现还是一样的报错。在一个新工程上面真机调试竟然报错？到底是哪里出了问题呢？</p>
+    <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>昨天新创建了一个<code>Demo</code>工程，准备测试<code>iOS</code>的<code>Access WiFi Information</code>权限功能，使用<code>iPhone X</code>真机调试的时候，发现根本没法运行，于是将<code>Access WiFi Information</code>权限关掉，并且删除了之前打开<code>Access WiFi Information</code>权限而自动生成的<code>xxx.entitlements</code>权限证书文件，发现还是一样的报错。在一个新工程上面真机调试竟然报错？到底是哪里出了问题呢？</p>
 <p>经过一天的调试，尝试了各种能想到的办法，以及在网上百度了一些资料，仍然没有解决…..</p>
 <p>错误信息如下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The executable was signed with invalid entitlements.</span><br><span class="line"></span><br><span class="line">The entitlements specified in your application’s Code Signing Entitlements file are invalid, </span><br><span class="line">not permitted, or do not match those specified in your provisioning profile. (0xE8008016).</span><br></pre></td></tr></table></figure>

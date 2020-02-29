@@ -1,14 +1,12 @@
 ---
-
-title: [iOS]真机调试: The executable was signed with invalid entitlements.
-date: 2020-02-27 
-categories: 
+title: 【iOS】真机调试,The executable was signed with invalid entitlements
+date: 2020-2-27
+categories:
 - iOS
 - Objective-C
-tags: 
+tags:
 - 真机调试报错
 - entitlements
-
 ---
 
 ## 说明

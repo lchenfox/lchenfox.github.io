@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>真机调试</title>
+    <url>/2020/02/27/%5BiOS%5D%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95-The%20executable%20was%20signed%20with%20invalid%20entitlements./</url>
+    <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>[iOS]真机调试,The executable was signed with invalid entitlements</p>
+<p>昨天新创建了一个<code>Demo</code>工程，准备测试<code>iOS</code>的<code>Access WiFi Information</code>权限功能，使用<code>iPhone X</code>真机调试的时候，发现根本没法运行，于是将<code>Access WiFi Information</code>权限关掉，并且删除了之前打开<code>Access WiFi Information</code>权限而自动生成的<code>xxx.entitlements</code>权限证书文件，发现还是一样的报错。在一个新工程上面真机调试竟然报错？到底是哪里出了问题呢？</p>
+<p>经过一天的调试，尝试了各种能想到的办法，以及在网上百度了一些资料，仍然没有解决…..</p>
+<p>错误信息如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The executable was signed with invalid entitlements.</span><br><span class="line"></span><br><span class="line">The entitlements specified in your application’s Code Signing Entitlements file are invalid, </span><br><span class="line">not permitted, or do not match those specified in your provisioning profile. (0xE8008016).</span><br></pre></td></tr></table></figure>
+
+<p>错误信息截图</p>
+<p><img src="https://i.loli.net/2020/02/27/qfeY1iA3QUBDgZr.png" alt="error.png"></p>
+<p>今天调整心态，使用<code>Google</code>查找，终于在<strong>stack overflow</strong>找到了问题所在</p>
+<p>答案链接：<a href="https://stackoverflow.com/a/54902044" target="_blank" rel="noopener">Entitlements file do not match those specified in your provisioning profile.(0xE8008016)</a></p>
+<p>答案截图</p>
+<p><img src="https://i.loli.net/2020/02/27/rW9oAV4Gd6KOmpY.png" alt="answer.png"></p>
+<p>原来是项目（这里就以我的<code>demo</code>工程名为例）的<strong>wifidemo</strong>与<strong>wifidemoTests</strong>所选择的开发者团队名不一样所致，看了一下自己的工程，的确不同，于是按照这个回答将其改为一直就好了。</p>
+<p><strong>图一</strong></p>
+<p><img src="https://i.loli.net/2020/02/27/MO4PSyeAnjXCcup.png" alt="wifidemo.png"></p>
+<p><strong>图二</strong><br><img src="https://i.loli.net/2020/02/27/en9GZPgtfXQkrOM.png" alt="wifidemoTests.png"></p>
+<p>注：<em>图一</em>和<em>图二</em>红框中的<code>Team</code>请保持一致，即可解决以上出现的问题。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+        <category>Objective-C</category>
+      </categories>
+      <tags>
+        <tag>真机调试报错</tag>
+        <tag>entitlements</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何使用GitHub Packages创建npm私有库</title>
     <url>/2019/12/31/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8GitHub%20Packages%E5%88%9B%E5%BB%BAnpm%E7%A7%81%E6%9C%89%E5%BA%93/</url>
     <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><code>GitHub Packages</code>是<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>提供的类似<code>npm</code>包管理工具或平台，通过<code>GitHub Packages</code>，我们可以直接使用<code>npm</code>相关的命令、功能，并且不用将自己的<code>npm</code>包发布到<code>npm</code>仓库。也就是说，我们的<code>npm</code>包将托管在<code>github</code>上，并且可以和我们相应的仓库保持同步。之前，我们介绍了<a href="https://www.clcoder.com/2019/12/18/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0npm%E5%AE%98%E6%96%B9%E4%BB%93%E5%BA%93/" target="_blank" rel="noopener">如何发布代码到npm官方仓库</a>、<a href="https://www.clcoder.com/2019/12/20/verdaccio%20+%20ngrok%E5%8F%91%E5%B8%83npm%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/#more" target="_blank" rel="noopener">verdaccio+ngrok发布npm私有仓库</a>以及<a href="https://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more" target="_blank" rel="noopener">基于github实现npm私有库的搭建</a>，通过这篇文章：<a href="https://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more" target="_blank" rel="noopener">基于github实现npm私有库的搭建</a>可以知道，我们可以创建自己的<code>npm私有库</code>，但是我们只能通过链接的方式安装<code>npm私有包</code>，不能使用<code>npm</code>的相关命令，比如<code>npm version patch</code>等等。今天，我们还继续讲<code>npm私有库</code>，还是基于<code>github</code>，与<a href="https://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more" target="_blank" rel="noopener">基于github实现npm私有库的搭建</a>不同的是，今天我们要讲的<code>npm私有库</code>是<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>官方于<code>2019年5月</code>推出的<code>GitHub Packages</code><strong>–</strong><code>类似npm包管理器</code>，通过<code>GitHub Packages</code>，我们不仅可以创建<code>npm私有包</code>，使用私有仓库，并且还可以使用<code>npm</code>的相关命令，也能通过以包名的形式来安装依赖，更重要的是，我们还可以将多个包（<code>packages</code>）放在同一个私有仓库当中，这样就可以统一管理，而不必一个<code>npm私有包</code>对应一个<code>github仓库</code>，简直太完美了。</p>

@@ -186,7 +186,7 @@
 </ol>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">      .......</span><br><span class="line">	&lt;meta-data android:name=&quot;com.google.android.geo.API_KEY&quot; android:value=&quot;AIzaSyAZ7eaTLpbEmz7xWGst_-pSXdYv9SU6D_c&quot;/&gt;</span><br><span class="line">	&lt;uses-library android:name=&quot;org.apache.http.legacy&quot; android:required=&quot;false&quot;/&gt;</span><br><span class="line">&lt;/application&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">      .......</span><br><span class="line">	&lt;meta-data android:name=&quot;com.google.android.geo.API_KEY&quot; android:value=&quot;AIzaSyAZ7eaTLpbEmz7xWGst_-pSXYcv9SU6D_u&quot;/&gt;</span><br><span class="line">	&lt;uses-library android:name=&quot;org.apache.http.legacy&quot; android:required=&quot;false&quot;/&gt;</span><br><span class="line">&lt;/application&gt;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>添加 <code>&lt;uses-library android:name=&quot;org.apache.http.legacy&quot; android:required=&quot;false&quot;/&gt;</code>的原因是： Android翻墙后，会奔溃：<a href="https://github.com/react-native-community/react-native-maps/issues/2991#issuecomment-516765727" target="_blank" rel="noopener">https://github.com/react-native-community/react-native-maps/issues/2991#issuecomment-516765727</a>。</p>
@@ -221,7 +221,7 @@
 </ol>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#import &lt;GoogleMaps/GoogleMaps.h&gt;</span><br><span class="line">[GMSServices provideAPIKey:@&quot;AIzaSyAZ7eaTLpbEmz7xWGst_-pSXdYv9SU6D_c&quot;];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#import &lt;GoogleMaps/GoogleMaps.h&gt;</span><br><span class="line">[GMSServices provideAPIKey:@&quot;AIzaSyAZ7eaTLpbEmz7xWGst_-pSXYcv9SU6D_u&quot;];</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><ol start="3">

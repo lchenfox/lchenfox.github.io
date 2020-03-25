@@ -85,7 +85,7 @@ dependencies {
 ```
 <application
       .......
-	<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAZ7eaTLpbEmz7xWGst_-pSXYcv9SU6D_u"/>
+	<meta-data android:name="com.google.android.geo.API_KEY" android:value="你的API KEY"/>
 	<uses-library android:name="org.apache.http.legacy" android:required="false"/>
 </application>
 ```
@@ -176,7 +176,7 @@ react-native link react-native-maps
 
 ```
 #import <GoogleMaps/GoogleMaps.h>
-[GMSServices provideAPIKey:@"AIzaSyAZ7eaTLpbEmz7xWGst_-pSXYcv9SU6D_u"];
+[GMSServices provideAPIKey:@"你的API KEY"];
 ```
 
 - 3. 手动集成`Google Maps SDK`

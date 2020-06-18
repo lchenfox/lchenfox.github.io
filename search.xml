@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>React Native日期选择器</title>
+    <url>/2020/06/18/React%20Native%E5%AE%9E%E7%8E%B0%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8/</url>
+    <content><![CDATA[<h1 id="React-Native日期选择器"><a href="#React-Native日期选择器" class="headerlink" title="React Native日期选择器"></a>React Native日期选择器</h1><p><strong>iOS和Android通用日期选择器：</strong><a href="https://github.com/lchenfox/react-native-common-date-picker" target="_blank" rel="noopener">react-native-common-date-picker</a>（如果你觉得还不错，记得给个 ⭐️⭐️⭐️）。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><strong>日期选择器截图</strong></p>
+<table>
+<thead>
+<tr>
+<th>Android 1</th>
+<th>Android 2</th>
+<th>Android 3</th>
+<th>Android 4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://i.loli.net/2020/06/12/BcqVmEsYAlSdRvz.png" alt="Android 1.png"></td>
+<td><img src="https://i.loli.net/2020/06/12/4L86ouwz1PNrdIG.png" alt="Android 2.png"></td>
+<td><img src="https://i.loli.net/2020/06/12/KSGh74QTdDn9wlH.png" alt="Android 3.png"></td>
+<td><img src="https://i.loli.net/2020/06/12/k3NbBnzmRQ65ZJS.png" alt="Android 4.png"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>iOS 1</th>
+<th>iOS 2</th>
+<th>iOS 3</th>
+<th>iOS 4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://i.loli.net/2020/06/12/nvd24jc1zGrAhLW.png" alt="iOS 1.png"></td>
+<td><img src="https://i.loli.net/2020/06/12/DgLFt79Uz38P2hv.png" alt="iOS 2.png"></td>
+<td><img src="https://i.loli.net/2020/06/12/wehKmGE3s5aoWtJ.png" alt="iOS 3.png"></td>
+<td><img src="https://i.loli.net/2020/06/12/T5QjBLpYH7lNrUm.png" alt="iOS 4.png"></td>
+</tr>
+</tbody></table>
+<p><strong>日历列表截图</strong></p>
+<table>
+<thead>
+<tr>
+<th>Android 1</th>
+<th>Android 2</th>
+<th>Android 3</th>
+<th>Android 4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://i.loli.net/2020/06/06/ldkZV3NpQivuL8z.png" alt="Android1.png"></td>
+<td><img src="https://i.loli.net/2020/06/06/Xhk2uwjvszreHTg.png" alt="Android2.png"></td>
+<td><img src="https://i.loli.net/2020/06/06/iBPDeptU4kFLjN2.png" alt="Android3.png"></td>
+<td><img src="https://i.loli.net/2020/06/06/tyALsbHZfGVzrJw.png" alt="Android4.png"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>iOS 1</th>
+<th>iOS 2</th>
+<th>iOS 3</th>
+<th>iOS 4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://i.loli.net/2020/06/06/LwEa476VAQ8kgTC.png" alt="iOS1.png"></td>
+<td><img src="https://i.loli.net/2020/06/06/K6h21JlyTspo7gq.png" alt="iOS2.png"></td>
+<td><img src="https://i.loli.net/2020/06/06/Pw1DnIkMjtve5NC.png" alt="iOS3.png"></td>
+<td><img src="https://i.loli.net/2020/06/06/nUuI1bSxayiTkZe.png" alt="iOS4.png"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>日期选择器GIF</th>
+<th>日历列表GIF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://i.loli.net/2020/06/15/8fyQB3WA1KMPhzt.gif" alt="DatePicker.gif"></td>
+<td><img src="https://i.loli.net/2020/06/15/baRr4Ymh8qBKoZt.gif" alt="CalendarList.gif"></td>
+</tr>
+</tbody></table>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直以来，都会因为<code>RN</code>的日期选择器使用而浪费时间和精力。首先，<code>RN</code>官方提供的日期选择器在<code>iOS</code>和<code>Android</code>上并不统一，尤其是在<code>Android</code>上，展示的是<strong>钟表</strong>的形式，作为一个<code>iOS</code>开发者来说，简直难以接受。</p>
+<p>因此，对于<code>RN</code>开发来说，<a href="https://reactnative.dev/docs/datepickerios" target="_blank" rel="noopener">RN官方 - DatePickerIOS</a> 和 <a href="https://reactnative.dev/docs/datepickerandroid" target="_blank" rel="noopener">RN官方 - DatePickerAndroid</a> 的不统一，这点就让很多人弃用官方提供的组件和<code>API</code>，那有没有现成的可以使用的日期选择器呢？</p>
+<p><strong>注：上面官方提供的日期选择器目前已经由RN社区统一维护，<a href="https://github.com/react-native-community/datetimepicker" target="_blank" rel="noopener">链接：@react-native-community/datetimepicker</a>。</strong></p>
+<p>现成的日期选择器自然是有的，比如<a href="https://github.com/mmazzarolo/react-native-modal-datetime-picker" target="_blank" rel="noopener">react-native-modal-datetime-picker</a>和官方提供的类似，可以说只是一层封装。再比如另一个较为符合需求的<a href="https://github.com/henninghall/react-native-date-picker" target="_blank" rel="noopener">react-native-date-picker</a>。然而，这些库要么基于官方做了一层封装，要么就是不能灵活地调整一些必要的配置，比如我们希望只显示<strong>年-月</strong>或者调整顺序的<strong>月-日-年</strong>、<strong>日-月-年</strong>等等。</p>
+<p>笔者的目的就是为了要让<strong>需求</strong>无处遁形，无论你怎么调整顺序、需要调整颜色、距离、字体大小等，我只需要配置一下参数就可以满足产品经理的<strong>“无理要求”</strong>，也因此才有了本文的重复造轮子。</p>
+<h2 id="为什么要推荐react-native-common-date-picker"><a href="#为什么要推荐react-native-common-date-picker" class="headerlink" title="为什么要推荐react-native-common-date-picker"></a>为什么要推荐react-native-common-date-picker</h2><p>主要有以下几点：</p>
+<ul>
+<li>支持<code>iOS和Android</code>，样式统一</li>
+<li>安装和使用方便，纯JavaScript实现，无需<code>link</code></li>
+<li>灵活性高，参数配置丰富，无论你只想显示<strong>年-月-日</strong>还是<strong>月-日-年</strong>、<strong>日-月-年</strong>、<strong>年-月</strong>等都可以</li>
+<li>支持日期选择器和日历📆两种不同类型的日期选择</li>
+<li>性能高，使用最基础最原始的“看似笨拙”的方法来提升性能（可以看源码里面有注释）</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>本库是纯<code>JS</code>实现，因此安装依赖非常简单，一步到位：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install react-native-common-date-picker</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h4 id="日期选择器"><a href="#日期选择器" class="headerlink" title="日期选择器"></a>日期选择器</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#123;DatePicker&#125; from &quot;react-native-common-date-picker&quot;;</span><br><span class="line"></span><br><span class="line">&lt;DatePicker</span><br><span class="line">    confirm=&#123;date =&gt; &#123;</span><br><span class="line">        console.warn(date)</span><br><span class="line">    &#125;&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="日历选择列表📆"><a href="#日历选择列表📆" class="headerlink" title="日历选择列表📆"></a>日历选择列表📆</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#123;CalendarList&#125; from &quot;react-native-common-date-picker&quot;;</span><br><span class="line"></span><br><span class="line">&lt;Modal animationType=&#123;&apos;slide&apos;&#125; visible=&#123;this.state.visible&#125;&gt;</span><br><span class="line">     &lt;CalendarList</span><br><span class="line">          containerStyle=&#123;&#123;flex: 1&#125;&#125;</span><br><span class="line">          cancel=&#123;() =&gt; this.setState(&#123;visible: false&#125;)&#125;</span><br><span class="line">          confirm=&#123;data =&gt; &#123;</span><br><span class="line">              this.setState(&#123;</span><br><span class="line">                   selectedDate1: data[0],</span><br><span class="line">                   selectedDate2: data[1],</span><br><span class="line">                   visible: false,</span><br><span class="line">              &#125;);</span><br><span class="line">          &#125;&#125;</span><br><span class="line">     /&gt;</span><br><span class="line">&lt;/Modal&gt;</span><br></pre></td></tr></table></figure>
+
+<p>更多的使用例子，大家自行查看<a href="https://github.com/lchenfox/react-native-common-date-picker" target="_blank" rel="noopener">GitHub: react-native-common-date-picker仓库</a>，源码里面也有很全面的注释，非常容易配置和使用。</p>
+]]></content>
+      <categories>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native, react-native-date-picker, react-native-common-date-picker，datepicker, 日期选择器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>react-native-code-push热更新</title>
     <url>/2020/03/25/RN%E4%BD%BF%E7%94%A8CodePush%E7%83%AD%E6%9B%B4%E6%96%B0/</url>
     <content><![CDATA[<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p><a href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/" target="_blank" rel="noopener">官方链接</a></p>

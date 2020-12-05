@@ -411,7 +411,6 @@
 ]]></content>
       <categories>
         <category>iOS</category>
-        <category>Objective-C</category>
       </categories>
       <tags>
         <tag>真机调试报错</tag>
@@ -1212,7 +1211,6 @@
 ]]></content>
       <categories>
         <category>iOS</category>
-        <category>Objective-C</category>
       </categories>
       <tags>
         <tag>KVC</tag>
@@ -2757,7 +2755,6 @@
 ]]></content>
       <categories>
         <category>iOS</category>
-        <category>Swift</category>
       </categories>
       <tags>
         <tag>Autolayout</tag>

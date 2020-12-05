@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Building for iOS Simulator, but the linked and embedded framework &#39;IdcardQuality.framework&#39; was built for iOS</title>
+    <url>/2020/12/05/Building%20for%20iOS%20Simulator,%20but%20the%20linked%20and%20embedded%20framework%20&#39;IdcardQuality.framework&#39;%20was%20built%20for%20iOS/</url>
+    <content><![CDATA[<h2 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h2><p>在使用百度<code>OCR</code>时，无法使用模拟器调试（<code>Xcode Version 12.2 (12B45b)</code>)，这是由于百度<code>OCR</code>库不支持模拟器架构，报错如下：</p>
+<p><strong><em>Building for iOS Simulator, but the linked and embedded framework ‘IdcardQuality.framework’ was built for iOS.</em></strong></p>
+<p><strong>截图：</strong></p>
+<p><img src="https://i.loli.net/2020/11/30/hrO7Ew6eDsu259M.png" alt="error.png"></p>
+<p>当然，这种智能识别库都是需要真机调用相机的，模拟器无法使用也是正常。但是，我们虽然不能也无法使用模拟器，我们也希望工程能够正常跑通，以便我们能够使用模拟器来测试其他的业务逻辑，不然需要一直使用<strong>真机</strong>来调试是非常不方便的。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>找到<code>Build Settings/Build Options/Excluded Source File Names</code>，在<code>Debug</code>模式下，添加<code>Any iOS Simulator SDK</code>，在后面添加要在模拟器运行情况下需要排除的文件，这里是<code>IdcardQuality.framework</code>：</p>
+<p><img src="https://i.loli.net/2020/11/30/mbQnKL5CPpjMiDv.png" alt="resolve.png"></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>iOS simulator</tag>
+        <tag>Linked and embedded framework</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React Native日期选择器</title>
     <url>/2020/06/18/React%20Native%E5%AE%9E%E7%8E%B0%E6%97%A5%E6%9C%9F%E9%80%89%E6%8B%A9%E5%99%A8/</url>
     <content><![CDATA[<h1 id="React-Native日期选择器"><a href="#React-Native日期选择器" class="headerlink" title="React Native日期选择器"></a>React Native日期选择器</h1><p><strong>iOS和Android通用日期选择器：</strong><a href="https://github.com/lchenfox/react-native-common-date-picker" target="_blank" rel="noopener">react-native-common-date-picker</a>（如果你觉得还不错，记得给个 ⭐️⭐️⭐️）。</p>

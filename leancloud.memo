@@ -26,4 +26,5 @@
 {"title":"react-native-code-push热更新","url":"/2020/03/25/RN使用CodePush热更新/"},
 {"title":"React Native日期选择器","url":"/2020/06/18/React Native实现日期选择器/"},
 {"title":"Building for iOS Simulator, but the linked and embedded framework 'IdcardQuality.framework' was built for iOS","url":"/2020/12/05/Building for iOS Simulator, but the linked and embedded framework 'IdcardQuality.framework' was built for iOS/"},
+{"title":"iOS interactivePopGestureRecognizer卡住&手势滑动监听","url":"/2021/03/12/iOS interactivePopGestureRecognizer卡住&手势滑动监听/"},
 ]

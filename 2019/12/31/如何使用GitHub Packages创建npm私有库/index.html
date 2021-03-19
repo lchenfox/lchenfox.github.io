@@ -1,37 +1,1369 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React Native,npm,私有仓库,npm私有库,GitHub Packages,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍GitHub Packages是GitHub提供的类似npm包管理工具或平台，通过GitHub Packages，我们可以直接使用npm相关的命令、功能，并且不用将自己的npm包发布到npm仓库。也就是说，我们的npm包将托管在github上，并且可以和我们相应的仓库保持同步。之前，我们介绍了如何发布代码到npm官方仓库、verdaccio+ngrok发布npm私有仓库以及基于github实现">
+<meta name="keywords" content="React Native,npm,私有仓库,npm私有库,GitHub Packages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用GitHub Packages创建npm私有库">
+<meta property="og:url" content="http://yoursite.com/2019/12/31/如何使用GitHub Packages创建npm私有库/index.html">
+<meta property="og:site_name" content="陈龙 的博客">
+<meta property="og:description" content="介绍GitHub Packages是GitHub提供的类似npm包管理工具或平台，通过GitHub Packages，我们可以直接使用npm相关的命令、功能，并且不用将自己的npm包发布到npm仓库。也就是说，我们的npm包将托管在github上，并且可以和我们相应的仓库保持同步。之前，我们介绍了如何发布代码到npm官方仓库、verdaccio+ngrok发布npm私有仓库以及基于github实现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/jED1BaIKRfrx2sW.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/3QG9BJF2VOEoLTn.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/E2f1OPhBr76Qvpj.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/cpW3nwZOIirz6G4.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/8hoPaexlVy9f3US.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/aUNoGV7lFWCS3mn.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/IgfBTxej6n4C7Sl.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/TlPvWEz5cH2ZDhS.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/KE68fdL5spavVe1.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/mZY4KWEaMjzPo1d.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/MDIf3ozEx5qj2bi.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/26/KgGMzYVCpkWNEca.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/27/RGM3LIpBzlvDgP7.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/27/xjsqrG6ocCmJeFp.png">
+<meta property="og:updated_time" content="2019-12-31T13:34:07.271Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何使用GitHub Packages创建npm私有库">
+<meta name="twitter:description" content="介绍GitHub Packages是GitHub提供的类似npm包管理工具或平台，通过GitHub Packages，我们可以直接使用npm相关的命令、功能，并且不用将自己的npm包发布到npm仓库。也就是说，我们的npm包将托管在github上，并且可以和我们相应的仓库保持同步。之前，我们介绍了如何发布代码到npm官方仓库、verdaccio+ngrok发布npm私有仓库以及基于github实现">
+<meta name="twitter:image" content="https://i.loli.net/2019/12/26/jED1BaIKRfrx2sW.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/31/如何使用GitHub Packages创建npm私有库/">
+
+
+
+
+
+  <title>如何使用GitHub Packages创建npm私有库 | 陈龙 的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈龙 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欢迎来到我的博客，我叫陈龙，现在是一名iOS以及React Native开发者，喜欢编程，喜欢技术，喜欢神秘的代码带来的酷炫和满足感，希望有机会可以和你一起互相学习、交流技术。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/31/如何使用GitHub Packages创建npm私有库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈龙">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈龙 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何使用GitHub Packages创建npm私有库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-31T14:30:34+08:00">
+                2019-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/12/31/如何使用GitHub Packages创建npm私有库/" class="leancloud_visitors" data-flag-title="如何使用GitHub Packages创建npm私有库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><code>GitHub Packages</code>是<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>提供的类似<code>npm</code>包管理工具或平台，通过<code>GitHub Packages</code>，我们可以直接使用<code>npm</code>相关的命令、功能，并且不用将自己的<code>npm</code>包发布到<code>npm</code>仓库。也就是说，我们的<code>npm</code>包将托管在<code>github</code>上，并且可以和我们相应的仓库保持同步。之前，我们介绍了<a href="https://www.clcoder.com/2019/12/18/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0npm%E5%AE%98%E6%96%B9%E4%BB%93%E5%BA%93/" target="_blank" rel="noopener">如何发布代码到npm官方仓库</a>、<a href="https://www.clcoder.com/2019/12/20/verdaccio%20+%20ngrok%E5%8F%91%E5%B8%83npm%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/#more" target="_blank" rel="noopener">verdaccio+ngrok发布npm私有仓库</a>以及<a href="https://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more" target="_blank" rel="noopener">基于github实现npm私有库的搭建</a>，通过这篇文章：<a href="https://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more" target="_blank" rel="noopener">基于github实现npm私有库的搭建</a>可以知道，我们可以创建自己的<code>npm私有库</code>，但是我们只能通过链接的方式安装<code>npm私有包</code>，不能使用<code>npm</code>的相关命令，比如<code>npm version patch</code>等等。今天，我们还继续讲<code>npm私有库</code>，还是基于<code>github</code>，与<a href="https://www.clcoder.com/2019/12/23/%E5%9F%BA%E4%BA%8Egithub%E5%AE%9E%E7%8E%B0npm%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E6%90%AD%E5%BB%BA/#more" target="_blank" rel="noopener">基于github实现npm私有库的搭建</a>不同的是，今天我们要讲的<code>npm私有库</code>是<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>官方于<code>2019年5月</code>推出的<code>GitHub Packages</code><strong>–</strong><code>类似npm包管理器</code>，通过<code>GitHub Packages</code>，我们不仅可以创建<code>npm私有包</code>，使用私有仓库，并且还可以使用<code>npm</code>的相关命令，也能通过以包名的形式来安装依赖，更重要的是，我们还可以将多个包（<code>packages</code>）放在同一个私有仓库当中，这样就可以统一管理，而不必一个<code>npm私有包</code>对应一个<code>github仓库</code>，简直太完美了。</p>
+<p><code>GitHub Packages</code>看起来是这个样子</p>
+<p><img src="https://i.loli.net/2019/12/26/jED1BaIKRfrx2sW.png" alt="github packages.png"></p>
+<h2 id="创建私有仓库"><a href="#创建私有仓库" class="headerlink" title="创建私有仓库"></a>创建私有仓库</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p><img src="https://i.loli.net/2019/12/26/3QG9BJF2VOEoLTn.png" alt="create repo.png"></p>
+<h3 id="私有仓库看起来是下面这个样子"><a href="#私有仓库看起来是下面这个样子" class="headerlink" title="私有仓库看起来是下面这个样子"></a>私有仓库看起来是下面这个样子</h3><p><img src="https://i.loli.net/2019/12/26/E2f1OPhBr76Qvpj.png" alt="repo like.png"></p>
+<blockquote>
+<p>如果你还是不清楚怎么创建私有仓库，那就只能自己<code>Google</code>或者<code>百度</code>了。</p>
+</blockquote>
+<h3 id="克隆私有仓库到本地"><a href="#克隆私有仓库到本地" class="headerlink" title="克隆私有仓库到本地"></a>克隆私有仓库到本地</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:lchenfox/npm-repo.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建Personal-access-tokens"><a href="#创建Personal-access-tokens" class="headerlink" title="创建Personal access tokens"></a>创建Personal access tokens</h2><h3 id="进入github设置，点击Developer-settings"><a href="#进入github设置，点击Developer-settings" class="headerlink" title="进入github设置，点击Developer settings"></a>进入github设置，点击Developer settings</h3><p><img src="https://i.loli.net/2019/12/26/cpW3nwZOIirz6G4.png" alt="dev setting.png"></p>
+<h3 id="依次点击1、2"><a href="#依次点击1、2" class="headerlink" title="依次点击1、2"></a>依次点击1、2</h3><p><img src="https://i.loli.net/2019/12/26/8hoPaexlVy9f3US.png" alt="tokens.png"></p>
+<h3 id="如下图，然后往下滑，点击底部按钮-Generate-token"><a href="#如下图，然后往下滑，点击底部按钮-Generate-token" class="headerlink" title="如下图，然后往下滑，点击底部按钮 Generate token"></a>如下图，然后往下滑，点击底部按钮 <code>Generate token</code></h3><p><img src="https://i.loli.net/2019/12/26/aUNoGV7lFWCS3mn.png" alt="generate token.png"></p>
+<h3 id="保存token"><a href="#保存token" class="headerlink" title="保存token"></a>保存token</h3><p><img src="https://i.loli.net/2019/12/26/IgfBTxej6n4C7Sl.png" alt="save token.png"></p>
+<blockquote>
+<p>注意：图中红框的<code>token</code>必须保存，因为<strong>只会在生成的时候显示一次</strong>，后面你是看不到的，而这个<code>token</code>一定会用到！！！</p>
+</blockquote>
+<h2 id="创建npm包"><a href="#创建npm包" class="headerlink" title="创建npm包"></a>创建npm包</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p><img src="https://i.loli.net/2019/12/26/TlPvWEz5cH2ZDhS.png" alt="init.png"></p>
+<p>命令<code>npm init --scope=lchenfox</code>中的<code>lchenfox</code>必须是你的<code>github</code>用户名，其他随便填写一些<code>description</code>和<code>author</code>，然后一路回车就好。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>有<code>2</code>中配置方式，第一种是在<code>package.json</code>所在目录创建一个<code>.npmrc</code>文件，另一种方式是直接修改<code>package.json</code>文件并增加<code>publishConfig</code>项，任选其一即可。</p>
+<ul>
+<li>方式1， 创建<code>.npmrc</code>（推荐）</li>
+</ul>
+<p>创建<code>.npmrc</code>文件，并添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registry=https://npm.pkg.github.com/lchenfox</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>再次提醒一次，<code>lchenfox</code>是你的<code>github</code>用户名。</p>
+</blockquote>
+<ul>
+<li>方式2， 添加<code>publishConfig</code></li>
+</ul>
+<p>在<code>package.json</code>中添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;publishConfig&quot;: &#123;</span><br><span class="line">    &quot;registry&quot;:&quot;https://npm.pkg.github.com/&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>添加后<code>package.json</code>看起来内容类似下面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;@lchenfox/npm-repo&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;A npm demo&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;repository&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;git+https://github.com/lchenfox/npm-repo.git&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;publishConfig&quot;: &#123;</span><br><span class="line">    &quot;registry&quot;:&quot;https://npm.pkg.github.com/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;langke&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;bugs&quot;: &#123;</span><br><span class="line">    &quot;url&quot;: &quot;https://github.com/lchenfox/npm-repo/issues&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;homepage&quot;: &quot;https://github.com/lchenfox/npm-repo#readme&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><ul>
+<li>方式1（推荐）</li>
+</ul>
+<p>刚才已经创建了<code>.npmrc</code>文件，现在为了授权，我们可以继续添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</span><br></pre></td></tr></table></figure>
+
+<p>添加以后，<code>.npmrc</code>内容应该包含两行，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">registry=https://npm.pkg.github.com/lchenfox</span><br><span class="line">//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：<code>0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</code>是<code>token</code>，另外前缀<code>//</code>一定不能少，否则授权一定失败。事实上，无论是发布<code>npm包</code>还是在项目里面安装<code>npm包</code>，当前目录下的<code>.npmrc</code>里面的<code>//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</code>只针对当前<code>npm</code>包或当前项目有效，你在另一个<code>npm</code>包目录下或另一个项目下是不生效的。比如，如果在<code>first-package</code>目录下的<code>.npmrc</code>中添加<code>//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</code>的话，你在<code>second-package</code>里面也必须单独添加来授权特定的包。问题来了，这样做岂不是很麻烦？如果我想要我的所有项目都生效的情况下怎么办？我们还有另一个办法，就是将<code>//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</code>添加到<code>~/.npmrc</code>用户目录里面，这样的话，它就属于一个全局变量，在这台电脑上无论是哪一个项目或<code>npm</code>包，都可以使用了。</p>
+</blockquote>
+<ul>
+<li>方式2</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm login --registry=https://npm.pkg.github.com</span><br><span class="line">&gt; Username: USERNAME</span><br><span class="line">&gt; Password: TOKEN</span><br><span class="line">&gt; Email: PUBLIC-EMAIL-ADDRESS</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>USERNAME</code>是你的<code>github</code>用户名，<code>Password</code>就是刚才的<code>token</code>，邮箱虽然可以随便填写，为了规范，最好填写你的<code>github</code>邮箱。</p>
+</blockquote>
+<p>登录成功类似以下输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  npm-repo git:(master) ✗ npm login --registry=https://npm.pkg.github.com</span><br><span class="line">Username: lchenfox</span><br><span class="line">Password:</span><br><span class="line">Email: (this IS public) lchenfox@foxmail.com</span><br><span class="line">Logged in as lchenfox on https://npm.pkg.github.com/.</span><br></pre></td></tr></table></figure>
+
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>执行<code>npm publish</code>命令发布</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  npm-repo git:(master) ✗ npm publish</span><br><span class="line">npm notice</span><br><span class="line">npm notice 📦  @lchenfox/npm-repo@1.0.0</span><br><span class="line">npm notice === Tarball Contents ===</span><br><span class="line">npm notice 536B package.json</span><br><span class="line">npm notice 65B  README.md</span><br><span class="line">npm notice === Tarball Details ===</span><br><span class="line">npm notice name:          @lchenfox/npm-repo</span><br><span class="line">npm notice version:       1.0.0</span><br><span class="line">npm notice package size:  437 B</span><br><span class="line">npm notice unpacked size: 601 B</span><br><span class="line">npm notice shasum:        ac8fe26f6cdd65d9bf8f992d56e5f30cc09697ec</span><br><span class="line">npm notice integrity:     sha512-qMlraog/O+uv1[...]GC4/dRBwXgOnA==</span><br><span class="line">npm notice total files:   2</span><br><span class="line">npm notice</span><br><span class="line">+ @lchenfox/npm-repo@1.0.0</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看到，<code>@lchenfox/npm-repo@1.0.0</code>发布成功，包名是<code>@lchenfox/npm-repo</code>，版本号是<code>1.0.0</code>。</p>
+<blockquote>
+<p>提示：当使用<code>npm publish</code>发布结束后，一般也会将代码修改同步提供到<code>github</code>仓库，这样的话，<code>npm</code>包和<code>github</code>仓库的内容就一直会保持一致。当然，如果你说我只需要<code>npm</code>包，又不需要管<code>github</code>仓库是什么，那也可以，但是，如果你不提交到<code>github</code>仓库，使其和<code>npm</code>包保持一致的话，那么当你换一台电脑要修改并且发布这个<code>npm</code>包时，就有可能出现版本和内容在两台电脑上都不一样的情况。比如，你在当前电脑发布了一个<code>v1.1.0</code>版本的<code>npm</code>包，在此之前，版本号是<code>v1.0.3</code>，发布<code>v1.1.0</code>之后，你没有提交到<code>github</code>远程仓库，当你在另一台电脑上把仓库克隆下来，<code>package.json</code>版本依然是<code>v1.0.3</code>（因为你的<code>v1.1.0</code>并没有提交），你修改了点内容，然后<code>npm version patch</code>将版本号修改为<code>v1.0.4</code>，然后<code>npm publish</code>发布后，你远程的<code>npm</code>包将以最新的一次发布即<code>v1.0.4</code>的内容为准，那么之前修改的<code>v1.1.0</code>的内容不起任何作用，这样的话，我们就难以保证版本号和内容的统一。因此，强烈建议发布<code>npm</code>包后，立即将改动的代码提交到远程的<code>github</code>仓库。</p>
+</blockquote>
+<h3 id="查看发布的npm包"><a href="#查看发布的npm包" class="headerlink" title="查看发布的npm包"></a>查看发布的npm包</h3><p><img src="https://i.loli.net/2019/12/26/KE68fdL5spavVe1.png" alt="publish success.png"></p>
+<p>点击<code>npm-repo</code>，查看到<code>npm</code>详情</p>
+<p><img src="https://i.loli.net/2019/12/26/mZY4KWEaMjzPo1d.png" alt="npm repo.png"></p>
+<h3 id="提交代码到远程私有仓库"><a href="#提交代码到远程私有仓库" class="headerlink" title="提交代码到远程私有仓库"></a>提交代码到远程私有仓库</h3><p>为了方便演示，添加一个<code>index.js</code>文件，并添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export function printHello() &#123;</span><br><span class="line">	console.warn(&quot;Hello&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后将代码提供到远程私有仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . &amp;&amp; git commit -m &quot;init commit&quot; &amp;&amp; git push</span><br></pre></td></tr></table></figure>
+
+<p>远程仓库看起来是这样</p>
+<p><img src="https://i.loli.net/2019/12/26/MDIf3ozEx5qj2bi.png" alt="remote repo.png"></p>
+<h2 id="使用npm包"><a href="#使用npm包" class="headerlink" title="使用npm包"></a>使用npm包</h2><h3 id="创建-npmrc"><a href="#创建-npmrc" class="headerlink" title="创建.npmrc"></a>创建<code>.npmrc</code></h3><p>这里在项目里面创建<code>.npmrc</code>和上面的<code>.npmrc</code>完全一样，你也可以直接复制到项目中就行。</p>
+<p>项目根目录下（<code>node_modules</code>所在的目录），创建<code>.npmrc</code>文件，并添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registry=https://npm.pkg.github.com/lchenfox</span><br></pre></td></tr></table></figure>
+
+<h3 id="登录（同创建npm包一样，有2种方式）"><a href="#登录（同创建npm包一样，有2种方式）" class="headerlink" title="登录（同创建npm包一样，有2种方式）"></a>登录（同创建npm包一样，有2种方式）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm login --registry=https://npm.pkg.github.com</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果在同一台电脑上登录过就不用再登录了。</p>
+</blockquote>
+<h3 id="安装npm包"><a href="#安装npm包" class="headerlink" title="安装npm包"></a>安装<code>npm</code>包</h3><p>执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @lchenfox/npm-repo@1.0.0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>还可以按照上图中的修改<code>package.json</code>安装。</p>
+</blockquote>
+<p>安装成功如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  testdemo npm install @lchenfox/npm-repo@1.0.0           </span><br><span class="line">+ @lchenfox/npm-repo@1.0.0</span><br><span class="line">added 1 package from 1 contributor in 9.556s</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2019/12/26/KgGMzYVCpkWNEca.png" alt="node-modules.png"></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123;printHello&#125; from &apos;@lchenfox/npm-repo&apos;;</span><br><span class="line"></span><br><span class="line">printHello(); // Hello</span><br></pre></td></tr></table></figure>
+
+<h2 id="发布多个npm包到同一个私有仓库"><a href="#发布多个npm包到同一个私有仓库" class="headerlink" title="发布多个npm包到同一个私有仓库"></a>发布多个npm包到同一个私有仓库</h2><p>上面我们只讲了如何发布一个<code>npm</code>包到一个私有仓库, 但是有时候，我们想将多个<code>npm</code>包发布到同一个<code>github</code>私有仓库中存放，因为一个<code>npm</code>包创建一个私有仓库简直太<strong>TM</strong>麻烦了，一个私有仓库管理多个<code>npm</code>包在使用上非常方便，也便于管理。</p>
+<h3 id="创建npm包-1"><a href="#创建npm包-1" class="headerlink" title="创建npm包"></a>创建npm包</h3><p>首先我们把仓库克隆到本地，比如这里的仓库名是<code>npm-repo</code>，进入到<code>/npm-repo</code>目录下，目前我们只有一个<code>README.md</code>文件，这个是创建<code>github私有仓库</code>的时候初始化的一个文件。然后，我们创建<code>2</code>个文件夹来作为<code>2</code>个<code>npm包</code>的目录，分别为<code>first-package</code>、<code>second-package</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir first-pacakge second-package</span><br></pre></td></tr></table></figure>
+
+<p>进入到<code>first-package</code>里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">➜  first-pacakge git:(master) npm init --scope=lchenfox</span><br><span class="line">This utility will walk you through creating a package.json file.</span><br><span class="line">It only covers the most common items, and tries to guess sensible defaults.</span><br><span class="line"></span><br><span class="line">See `npm help json` for definitive documentation on these fields</span><br><span class="line">  1 &#123;</span><br><span class="line">and exactly what they do.</span><br><span class="line">  1 export function printHello1() &#123;</span><br><span class="line"></span><br><span class="line">  1 # Getting started</span><br><span class="line">Use `npm install &lt;pkg&gt;` afterwards to install a package and</span><br><span class="line">  1 registry=https://npm.pkg.github.com/lchenfox</span><br><span class="line">save it as a dependency in the package.json file.</span><br><span class="line"></span><br><span class="line">Press ^C at any time to quit.</span><br><span class="line">package name: (@lchenfox/first-pacakge)</span><br><span class="line">version: (1.0.0)</span><br><span class="line">description: first-pacakge</span><br><span class="line">entry point: (index.js)</span><br><span class="line">test command:</span><br><span class="line">git repository: git@github.com:lchenfox/npm-repo.git</span><br><span class="line">keywords: npmdemo</span><br><span class="line">author: langke</span><br><span class="line">license: (ISC)</span><br><span class="line">About to write to /Users/langke/TestReactNative/github-packages/npm-repo/first-pacakge/package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;@lchenfox/first-pacakge&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;first-pacakge&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;repository&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;git+ssh://git@github.com/lchenfox/npm-repo.git&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;npmdemo&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;author&quot;: &quot;langke&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;bugs&quot;: &#123;</span><br><span class="line">    &quot;url&quot;: &quot;https://github.com/lchenfox/npm-repo/issues&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;homepage&quot;: &quot;https://github.com/lchenfox/npm-repo#readme&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Is this OK? (yes)</span><br></pre></td></tr></table></figure>
+
+<p>上面我选填了<code>description</code>、<code>author</code>、<code>keywords</code>，其实这些项也可以不填，但是必须注意的是 <code>git repository: git@github.com:lchenfox/npm-repo.git</code> 是必填项，<code>git@github.com:lchenfox/npm-repo.git</code>是你的<code>github私有仓库</code>地址。如果你忘记填写<code>git repository</code>，也没有关系，可以初始化结束后编辑<code>pacage.json</code>文件，添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;repository&quot; : &#123;</span><br><span class="line">    &quot;type&quot; : &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;ssh://git@github.com/lchenfox/npm-repo.git&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>type</code>就是<code>git</code>,  <code>url</code>就是私有仓库地址，其中，<code>lchenfox</code>是<code>github</code>用户名， <code>npm-repo</code>是私有仓库名。</p>
+<p>然后按照上面的步骤依次添加<code>publishConfig</code>到<code>pacage.json</code>、创建<code>.npmrc</code>文件、登录，另外为了方便演示，分别在<br><code>first-package</code>、<code>second-package</code>创建<code>README.md</code>和<code>index.js</code>文件。</p>
+<p>最终，<code>first-package</code>共有<code>4</code>个文件：<code>.npmrc</code>、<code>README.md</code>、<code>index.js</code>、<code>package.json</code>，内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">➜  first-pacakge git:(master) ✗ l</span><br><span class="line">total 32</span><br><span class="line">drwxr-xr-x  6 langke  staff   192B Dec 27 09:32 .</span><br><span class="line">drwxr-xr-x  6 langke  staff   192B Dec 27 09:22 ..</span><br><span class="line">-rw-r--r--  1 langke  staff    45B Dec 27 09:32 .npmrc</span><br><span class="line">-rw-r--r--  1 langke  staff    33B Dec 27 09:32 README.md</span><br><span class="line">-rw-r--r--  1 langke  staff    59B Dec 27 09:32 index.js</span><br><span class="line">-rw-r--r--  1 langke  staff   581B Dec 27 09:31 package.json</span><br><span class="line"></span><br><span class="line">➜  first-pacakge git:(master) ✗ cat .npmrc</span><br><span class="line">registry=https://npm.pkg.github.com/lchenfox</span><br><span class="line"></span><br><span class="line">➜  first-pacakge git:(master) ✗ cat README.md</span><br><span class="line"># Getting started</span><br><span class="line"></span><br><span class="line">first package</span><br><span class="line"></span><br><span class="line">➜  first-pacakge git:(master) ✗ cat index.js</span><br><span class="line">export function printHello1() &#123;</span><br><span class="line">	console.warn(&quot;hello1&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">➜  first-pacakge git:(master) ✗ cat package.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;@lchenfox/first-pacakge&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;first-pacakge&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;publishConfig&quot;: &#123;</span><br><span class="line">    &quot;registry&quot;:&quot;https://npm.pkg.github.com/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;repository&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;git+ssh://git@github.com/lchenfox/npm-repo.git&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;npmdemo&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;author&quot;: &quot;langke&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;bugs&quot;: &#123;</span><br><span class="line">    &quot;url&quot;: &quot;https://github.com/lchenfox/npm-repo/issues&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;homepage&quot;: &quot;https://github.com/lchenfox/npm-repo#readme&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>second-package</code>内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">➜  second-package git:(master) ✗ l</span><br><span class="line">total 32</span><br><span class="line">drwxr-xr-x  6 langke  staff   192B Dec 27 10:05 .</span><br><span class="line">drwxr-xr-x  6 langke  staff   192B Dec 27 09:22 ..</span><br><span class="line">-rw-r--r--  1 langke  staff    45B Dec 27 10:05 .npmrc</span><br><span class="line">-rw-r--r--  1 langke  staff    34B Dec 27 09:54 README.md</span><br><span class="line">-rw-r--r--  1 langke  staff    59B Dec 27 09:54 index.js</span><br><span class="line">-rw-r--r--  1 langke  staff   583B Dec 27 09:54 package.json</span><br><span class="line"></span><br><span class="line">➜  second-package git:(master) ✗ cat .npmrc</span><br><span class="line">registry=https://npm.pkg.github.com/lchenfox</span><br><span class="line"></span><br><span class="line">➜  second-package git:(master) ✗ cat README.md</span><br><span class="line"># Getting started</span><br><span class="line"></span><br><span class="line">second package</span><br><span class="line"></span><br><span class="line">➜  second-package git:(master) ✗ cat index.js</span><br><span class="line">export function printHello2() &#123;</span><br><span class="line">	console.warn(&quot;hello2&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">➜  second-package git:(master) ✗ cat package.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;@lchenfox/second-pacakge&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;second-pacakge&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;publishConfig&quot;: &#123;</span><br><span class="line">    &quot;registry&quot;:&quot;https://npm.pkg.github.com/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;repository&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;git+ssh://git@github.com/lchenfox/npm-repo.git&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;npmdemo&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;author&quot;: &quot;langke&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;bugs&quot;: &#123;</span><br><span class="line">    &quot;url&quot;: &quot;https://github.com/lchenfox/npm-repo/issues&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;homepage&quot;: &quot;https://github.com/lchenfox/npm-repo#readme&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>另外一般会添加一个<code>.gitignore</code>文件用于忽略掉如<code>.idea</code>、<code>.DS_Store</code>文件，还会添加一个<code>CHANGELOG.md</code>文件用于描述每一个版本的变更，这样才更方便<code>npm</code>使用者。</p>
+</blockquote>
+<p>然后执行<code>npm publish</code>发布到<code>GitHub Packages</code>， 如图</p>
+<p><img src="https://i.loli.net/2019/12/27/RGM3LIpBzlvDgP7.png" alt="mul-packages.png"></p>
+<p>可以看到，两个<code>npm包</code>分别为<code>first-package</code>、<code>second-package</code>，都发布到了<code>GitHub Packages</code>，并且都放到同一个仓库（<code>npm-repo</code>）当中，最后别忘记了将代码提交到远程的私有仓库中。</p>
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><p>和上面的使用是一样的，我们来安装一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install @lchenfox/first-pacakge@1.0.0</span><br><span class="line">npm install @lchenfox/second-pacakge@1.0.0</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后，在项目的<code>node_modules</code>里面看起来如下</p>
+<p><img src="https://i.loli.net/2019/12/27/xjsqrG6ocCmJeFp.png" alt="multiple-packages.png"></p>
+<p>导入使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123;printHello1&#125; from &apos;@lchenfox/first-pacakge&apos;;</span><br><span class="line">import &#123;printHello2&#125; from &apos;@lchenfox/second-pacakge&apos;;</span><br><span class="line"></span><br><span class="line">printHello1(); // hello1</span><br><span class="line">printHello2(); // hello2</span><br></pre></td></tr></table></figure>
+
+<p>到此，我们就知道如何使用<code>GitHub Packages</code>来创建<code>npm</code>私有库了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>必须注意</strong>：本文所有<code>lchenfox</code>一定是你自己的<code>github</code>用户名，所有<code>_authToken</code>一定是你自己的<code>Personal access tokens</code>。</p>
+<h3 id="发布npm包必须满足两个条件"><a href="#发布npm包必须满足两个条件" class="headerlink" title="发布npm包必须满足两个条件"></a>发布npm包必须满足两个条件</h3><ul>
+<li>第<code>1</code>点，要么创建<code>.npmrc</code>文件，里面添加<code>registry=https://npm.pkg.github.com/lchenfox</code>，要么就直接在<code>package.json</code>中添加<code>publishConfig</code></li>
+<li>第<code>2</code>点，要么在<code>.npmrc</code>（如果没有就创建一个）文件中添加<code>//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</code>授权，要么使用<code>npm login --registry=https://npm.pkg.github.com</code>登录授权</li>
+</ul>
+<h3 id="安装npm包必须满足两个条件"><a href="#安装npm包必须满足两个条件" class="headerlink" title="安装npm包必须满足两个条件"></a>安装npm包必须满足两个条件</h3><ul>
+<li>第<code>1</code>点，必须在项目根目录下（<code>node_modules</code>所在目录）创建<code>.npmrc</code>并且添加<code>registry=https://npm.pkg.github.com/lchenfox</code></li>
+<li>第<code>2</code>点，同以上发布npm包的第<code>2</code>点</li>
+</ul>
+<p>使用<code>GitHub Packages</code>来创建和托管<code>npm</code>包非常方便，我们可以使用<code>npm</code>的相关命令，发布、安装方式基本和<code>npm</code>一样，使用这种方式来创建属于我们自己的私有库，维护起来也很简单，和之前的几种方式比起来，我个人觉得这种方式很适合搭建(或许只能说创建？)公司内部的<code>npm</code>私有库。</p>
+<p>注意：虽然我们使用了<code>.npmrc</code>文件，但是，不要把<code>//npm.pkg.github.com/:_authToken=0fc31c688a4a75f9509444b4648ac8e5fbeb20c4</code>提供到<code>github</code>仓库，因为<code>GitHub</code>官方为了安全考虑，不允许提交到仓库，如果你提交了，<code>GitHub</code>会自动检测，并且撤销这个<code>token</code>，那么你下次安装、发布都没用了，只能重新生成<code>token</code>!!! 你可以添加在<code>.gitignore</code>文件里面添加忽略<code>.npmrc</code>文件就好了，也就是说<code>.npmrc</code>文件只能放在本地！</p>
+<p>更多详情，比如如何在一个项目从多个<code>GitHub</code>账号拉取多个不同来源的<code>npm</code>依赖包，请查看官方：<a href="https://help.github.com/en/github/managing-packages-with-github-packages/configuring-npm-for-use-with-github-packages#installing-packages-from-other-organizations" target="_blank" rel="noopener">Installing packages from other organizations</a>、<a href="https://help.github.com/en/github/managing-packages-with-github-packages" target="_blank" rel="noopener">Managing packages with GitHub Packages</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React-Native/" rel="tag"># React Native</a>
+          
+            <a href="/tags/npm/" rel="tag"># npm</a>
+          
+            <a href="/tags/私有仓库/" rel="tag"># 私有仓库</a>
+          
+            <a href="/tags/npm私有库/" rel="tag"># npm私有库</a>
+          
+            <a href="/tags/GitHub-Packages/" rel="tag"># GitHub Packages</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/23/基于github实现npm私有库的搭建/" rel="next" title="基于github实现npm私有库的搭建">
+                <i class="fa fa-chevron-left"></i> 基于github实现npm私有库的搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/27/[iOS]真机调试-The executable was signed with invalid entitlements./" rel="prev" title="【iOS】真机调试,The executable was signed with invalid entitlements">
+                【iOS】真机调试,The executable was signed with invalid entitlements <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="陈龙">
+            
+              <p class="site-author-name" itemprop="name">陈龙</p>
+              <p class="site-description motion-element" itemprop="description">这是我的个人博客网站，用于记录相关的技术知识以及心得。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建私有仓库"><span class="nav-number">2.</span> <span class="nav-text">创建私有仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">2.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有仓库看起来是下面这个样子"><span class="nav-number">2.2.</span> <span class="nav-text">私有仓库看起来是下面这个样子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#克隆私有仓库到本地"><span class="nav-number">2.3.</span> <span class="nav-text">克隆私有仓库到本地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Personal-access-tokens"><span class="nav-number">3.</span> <span class="nav-text">创建Personal access tokens</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进入github设置，点击Developer-settings"><span class="nav-number">3.1.</span> <span class="nav-text">进入github设置，点击Developer settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依次点击1、2"><span class="nav-number">3.2.</span> <span class="nav-text">依次点击1、2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如下图，然后往下滑，点击底部按钮-Generate-token"><span class="nav-number">3.3.</span> <span class="nav-text">如下图，然后往下滑，点击底部按钮 Generate token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存token"><span class="nav-number">3.4.</span> <span class="nav-text">保存token</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建npm包"><span class="nav-number">4.</span> <span class="nav-text">创建npm包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">4.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">4.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录"><span class="nav-number">4.3.</span> <span class="nav-text">登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布"><span class="nav-number">4.4.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看发布的npm包"><span class="nav-number">4.5.</span> <span class="nav-text">查看发布的npm包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交代码到远程私有仓库"><span class="nav-number">4.6.</span> <span class="nav-text">提交代码到远程私有仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用npm包"><span class="nav-number">5.</span> <span class="nav-text">使用npm包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-npmrc"><span class="nav-number">5.1.</span> <span class="nav-text">创建.npmrc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录（同创建npm包一样，有2种方式）"><span class="nav-number">5.2.</span> <span class="nav-text">登录（同创建npm包一样，有2种方式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装npm包"><span class="nav-number">5.3.</span> <span class="nav-text">安装npm包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">5.4.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布多个npm包到同一个私有仓库"><span class="nav-number">6.</span> <span class="nav-text">发布多个npm包到同一个私有仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建npm包-1"><span class="nav-number">6.1.</span> <span class="nav-text">创建npm包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-1"><span class="nav-number">6.2.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发布npm包必须满足两个条件"><span class="nav-number">7.1.</span> <span class="nav-text">发布npm包必须满足两个条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装npm包必须满足两个条件"><span class="nav-number">7.2.</span> <span class="nav-text">安装npm包必须满足两个条件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈龙</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("v0wFcbyuAezK1MWEW15YYxa3-gzGzoHsz", "o3soEcgJkk33RLeuRctakiFF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

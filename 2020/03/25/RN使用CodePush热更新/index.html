@@ -1,37 +1,1333 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React Native, react-native-code-push, 热更新,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前期准备官方链接 环境本文测试都是基于以下配置进行测试 1234567891011121314151617181920212223242526272829info  React Native Environment Info:    System:      OS: macOS 10.14.5      CPU: (4) x64 Intel(R) Core(TM) i3-8100B CPU @ 3">
+<meta name="keywords" content="React Native, react-native-code-push, 热更新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-native-code-push热更新">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/RN使用CodePush热更新/index.html">
+<meta property="og:site_name" content="陈龙 的博客">
+<meta property="og:description" content="前期准备官方链接 环境本文测试都是基于以下配置进行测试 1234567891011121314151617181920212223242526272829info  React Native Environment Info:    System:      OS: macOS 10.14.5      CPU: (4) x64 Intel(R) Core(TM) i3-8100B CPU @ 3">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-25T13:14:43.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-native-code-push热更新">
+<meta name="twitter:description" content="前期准备官方链接 环境本文测试都是基于以下配置进行测试 1234567891011121314151617181920212223242526272829info  React Native Environment Info:    System:      OS: macOS 10.14.5      CPU: (4) x64 Intel(R) Core(TM) i3-8100B CPU @ 3">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/25/RN使用CodePush热更新/">
+
+
+
+
+
+  <title>react-native-code-push热更新 | 陈龙 的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈龙 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欢迎来到我的博客，我叫陈龙，现在是一名iOS以及React Native开发者，喜欢编程，喜欢技术，喜欢神秘的代码带来的酷炫和满足感，希望有机会可以和你一起互相学习、交流技术。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/25/RN使用CodePush热更新/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈龙">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈龙 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">react-native-code-push热更新</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-25T15:41:33+08:00">
+                2020-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/03/25/RN使用CodePush热更新/" class="leancloud_visitors" data-flag-title="react-native-code-push热更新">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p><a href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/" target="_blank" rel="noopener">官方链接</a></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>本文测试都是基于以下配置进行测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">info</span><br><span class="line">  React Native Environment Info:</span><br><span class="line">    System:</span><br><span class="line">      OS: macOS 10.14.5</span><br><span class="line">      CPU: (4) x64 Intel(R) Core(TM) i3-8100B CPU @ 3.60GHz</span><br><span class="line">      Memory: 192.60 MB / 8.00 GB</span><br><span class="line">      Shell: 5.3 - /bin/zsh</span><br><span class="line">    Binaries:</span><br><span class="line">      Node: 12.10.0 - /usr/local/bin/node</span><br><span class="line">      Yarn: 1.17.3 - ~/.yarn/bin/yarn</span><br><span class="line">      npm: 6.11.3 - /usr/local/bin/npm</span><br><span class="line">      Watchman: 4.9.0 - /usr/local/bin/watchman</span><br><span class="line">    SDKs:</span><br><span class="line">      iOS SDK:</span><br><span class="line">        Platforms: iOS 13.2, DriverKit 19.0, macOS 10.15, tvOS 13.2, watchOS 6.1</span><br><span class="line">      Android SDK:</span><br><span class="line">        API Levels: 23, 26, 27, 28</span><br><span class="line">        Build Tools: 23.0.1, 26.0.1, 27.0.3, 28.0.2, 28.0.3</span><br><span class="line">        System Images: android-23 | Intel x86 Atom_64, android-23 | Google APIs Intel x86 Atom, android-23 | Google APIs Intel x86 Atom_64, android-26 | Google APIs Intel x86 Atom, android-27 | Intel x86 Atom_64, android-27 | Google APIs Intel x86 Atom, android-27 | Google Play Intel x86 Atom, android-28 | Google Play Intel x86 Atom</span><br><span class="line">    IDEs:</span><br><span class="line">      Android Studio: 3.5 AI-191.8026.42.35.5977832</span><br><span class="line">      Xcode: 11.3.1/11C505 - /usr/bin/xcodebuild</span><br><span class="line">    npmPackages:</span><br><span class="line">      react: 16.8.3 =&gt; 16.8.3</span><br><span class="line">      react-native: 0.59.9 =&gt; 0.59.9</span><br><span class="line">    npmGlobalPackages:</span><br><span class="line">      react-native-cli: 2.0.1</span><br><span class="line">      react-native-demo-for-npm: 1.0.16</span><br><span class="line">      react-native-update-cli: 0.1.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><h3 id="1-Install-the-App-Center-CLI"><a href="#1-Install-the-App-Center-CLI" class="headerlink" title="1. Install the App Center CLI"></a>1. Install the App Center CLI</h3><p>要管理大多数<strong>CodePush</strong>功能，需要使用<strong>App Center CLI</strong>。通过以下命令安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g appcenter-cli</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：官方提示，不要使用<code>sudo</code>权限来执行安装这个命令。</p>
+</blockquote>
+<p>在成功安装<strong>App Center CLI</strong>后，执行下面的命令来配置你的<strong>App Center</strong>账户详情</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter login</span><br></pre></td></tr></table></figure>
+
+<p>账户信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Logged in as wankeenergy-gmail.com</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-1-在App-Center上创建App"><a href="#1-1-在App-Center上创建App" class="headerlink" title="1.1 在App Center上创建App"></a>1.1 在App Center上创建App</h5><ul>
+<li>iOS</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter apps create -d PowerPlus-iOS -o iOS -p React-Native</span><br></pre></td></tr></table></figure>
+
+<p>创建成功输出类似如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">➜  SolarEnergy git:(dev_chenlong) ✗ appcenter apps create -d PowerPlus-iOS -o iOS -p React-Native</span><br><span class="line">App Secret:            28a33816-6bc0-4b00-8947-97b28e7780e4</span><br><span class="line">Description:</span><br><span class="line">Display Name:          PowerPlus-iOS</span><br><span class="line">Name:                  PowerPlus-iOS</span><br><span class="line">OS:                    iOS</span><br><span class="line">Platform:              React-Native</span><br><span class="line">Release Type:</span><br><span class="line">Owner ID:              20273273-6efd-459d-bb13-5cf102ba28d4</span><br><span class="line">Owner Display Name:    Energy Wanke</span><br><span class="line">Owner Email:           wankeenergy@gmail.com</span><br><span class="line">Owner Name:            wankeenergy-gmail.com</span><br><span class="line">Azure Subscription ID:</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Android</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter apps create -d PowerPlus-Android -o Android -p React-Native</span><br></pre></td></tr></table></figure>
+
+<p>我们可以把<strong>App Center</strong>上的应用程序<code>PowerPlus-iOS</code>设置为当前的应用程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter apps set-current wankeenergy-gmail.com/PowerPlus-iOS</span><br></pre></td></tr></table></figure>
+
+<p>设置测试（<code>Staging</code>）)和 生产（<code>Production</code>）环境密钥，这样的话避免测试的时候应用到生产环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">appcenter codepush deployment add -a &lt;ownerName&gt;/&lt;appName&gt; Staging</span><br><span class="line">appcenter codepush deployment add -a &lt;ownerName&gt;/&lt;appName&gt; Production</span><br></pre></td></tr></table></figure>
+
+<p>由于我们刚才使用<code>appcenter apps set-current</code>设置了<code>PowerPlus-iOS</code>设置为当前的应用程序, 所以直接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter codepush deployment add Staging</span><br></pre></td></tr></table></figure>
+
+<p>输出如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  SolarEnergy git:(dev_chenlong) ✗ appcenter codepush deployment add Staging</span><br><span class="line">Deployment Staging has been created for wankeenergy-gmail.com/PowerPlus-iOS with key _aoveTNJlRogvD_AZL16sr1dYl-JIG-moOdTY</span><br></pre></td></tr></table></figure>
+
+<p>部署生产环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  SolarEnergy git:(dev_chenlong) ✗ appcenter codepush deployment add Production</span><br><span class="line">Deployment Production has been created for wankeenergy-gmail.com/PowerPlus-iOS with key ZqjsB9UA9BX5KylIOgNU4lCkSlDwCRVZudOoH</span><br></pre></td></tr></table></figure>
+
+<p>将当前应用程序设置成<code>Android</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter apps set-current wankeenergy-gmail.com/PowerPlus-Android</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">➜  SolarEnergy git:(dev_chenlong) ✗ appcenter codepush deployment add Staging</span><br><span class="line">Deployment Staging has been created for wankeenergy-gmail.com/PowerPlus-Android with key tFRH5R1fNGA_BTQ_P4ixCiR4v6TsEUL4iSMZj</span><br><span class="line"></span><br><span class="line">➜  SolarEnergy git:(dev_chenlong) ✗ appcenter codepush deployment add Production</span><br><span class="line">Deployment Production has been created for wankeenergy-gmail.com/PowerPlus-Android with key Daj3dgNAeyKYFzAqWGWfoV9PggYm8eX76vbMC</span><br></pre></td></tr></table></figure>
+
+<p>可以使用下面的命令来查看当前应用程序的部署<code>key</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">➜  SolarEnergy git:(dev_chenlong) ✗ appcenter codepush deployment list --displayKeys</span><br></pre></td></tr></table></figure>
+
+<p>输出如下</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Staging</td>
+<td>tFRH5R1fNGA_BTQ_P4ixCiR4v6TsEUL4iSMZj</td>
+</tr>
+<tr>
+<td>Production</td>
+<td>Daj3dgNAeyKYFzAqWGWfoV9PggYm8eX76vbMC</td>
+</tr>
+</tbody></table>
+<p>如果想改变已命名的应用程序名，可以使用如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter apps update -n &lt;newName&gt; -a &lt;ownerName&gt;/&lt;appName&gt;</span><br></pre></td></tr></table></figure>
+
+<p>要想从服务器上移除<code>app</code>，可以使用如下命令(要注意，如果删除，则无法再更新<code>app</code>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter apps delete -a &lt;ownerName&gt;/&lt;appName&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果想要列举所有在<strong>App Center</strong>服务器上的<code>app</code>，可以运行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter apps list</span><br></pre></td></tr></table></figure>
+
+<p>比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  SolarEnergy git:(dev_chenlong) ✗ appcenter apps list</span><br><span class="line">* wankeenergy-gmail.com/PowerPlus-Android (current app)</span><br><span class="line">  wankeenergy-gmail.com/PowerPlus-iOS</span><br></pre></td></tr></table></figure>
+
+<p>回滚版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter codepush rollback</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-CodePush-ify你的app"><a href="#2-CodePush-ify你的app" class="headerlink" title="2. CodePush-ify你的app"></a>2. CodePush-ify你的app</h3><p>添加<strong>CodePush client SDK</strong>到你的<code>app</code>，通过配置，从<strong>App Center</strong>中拉取所部署的<code>app</code>更新, 详情可参考</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/react-native#getting-started" target="_blank" rel="noopener">React Native</a></li>
+</ul>
+<h5 id="2-1-开始"><a href="#2-1-开始" class="headerlink" title="2.1 开始"></a>2.1 开始</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-native-code-push@5.7.0</span><br></pre></td></tr></table></figure>
+
+<p><code>Android</code>和<code>iOS</code>的配置方式有所不同，要注意的是，官方推荐为每一个平台单独创建一个<strong>CodePush</strong>应用程序。如果你想要看一下其他工程如何集成<strong>CodePush</strong>，可以看一下社区提供的一些样例<code>app</code>: <a href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/react-native#example-apps--starters" target="_blank" rel="noopener">example apps</a>。此外，如果你想快速熟悉<strong>CodePush + React Native</strong>，可以看一下这些人制作的视频：<a href="https://www.youtube.com/watch?v=uN0FRWk-YW8&feature=youtu.be" target="_blank" rel="noopener">Bilal Budhani</a>和<a href="https://www.youtube.com/watch?v=f6I9y7V-Ibk" target="_blank" rel="noopener">Deepak Sisodiya</a>。</p>
+<h5 id="2-2-iOS设置（这里按RN版本小于0-6来安装，因为我是0-59-9）"><a href="#2-2-iOS设置（这里按RN版本小于0-6来安装，因为我是0-59-9）" class="headerlink" title="2.2 iOS设置（这里按RN版本小于0.6来安装，因为我是0.59.9）"></a>2.2 iOS设置（这里按RN版本小于0.6来安装，因为我是0.59.9）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native link react-native-code-push</span><br></pre></td></tr></table></figure>
+
+<p>上面这个命令会提示输入一个部署<code>key</code>(这个<code>key</code>就是上面已经添加的<code>Staging</code>和<code>Production</code>)，可以按回车键忽略，后面再配置也可以，可以通过以下命令来获取部署<code>key</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter codepush deployment list -a &lt;ownerName&gt;/&lt;appName&gt; --displayKeys</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-到这里之后，我们运行react-native-run-android可能会报错如下："><a href="#2-3-到这里之后，我们运行react-native-run-android可能会报错如下：" class="headerlink" title="2.3 到这里之后，我们运行react-native run-android可能会报错如下："></a>2.3 到这里之后，我们运行<code>react-native run-android</code>可能会报错如下：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* What went wrong:</span><br><span class="line">Execution failed for task &apos;:app:transformDexArchiveWithDexMergerForDebug&apos;.</span><br><span class="line">&gt; com.android.build.api.transform.TransformException: java.lang.RuntimeException: java.lang.RuntimeException: com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives:</span><br><span class="line">  The number of method references in a .dex file cannot exceed 64K.</span><br><span class="line">  Learn how to resolve this issue at https://developer.android.com/tools/building/multidex.html</span><br></pre></td></tr></table></figure>
+
+<p>解决办法，在<code>android/app/build.gradle</code>下添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line"></span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	defaultConfig &#123;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	   // Enabling multidex support.</span><br><span class="line">        multiDexEnabled true</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-4-在项目根组件添加CodePush"><a href="#2-4-在项目根组件添加CodePush" class="headerlink" title="2.4 在项目根组件添加CodePush"></a>2.4 在项目根组件添加CodePush</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import codePush from &quot;react-native-code-push&quot;;</span><br><span class="line"></span><br><span class="line">class MyApp extends Component &#123;</span><br><span class="line"></span><br><span class="line">	   componentDidMount() &#123;</span><br><span class="line">	   		  /* </span><br><span class="line">	   		    注意：如果我们分别在Android和iOS中配置了 Staging 和 Production 密钥，那么我们这里可以</span><br><span class="line">	   		         不需要deploymentKey！！！当然，要传也没有关系，传的话就是代表动态使用这个 deploymentKey，会覆</span><br><span class="line">	   		         盖在工程中配置的key，看个人的选择！</span><br><span class="line">	   		   */</span><br><span class="line">        	  const deploymentKey = isAndroid ? &apos;tFRH5R1fNGA_BTQ_P4ixCiR4v6TsEUL4iSMZj&apos; : &apos;_aoveTNJlRogvD_AZL16sr1dYl-JIG-moOdTY&apos;;</span><br><span class="line">        	  codePush.sync(&#123;</span><br><span class="line">                   updateDialog: false,</span><br><span class="line">                   installMode: codePush.InstallMode.ON_NEXT_RESTART,</span><br><span class="line">                   deploymentKey: deploymentKey,</span><br><span class="line">       	       &#125;, status =&gt; &#123;</span><br><span class="line">           		 	__DEV__ &amp;&amp; console.warn(`status: $&#123;status&#125;`)</span><br><span class="line">       	 	   &#125;, progress =&gt; &#123;</span><br><span class="line">           		 	const &#123;totalBytes, receivedBytes&#125; = progress;</span><br><span class="line">            		__DEV__ &amp;&amp; console.warn(`totalBytes: $&#123;totalBytes&#125;, receivedBytes: $&#123;receivedBytes&#125;`);</span><br><span class="line">        	   &#125;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyApp = codePush(MyApp);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-部署测试和生产环境密钥进行多端测试"><a href="#3-部署测试和生产环境密钥进行多端测试" class="headerlink" title="3. 部署测试和生产环境密钥进行多端测试"></a>3. 部署测试和生产环境密钥进行多端测试</h3><p><a href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/react-native#multi-deployment-testing" target="_blank" rel="noopener">Multi-Deployment Testing</a></p>
+<h3 id="4-发布app更新"><a href="#4-发布app更新" class="headerlink" title="4. 发布app更新"></a>4. 发布app更新</h3><p>注意：<code>Android</code>打包测试热更新的时候用下面这个命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew assembleReleaseStaging</span><br></pre></td></tr></table></figure>
+
+<p>如果用<code>./gradlew assembleRelease</code>的话，默认走的是<code>Production</code>。</p>
+<p>如果需要直接在本地调试安装在<code>android</code>手机上的<code>Staging</code>版本，可以执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native run-android --variant=releaseStaging</span><br></pre></td></tr></table></figure>
+
+<p><code>iOS</code>打包需要在<code>archive</code>的时候选择<code>Staging</code>，否则打的也是<code>Production</code>。</p>
+<p>在更新代码后，使用<strong>App Center CLI</strong>发布更新到<strong>App Center</strong>，根据下面发布即可</p>
+<h5 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a>React Native</h5><p>执行<strong>App Center CLI</strong>的<code>release-react</code>命令来打包代码和<code>asset</code>文件，然后发布到<strong>App Center server</strong>作为一个新的发布。例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter codepush release-react -a &lt;ownerName&gt;/MyApp</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>App Center CLI</strong>的一个重要特性就是可以使用<code>appcenter apps set-current &lt;ownerName&gt;/&lt;appName&gt;</code>把一个<code>app</code>设置为当前的<code>app</code>. 通过把<code>app</code>设置为当前<code>app</code>，就没有必要使用<code>-a</code>标志。例如，命令<code>appcenter codepush deployment list -a &lt;ownerName&gt;/&lt;appName&gt;</code>可以用<code>appcenter codepush deployment list</code>来代替。你也可以使用命令<code>appcenter apps get-current</code>来查看哪个<code>app</code>被设置成你账号的当前<code>app</code>。</p>
+</blockquote>
+<p>发布一个更新(加<code>-m</code>就是强制更新，会立即重启<code>app</code>)，并带有日志描述</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 强制立即重启</span><br><span class="line">appcenter codepush release-react -a &lt;ownerName&gt;/MyApp-iOS  -m --description &quot;Modified the header color&quot;</span><br><span class="line"></span><br><span class="line">// 不强制立即重启</span><br><span class="line">appcenter codepush release-react -a &lt;ownerName&gt;/MyApp-iOS  --description &quot;Modified the header color&quot;</span><br></pre></td></tr></table></figure>
+
+<p>发布更新到具体的版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter codepush release-react -a &lt;ownerName&gt;/MyApp-Android  --target-binary-version &quot;1.1.0&quot;</span><br></pre></td></tr></table></figure>
+
+<p>也可以指定范围要发布到哪些版本，参数如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Range Expression	Who gets the update</span><br><span class="line">1.2.3				Only devices running the specific binary version 1.2.3 of your app</span><br><span class="line">*	    			Any device configured to consume updates from your CodePush app</span><br><span class="line">1.2.x				Devices running major version 1, minor version 2, and any patch version of your app</span><br><span class="line">1.2.3 - 1.2.7		Devices running any binary version between 1.2.3 (inclusive) and 1.2.7 (inclusive)</span><br><span class="line">&gt;=1.2.3 &lt;1.2.7		Devices running any binary version between 1.2.3 (inclusive) and 1.2.7 (exclusive)</span><br><span class="line">1.2	    			Equivalent to &gt;=1.2.0 &lt;1.3.0</span><br><span class="line">~1.2.3				Equivalent to &gt;=1.2.3 &lt;1.3.0</span><br><span class="line">^1.2.3				Equivalent to &gt;=1.2.3 &lt;2.0.0</span><br></pre></td></tr></table></figure>
+
+<p>要发布到生产环境还是测试环境，可以使用<code>--deployment-name 或 -d</code>，默认是<code>Staging</code>, 例如要发布到版本<code>1.1.0</code>的生产环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appcenter codepush release-react -a &lt;ownerName&gt;/MyApp-Android  --target-binary-version &quot;1.1.0&quot; --deployment-name Production</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-运行你的app"><a href="#5-运行你的app" class="headerlink" title="5. 运行你的app"></a>5. 运行你的app</h3><p>一旦这些步骤完成，所有运行<code>app</code>的用户都会收到更新。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React-Native-react-native-code-push-热更新/" rel="tag"># React Native, react-native-code-push, 热更新</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/14/RN集成Google Maps/" rel="next" title="RN集成Google Maps">
+                <i class="fa fa-chevron-left"></i> RN集成Google Maps
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/18/React Native实现日期选择器/" rel="prev" title="React Native日期选择器">
+                React Native日期选择器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="陈龙">
+            
+              <p class="site-author-name" itemprop="name">陈龙</p>
+              <p class="site-description motion-element" itemprop="description">这是我的个人博客网站，用于记录相关的技术知识以及心得。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期准备"><span class="nav-number">1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">3.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Install-the-App-Center-CLI"><span class="nav-number">3.1.</span> <span class="nav-text">1. Install the App Center CLI</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-在App-Center上创建App"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">1.1 在App Center上创建App</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CodePush-ify你的app"><span class="nav-number">3.2.</span> <span class="nav-text">2. CodePush-ify你的app</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-开始"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">2.1 开始</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-iOS设置（这里按RN版本小于0-6来安装，因为我是0-59-9）"><span class="nav-number">3.2.0.2.</span> <span class="nav-text">2.2 iOS设置（这里按RN版本小于0.6来安装，因为我是0.59.9）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-到这里之后，我们运行react-native-run-android可能会报错如下："><span class="nav-number">3.2.0.3.</span> <span class="nav-text">2.3 到这里之后，我们运行react-native run-android可能会报错如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-在项目根组件添加CodePush"><span class="nav-number">3.2.0.4.</span> <span class="nav-text">2.4 在项目根组件添加CodePush</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#3-部署测试和生产环境密钥进行多端测试"><span class="nav-number">3.3.</span> <span class="nav-text">3. 部署测试和生产环境密钥进行多端测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-发布app更新"><span class="nav-number">3.4.</span> <span class="nav-text">4. 发布app更新</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#React-Native"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">React Native</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-运行你的app"><span class="nav-number">3.5.</span> <span class="nav-text">5. 运行你的app</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈龙</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("v0wFcbyuAezK1MWEW15YYxa3-gzGzoHsz", "o3soEcgJkk33RLeuRctakiFF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

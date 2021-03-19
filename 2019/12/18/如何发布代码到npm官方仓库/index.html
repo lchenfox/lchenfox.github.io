@@ -1,37 +1,1382 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React Native,npm,私有仓库,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言有时候我们想把自己的组件像在github上提供的以npm方式安装到本地的方式给别人用，我们就可以到npm官方网站注册自己的账号并以CLI的形式将自己的代码发布到npm官方仓库。 但是，目前来说，我们可以发布到npm官方仓库的组件或库都是公开的，这意味着是开源的，也就是任何人都可以搜索到你发布的这个仓库并且安装使用。 官方目前提供2种方式，一种是免费的，也就是我们刚才说的公开的，这种方式不会限制">
+<meta name="keywords" content="React Native,npm,私有仓库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【RN】如何发布代码到npm官方仓库">
+<meta property="og:url" content="http://yoursite.com/2019/12/18/如何发布代码到npm官方仓库/index.html">
+<meta property="og:site_name" content="陈龙 的博客">
+<meta property="og:description" content="前言有时候我们想把自己的组件像在github上提供的以npm方式安装到本地的方式给别人用，我们就可以到npm官方网站注册自己的账号并以CLI的形式将自己的代码发布到npm官方仓库。 但是，目前来说，我们可以发布到npm官方仓库的组件或库都是公开的，这意味着是开源的，也就是任何人都可以搜索到你发布的这个仓库并且安装使用。 官方目前提供2种方式，一种是免费的，也就是我们刚才说的公开的，这种方式不会限制">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/ZhRYnaHIl1MNcG3.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/Vwar9YP3XB5OGy4.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/4KdZJtUsyYQmqXA.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/R5H94eqfsn3J1Uh.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/TDpUZVaYlxEArmb.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/LEk45XIV8bUORMA.gif">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/nEWZzSJy3u9Hq6V.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/6HcM3zBEU5DCPIk.gif">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/nP2IotwfBvAJESK.gif">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/zvshy1cAudSNgfJ.png">
+<meta property="og:image" content="https://i.loli.net/2019/12/18/iqIJEYM1fSTalsQ.gif">
+<meta property="og:updated_time" content="2019-12-21T10:59:32.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【RN】如何发布代码到npm官方仓库">
+<meta name="twitter:description" content="前言有时候我们想把自己的组件像在github上提供的以npm方式安装到本地的方式给别人用，我们就可以到npm官方网站注册自己的账号并以CLI的形式将自己的代码发布到npm官方仓库。 但是，目前来说，我们可以发布到npm官方仓库的组件或库都是公开的，这意味着是开源的，也就是任何人都可以搜索到你发布的这个仓库并且安装使用。 官方目前提供2种方式，一种是免费的，也就是我们刚才说的公开的，这种方式不会限制">
+<meta name="twitter:image" content="https://i.loli.net/2019/12/18/ZhRYnaHIl1MNcG3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/18/如何发布代码到npm官方仓库/">
+
+
+
+
+
+  <title>【RN】如何发布代码到npm官方仓库 | 陈龙 的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈龙 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欢迎来到我的博客，我叫陈龙，现在是一名iOS以及React Native开发者，喜欢编程，喜欢技术，喜欢神秘的代码带来的酷炫和满足感，希望有机会可以和你一起互相学习、交流技术。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/18/如何发布代码到npm官方仓库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈龙">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈龙 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【RN】如何发布代码到npm官方仓库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-18T13:07:23+08:00">
+                2019-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/12/18/如何发布代码到npm官方仓库/" class="leancloud_visitors" data-flag-title="【RN】如何发布代码到npm官方仓库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有时候我们想把自己的组件像在<code>github</code>上提供的以<code>npm</code>方式安装到本地的方式给别人用，我们就可以到<a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm官方网站</a>注册自己的账号并以<code>CLI</code>的形式将自己的代码发布到<code>npm官方仓库</code>。</p>
+<p>但是，目前来说，我们可以发布到<code>npm官方仓库</code>的组件或库都是<strong>公开的</strong>，这意味着是开源的，也就是<strong>任何人都可以搜索到你发布的这个仓库并且安装使用</strong>。</p>
+<p>官方目前提供<code>2</code>种方式，一种是免费的，也就是我们刚才说的公开的，这种方式不会限制你发布多少包到<code>npm</code>，你发布十个、百个甚至上千个都行，只要你开心，想发就发；另一种方式是收费的，具体的价格<a href="https://www.npmjs.com/products" target="_blank" rel="noopener">npm官方价格说明</a>，当然，这种收费的好处是，我们可以发布<strong>私有仓库</strong>，这种<strong>私有仓库</strong>别人未经授权是看不到摸不着。如果你只是想把自己的组件开源给别人用，发扬开源精神，那么使用免费的就可以了，如果你不想提供给别人用，比如说是公司内部的一些业务组件、功能组件等，那么除了<code>npm</code>官方收费的方式以外，也有一些其他创建<strong>私有npm仓库</strong>的方式。但是在这篇文章中，只讲发布<strong>免费版</strong>的仓库。</p>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>首先第一件事就是注册，<strong>你必须拥有一个npm账号才能发布包</strong>，这是一个必须的步骤。</p>
+<ul>
+<li>1.<a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm官方网站</a>，点击<code>Sign Up</code></li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/18/ZhRYnaHIl1MNcG3.png" alt="Sign Up.png"></p>
+<ul>
+<li>2.填写注册信息，然后点击<code>Create an Account</code></li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/18/Vwar9YP3XB5OGy4.png" alt="Sign Up.png"></p>
+<ul>
+<li>3.登录邮箱，将类似红框中的链接复制到你的浏览器中，回车，验证完毕</li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/18/4KdZJtUsyYQmqXA.png" alt="Verify Email.png"></p>
+<ul>
+<li>4.注册成功，你将看到如下界面</li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/18/R5H94eqfsn3J1Uh.png" alt="Success.png"></p>
+<h2 id="创建-amp-发布包"><a href="#创建-amp-发布包" class="headerlink" title="创建&amp;发布包"></a>创建&amp;发布包</h2><ul>
+<li>1.打开<code>terminal</code>，随便找一个文件夹作为测试仓库，执行<code>npm adduser</code></li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/18/TDpUZVaYlxEArmb.png" alt="init.png"></p>
+<blockquote>
+<p>图中的<code>langke_npm</code>是我自己随便创建的文件夹，你也可以自己随意命名创建，开心就好。另外，你也可以使用<code>npm login</code>来代替命令<code>npm adduser</code>，两者并没有什么区别，如果不信，那就看这里<a href="https://docs.npmjs.com/cli/adduser.html" target="_blank" rel="noopener">见识一下官方npm login &amp; npm adduser</a>。然后，输入用户名、密码、邮箱，注意，输入密码的时候你是看不见的，这是<code>terminal</code>为了保护你的安全，做了隐藏，出现类似<code>Logged in as langke007 on http://registry.npmjs.org/.</code>，你已经登录成功。</p>
+</blockquote>
+<ul>
+<li>2.初始化仓库，执行<code>npm init</code></li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/18/LEk45XIV8bUORMA.gif" alt="npm init.gif"></p>
+<blockquote>
+<p>执行<code>npm init</code>后，会填写一些相应信息，根据提示填写即可，没什么难度，结束后会生成一个<code>package.json</code>文件，里面就包含你填写的所有信息。</p>
+</blockquote>
+<ul>
+<li>3.创建<code>README.md</code>、<code>index.js</code>文件</li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/18/nEWZzSJy3u9Hq6V.png" alt="instruction.png"></p>
+<ul>
+<li>4.发布，执行<code>npm publish</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">➜  langke_npm npm publish</span><br><span class="line">npm notice</span><br><span class="line">npm notice 📦  langke_npm_demo@1.0.0</span><br><span class="line">npm notice === Tarball Contents ===</span><br><span class="line">npm notice 60B  index.js</span><br><span class="line">npm notice 292B package.json</span><br><span class="line">npm notice 33B  README.md</span><br><span class="line">npm notice === Tarball Details ===</span><br><span class="line">npm notice name:          langke_npm_demo</span><br><span class="line">npm notice version:       1.0.0</span><br><span class="line">npm notice package size:  410 B</span><br><span class="line">npm notice unpacked size: 385 B</span><br><span class="line">npm notice shasum:        730c17ff5fd22e05d0a1e05088b74066667c292d</span><br><span class="line">npm notice integrity:     sha512-+80RanxwwDwTv[...]ZJDWYN+EDm37w==</span><br><span class="line">npm notice total files:   3</span><br><span class="line">npm notice</span><br><span class="line">+ langke_npm_demo@1.0.0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2019/12/18/6HcM3zBEU5DCPIk.gif" alt="npm publish.gif"></p>
+<blockquote>
+<p>进入到网页，你就可以看到刚才所发布的包，具体见上图。如果发布遇到类似<code>npm ERR! no_perms Private mode enable, only admin can publish this module</code>的错误，应该是镜像源的问题，使用官方镜像源，执行<code>npm config set registry http://registry.npmjs.org</code>。</p>
+</blockquote>
+<h2 id="使用刚才发布的包"><a href="#使用刚才发布的包" class="headerlink" title="使用刚才发布的包"></a>使用刚才发布的包</h2><p>我这里是<code>React Native</code>项目，但是都是一样的道理，到根目录下执行</p>
+<ul>
+<li>1.安装</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install langke_npm_demo</span><br></pre></td></tr></table></figure>
+
+<p>然后在项目中的文件里导入</p>
+<ul>
+<li>2.使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123;printHello&#125; from &apos;langke_npm_demo&apos;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">printHello()</span><br></pre></td></tr></table></figure>
+
+<h2 id="取消发布"><a href="#取消发布" class="headerlink" title="取消发布"></a>取消发布</h2><p>使用命令<code>npm unpublish &lt;package-name&gt; -f</code>来取消发布，这样的话，你刚才发布的包就会被撤回，等于没有发布！</p>
+<p><img src="https://i.loli.net/2019/12/18/nP2IotwfBvAJESK.gif" alt="npm unpublish.gif"></p>
+<h2 id="在新电脑或者新目录下更新并发布已有的npm包"><a href="#在新电脑或者新目录下更新并发布已有的npm包" class="headerlink" title="在新电脑或者新目录下更新并发布已有的npm包"></a>在新电脑或者新目录下更新并发布已有的npm包</h2><p>如果你换了一台新电脑，或者删除了刚才所创建的<code>npm</code>包，那么可以在新电脑或者新目录下，执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;package-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>安装结束后，你会看到一个<code>node_modules</code>文件夹，里面有你刚才创建的<code>npm</code>包，然后一切都和前面的发布一样，修改任意你想修改的文件，在有<code>package.json</code>文件的目录下，执行<code>npm publish</code>就可以了。但是要记住，每一次发布<code>npm</code>包都需要修改版本号，否则你将发布失败！具体修改版本号后面也有常用的配套命令介绍，往下看，没兴趣的话，就到此为止。</p>
+<h2 id="关联github"><a href="#关联github" class="headerlink" title="关联github"></a>关联github</h2><p>有时候我们看到别人发布到<code>npm</code>官方仓库的包，具有如下红框中的部分，也就是关联到<code>github</code>，包括<code>Issues</code>、<code>Pull Requests</code>等等</p>
+<p><img src="https://i.loli.net/2019/12/18/zvshy1cAudSNgfJ.png" alt="sample.png"></p>
+<p>为了让我们的公共仓库也能关联到<code>github</code>，我们可以在创建<code>npm</code>包的时候填写<code>git repository</code>一栏填写<code>github</code>的某个仓库的<code>https</code>地址，如下</p>
+<p><img src="https://i.loli.net/2019/12/18/iqIJEYM1fSTalsQ.gif" alt="npm github.gif"></p>
+<blockquote>
+<p>这里我已经提前在<code>github</code>上创建了一个<code>langke-npm-demo1</code>的仓库了，所以关联地址的时候，之后复制过去就好了。</p>
+</blockquote>
+<h2 id="一些常用npm命令介绍"><a href="#一些常用npm命令介绍" class="headerlink" title="一些常用npm命令介绍"></a>一些常用npm命令介绍</h2><ul>
+<li>查看当前登录的npm用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm whoami</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看npm配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config ls</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看当前使用的npm镜像源</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切换npm镜像源</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry 【这里是镜像源url】</span><br></pre></td></tr></table></figure>
+
+<h3 id="npm修改版本号"><a href="#npm修改版本号" class="headerlink" title="npm修改版本号"></a>npm修改版本号</h3><p>比如要将版本号从<code>1.0.0</code>修改为<code>2.0.0</code>，有<code>2</code>种方式</p>
+<h4 id="一-手动修改"><a href="#一-手动修改" class="headerlink" title="一 手动修改"></a>一 手动修改</h4><p>直接修改<code>package.json</code>文件中的版本号</p>
+<p>原来的<code>package.json</code>内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;react-native-demo-for-npm&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;this is just a npm demo&quot;,</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;react-native-demo-for-npm&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;2.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;this is just a npm demo&quot;,</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="二-命令修改"><a href="#二-命令修改" class="headerlink" title="二 命令修改"></a>二 命令修改</h4><ul>
+<li>1.修改指定版本号</li>
+</ul>
+<p>在有<code>package.json</code>的当前目录下，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version 新版本号</span><br></pre></td></tr></table></figure>
+
+<p>比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version 2.0.0</span><br></pre></td></tr></table></figure>
+
+<p>这样的话，在发布之前，就可以将版本号从<code>1.0.0</code>修改为<code>2.0.0</code>了。</p>
+<ul>
+<li>2.由npm命令生成有序版本号</li>
+</ul>
+<p>2.1) 修改主版本号，如果当前版本号是<code>1.0.0</code>，要修改为<code>2.0.0</code>，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version major</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种方式一般用于包的大幅度改动，如增加了大量了<code>API</code>或者发生其他大量的内容修改。</p>
+</blockquote>
+<p>2.2) 修改次版本号，比如当前版本号是<code>1.0.0</code>，要修改为<code>1.1.0</code>，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version minor</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种方式一般用于包的小幅度改动，比如增加了一些<code>API</code>的前后兼容，扩展等等。</p>
+</blockquote>
+<p>2.3）修改补丁版本号，比如当前版本号是<code>1.0.0</code>，要修改为<code>1.0.1</code>，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version patch</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这种方式一般用于打补丁，也就是一些<code>bug</code>修复，没有做其他太大的内容变化。</p>
+</blockquote>
+<ul>
+<li>查看已发布的npm包所有版本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm view react-native-demo-for-npm versions</span><br></pre></td></tr></table></figure>
+
+<h3 id="撤销已经发布的包"><a href="#撤销已经发布的包" class="headerlink" title="撤销已经发布的包"></a>撤销已经发布的包</h3><ul>
+<li>一 撤销整个包</li>
+</ul>
+<p>1.1）如果已经将<code>npm</code>包发布到远程<code>npm</code>仓库，但是又想撤销发布</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish &lt;package-name&gt; -f</span><br></pre></td></tr></table></figure>
+
+<p>比如，已经发布到<code>npm</code>仓库的包名叫做<code>react-native-demo</code>，那么运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish react-native-demo -f</span><br></pre></td></tr></table></figure>
+
+<p>则<code>react-native-demo</code>就从<code>npm</code>仓库上删除了，你也无法再从<code>npm</code>仓库搜索到这个包。</p>
+<p>1.2）如果开启了<code>2FA(two-factor authentication)</code>，那么就需要在<code>publish</code>后面加上<code>--otp=123456</code>，这里的<code>123456</code>是手机上<code>app（app名称叫做 Authenticator）</code>获取的授权码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish --otp=123456 react-native-demo -f</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>二 撤销具体的版本</li>
+</ul>
+<p>2.1）如果想要撤销已经发布的具体版本，则可以使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish &lt;package-name&gt;@&lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+<p>比如，现在有<code>2</code>个版本，分别是<code>v1.0.0</code>、<code>v1.2.0</code>，想要撤销<code>v1.2.0</code>，可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish react-native-demo@1.2.0</span><br></pre></td></tr></table></figure>
+
+<p>2.2）同样地，如果开启了<code>2FA(two-factor authentication)</code>，那么就需要在<code>publish</code>后面加上<code>--otp=123456</code>，这里的<code>123456</code>是手机上<code>app（app名称叫做 Authenticator）</code>获取的授权码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish react-native-demo@1.2.0 --otp=123456</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：撤销整个包或具体的版本只有在从开始发布内的<code>72</code>小时内有效，具体见 <a href="https://docs.npmjs.com/unpublishing-packages-from-the-registry" target="_blank" rel="noopener">官网：Unpublishing packages from the registry</a></p>
+</blockquote>
+<p>下一篇文章将介绍 <a href="http://www.clcoder.com/2019/12/20/verdaccio%20+%20ngrok%E5%8F%91%E5%B8%83npm%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/#more" target="_blank" rel="noopener">verdaccio+ngrok发布npm私有仓库</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React-Native/" rel="tag"># React Native</a>
+          
+            <a href="/tags/npm/" rel="tag"># npm</a>
+          
+            <a href="/tags/私有仓库/" rel="tag"># 私有仓库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/13/pod install-Error installing DoubleConversion/" rel="next" title="RN之[pod install] Error installing DoubleConversion">
+                <i class="fa fa-chevron-left"></i> RN之[pod install] Error installing DoubleConversion
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/20/verdaccio + ngrok发布npm私有仓库/" rel="prev" title="verdaccio+ngrok发布npm私有仓库">
+                verdaccio+ngrok发布npm私有仓库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="陈龙">
+            
+              <p class="site-author-name" itemprop="name">陈龙</p>
+              <p class="site-description motion-element" itemprop="description">这是我的个人博客网站，用于记录相关的技术知识以及心得。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册"><span class="nav-number">2.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-amp-发布包"><span class="nav-number">3.</span> <span class="nav-text">创建&amp;发布包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用刚才发布的包"><span class="nav-number">4.</span> <span class="nav-text">使用刚才发布的包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消发布"><span class="nav-number">5.</span> <span class="nav-text">取消发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在新电脑或者新目录下更新并发布已有的npm包"><span class="nav-number">6.</span> <span class="nav-text">在新电脑或者新目录下更新并发布已有的npm包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关联github"><span class="nav-number">7.</span> <span class="nav-text">关联github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些常用npm命令介绍"><span class="nav-number">8.</span> <span class="nav-text">一些常用npm命令介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm修改版本号"><span class="nav-number">8.1.</span> <span class="nav-text">npm修改版本号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-手动修改"><span class="nav-number">8.1.1.</span> <span class="nav-text">一 手动修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-命令修改"><span class="nav-number">8.1.2.</span> <span class="nav-text">二 命令修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销已经发布的包"><span class="nav-number">8.2.</span> <span class="nav-text">撤销已经发布的包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈龙</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("v0wFcbyuAezK1MWEW15YYxa3-gzGzoHsz", "o3soEcgJkk33RLeuRctakiFF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

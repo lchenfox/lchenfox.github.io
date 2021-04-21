@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Homebrew error Not a valid ref refs/remotes/origin/master</title>
+    <title>Homebrew error Not a valid ref refs remotes origin master</title>
     <url>/2021/04/21/Homebrew%20error%20Not%20a%20valid%20ref%20refs%20remotes%20origin%20master/</url>
     <content><![CDATA[<p>本文参考：<a href="https://learnku.com/articles/55985" target="_blank" rel="noopener">brew 报错 error: Not a valid ref: refs/remotes/origin/master 的解决方法</a></p>
 <h2 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装<code>Homebrew</code></h2><p>在终端执行以下命令</p>

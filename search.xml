@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Homebrew error Not a valid ref refs/remotes/origin/master</title>
+    <url>/2021/04/21/Homebrew%20error%20Not%20a%20valid%20ref%20refs%20remotes%20origin%20master/</url>
+    <content><![CDATA[<p>本文参考：<a href="https://learnku.com/articles/55985" target="_blank" rel="noopener">brew 报错 error: Not a valid ref: refs/remotes/origin/master 的解决方法</a></p>
+<h2 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装<code>Homebrew</code></h2><p>在终端执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">==&gt; Checking for `sudo` access (which may request your password).</span><br><span class="line">Password:</span><br><span class="line">==&gt; This script will install:</span><br><span class="line">/opt/homebrew/bin/brew</span><br><span class="line">/opt/homebrew/share/doc/homebrew</span><br><span class="line">/opt/homebrew/share/man/man1/brew.1</span><br><span class="line">/opt/homebrew/share/zsh/site-functions/_brew</span><br><span class="line">/opt/homebrew/etc/bash_completion.d/brew</span><br><span class="line">/opt/homebrew</span><br><span class="line"></span><br><span class="line">Press RETURN to continue or any other key to abort</span><br><span class="line">==&gt; /usr/bin/sudo /usr/sbin/chown -R long.chen28:admin /opt/homebrew</span><br><span class="line">==&gt; Downloading and installing Homebrew...</span><br><span class="line">HEAD is now at 844f15ede Merge pull request #11182 from Rylan12/deprecate-brew-search-casks</span><br><span class="line">error: Not a valid ref: refs/remotes/origin/master</span><br><span class="line">fatal: ambiguous argument &apos;refs/remotes/origin/master&apos;: unknown revision or path not in the working tree.</span><br><span class="line">Use &apos;--&apos; to separate paths from revisions, like this:</span><br><span class="line">&apos;git &lt;command&gt; [&lt;revision&gt;...] -- [&lt;file&gt;...]&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>当安装多次失败时，会由于本地存在缓存，再次安装导致冲突。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>打开 <a href="https://raw.githubusercontent.com/Homebrew/install/master/uninstall" target="_blank" rel="noopener">链接🔗</a>，复制里面的内容，在终端使用如下命令创建一个<code>uninstall.rb</code>文件并将复制的内容粘贴到这个<code>uninstall.rb</code>文件里面，保存退出</p>
+<p>链接里面的内容如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!/usr/bin/ruby</span><br><span class="line"></span><br><span class="line">STDERR.print &lt;&lt;EOS</span><br><span class="line">Warning: The Ruby Homebrew uninstaller is now deprecated and has been rewritten in</span><br><span class="line">Bash. Please migrate to the following command:</span><br><span class="line">  /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)&quot;</span><br><span class="line"></span><br><span class="line">EOS</span><br><span class="line"></span><br><span class="line">Kernel.exec &quot;/bin/bash&quot;, &quot;-c&quot;, &apos;/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)&quot;&apos; + &apos; uninstall &apos; +  ARGV.join(&quot; &quot;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vi uninstall.rb</span><br></pre></td></tr></table></figure>
+
+<p>然后执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ruby uninstall.rb</span><br></pre></td></tr></table></figure>
+
+<p>这样就解决了刚才的报错问题，然后再次尝试安装就好。</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>Homebrew</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>weakSelf和strongSelf引起的奔溃</title>
     <url>/2021/03/18/weakSelf%E5%92%8CstrongSelf%E5%BC%95%E8%B5%B7%E7%9A%84%E5%A5%94%E6%BA%83/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在<code>OC</code>中，我们经常会遇到一个东西叫<strong>循环引用</strong>，毫无疑问，<strong>循环引用</strong>会导致内存泄漏，严重的时候，导致应用程序奔溃也是可能的。我们经常遇到的<strong>循环引用</strong>就是<code>Block</code>（或者<code>delegate</code>）所引起的，而解决的方式也是老生常谈的使用<code>weak</code>来弱引用被引用的对象，打破循环，这样就可以避免循环引用这个问题。</p>

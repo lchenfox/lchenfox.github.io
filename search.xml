@@ -1,32 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hello-worlds</title>
-    <url>/2022/03/27/hello-worlds/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexos</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>全屏侧滑和侧滑监听</title>
-    <url>/2022/03/27/%E5%85%A8%E5%B1%8F%E4%BE%A7%E6%BB%91%E4%BE%A7%E6%BB%91%E7%9B%91%E5%90%AC/</url>
+    <title>【iOS】UINavigationController全屏侧滑和侧滑监听</title>
+    <url>/2022/03/27/%5BiOS%5DUINavigationController%E5%85%A8%E5%B1%8F%E4%BE%A7%E6%BB%91%E5%92%8C%E4%BE%A7%E6%BB%91%E7%9B%91%E5%90%AC/</url>
     <content><![CDATA[<p>在日常开发中，我们经常使用到系统的导航，来完成各页面的交互跳转，这是再正常不过且用到的基础功能。众所周知，我们也可以在具体的页面禁用系统导航，一般都是通过设置<code>interactivePopGestureRecognizer</code>是否开启来实现，不过，我们必须注意系统导航在根页面时，未经处理，用户再测滑则会导致<code>app</code>卡住甚至卡死，这个问题在之前的一篇文章中也有说过，并且也说了如何监听用户侧滑释放的方法，以便我们能够做一些额外操作。文章链接🔗: <a href="https://www.jianshu.com/p/8fdff54a08c8" target="_blank" rel="noopener">iOS interactivePopGestureRecognizer卡住&amp;手势滑动监听</a>。</p>
 <p>尽管系统的导航已满足大部分开发需求，但是用户的体验可能不是很好。之前的那篇文章虽然解决了以下两个问题：</p>
 <ul>
@@ -122,8 +98,8 @@
         <category>Objective-C</category>
       </categories>
       <tags>
-        <tag>全屏侧滑</tag>
-        <tag>侧滑</tag>
+        <tag>iOS全屏侧滑</tag>
+        <tag>iOS侧滑</tag>
       </tags>
   </entry>
   <entry>

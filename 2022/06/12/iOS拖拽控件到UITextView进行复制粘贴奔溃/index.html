@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="weakSelf,strongSelf,循环引用,内存泄漏,">
+  <meta name="keywords" content="UITextView,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言在OC中，我们经常会遇到一个东西叫循环引用，毫无疑问，循环引用会导致内存泄漏，严重的时候，导致应用程序奔溃也是可能的。我们经常遇到的循环引用就是Block（或者delegate）所引起的，而解决的方式也是老生常谈的使用weak来弱引用被引用的对象，打破循环，这样就可以避免循环引用这个问题。 但是，如果你稍微不慎，有时候使用weak也会导致应用程序奔溃，造成难以挽回的后果。这篇文章就是简要说明下">
-<meta name="keywords" content="weakSelf,strongSelf,循环引用,内存泄漏">
+<meta name="description" content="前言在iOS 15以后，我们可以通过拖拽一个控件（UITextField或UITextView）的形式将其内容复制粘贴到另一个UITextView，在拖拽之前，如果UITextView的内容为空，例如：@&amp;quot;&amp;quot;、@&amp;quot;    &amp;quot;（含空格），在设置代理- (void)textViewDidChange:(UITextView *)textView时，并且在代理中改">
+<meta name="keywords" content="UITextView">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weakSelf和strongSelf引起的奔溃">
-<meta property="og:url" content="http://yoursite.com/2021/03/18/weakSelf和strongSelf引起的奔溃/index.html">
+<meta property="og:title" content="iOS拖拽控件到UITextView进行复制粘贴奔溃">
+<meta property="og:url" content="http://yoursite.com/2022/06/12/iOS拖拽控件到UITextView进行复制粘贴奔溃/index.html">
 <meta property="og:site_name" content="陈龙 的博客">
-<meta property="og:description" content="前言在OC中，我们经常会遇到一个东西叫循环引用，毫无疑问，循环引用会导致内存泄漏，严重的时候，导致应用程序奔溃也是可能的。我们经常遇到的循环引用就是Block（或者delegate）所引起的，而解决的方式也是老生常谈的使用weak来弱引用被引用的对象，打破循环，这样就可以避免循环引用这个问题。 但是，如果你稍微不慎，有时候使用weak也会导致应用程序奔溃，造成难以挽回的后果。这篇文章就是简要说明下">
+<meta property="og:description" content="前言在iOS 15以后，我们可以通过拖拽一个控件（UITextField或UITextView）的形式将其内容复制粘贴到另一个UITextView，在拖拽之前，如果UITextView的内容为空，例如：@&amp;quot;&amp;quot;、@&amp;quot;    &amp;quot;（含空格），在设置代理- (void)textViewDidChange:(UITextView *)textView时，并且在代理中改">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-03-18T13:52:09.112Z">
+<meta property="og:updated_time" content="2022-06-12T15:18:47.549Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="weakSelf和strongSelf引起的奔溃">
-<meta name="twitter:description" content="前言在OC中，我们经常会遇到一个东西叫循环引用，毫无疑问，循环引用会导致内存泄漏，严重的时候，导致应用程序奔溃也是可能的。我们经常遇到的循环引用就是Block（或者delegate）所引起的，而解决的方式也是老生常谈的使用weak来弱引用被引用的对象，打破循环，这样就可以避免循环引用这个问题。 但是，如果你稍微不慎，有时候使用weak也会导致应用程序奔溃，造成难以挽回的后果。这篇文章就是简要说明下">
+<meta name="twitter:title" content="iOS拖拽控件到UITextView进行复制粘贴奔溃">
+<meta name="twitter:description" content="前言在iOS 15以后，我们可以通过拖拽一个控件（UITextField或UITextView）的形式将其内容复制粘贴到另一个UITextView，在拖拽之前，如果UITextView的内容为空，例如：@&amp;quot;&amp;quot;、@&amp;quot;    &amp;quot;（含空格），在设置代理- (void)textViewDidChange:(UITextView *)textView时，并且在代理中改">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2021/03/18/weakSelf和strongSelf引起的奔溃/">
+  <link rel="canonical" href="http://yoursite.com/2022/06/12/iOS拖拽控件到UITextView进行复制粘贴奔溃/">
 
 
 
 
 
-  <title>weakSelf和strongSelf引起的奔溃 | 陈龙 的博客</title>
+  <title>iOS拖拽控件到UITextView进行复制粘贴奔溃 | 陈龙 的博客</title>
   
 
 
@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/18/weakSelf和strongSelf引起的奔溃/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/06/12/iOS拖拽控件到UITextView进行复制粘贴奔溃/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="陈龙">
@@ -302,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">weakSelf和strongSelf引起的奔溃</h1>
+          <h1 class="post-title" itemprop="name headline">iOS拖拽控件到UITextView进行复制粘贴奔溃</h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-18T00:00:00+08:00">
-                2021-03-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-12T00:00:00+08:00">
+                2022-06-12
               </time>
             
 
@@ -374,39 +374,50 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在<code>OC</code>中，我们经常会遇到一个东西叫<strong>循环引用</strong>，毫无疑问，<strong>循环引用</strong>会导致内存泄漏，严重的时候，导致应用程序奔溃也是可能的。我们经常遇到的<strong>循环引用</strong>就是<code>Block</code>（或者<code>delegate</code>）所引起的，而解决的方式也是老生常谈的使用<code>weak</code>来弱引用被引用的对象，打破循环，这样就可以避免循环引用这个问题。</p>
-<p>但是，如果你稍微不慎，有时候使用<code>weak</code>也会导致应用程序奔溃，造成难以挽回的后果。这篇文章就是简要说明下，如何正确地使用<code>weak</code>，以及有时候需要结合<code>strong</code>来避免<strong>循环引用</strong>的内存泄漏。</p>
-<h2 id="Block循环引用"><a href="#Block循环引用" class="headerlink" title="Block循环引用"></a>Block循环引用</h2><p>一个对象持有一个<code>Block</code>，这个<code>Block</code>中又引用了这个对象，这就是<strong>循环引用</strong>。最常见最简单的就是持有当前<code>self</code>，这也是在开发中经常遇到的情况。在<code>SecondViewController.m</code>中，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;SecondViewController.h&quot;</span><br><span class="line">#import &quot;MyObject.h&quot;</span><br><span class="line"></span><br><span class="line">@interface SecondViewController ()</span><br><span class="line">@property (nonatomic, strong) MyObject *obj;</span><br><span class="line">@property (nonatomic, copy) NSString *name;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation SecondViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    self.title = @&quot;Second VC&quot;;</span><br><span class="line">    self.name = @&quot;Alice&quot;;</span><br><span class="line">    </span><br><span class="line">    self.obj = [[MyObject alloc] init]; </span><br><span class="line">    [self.obj start:^&#123;</span><br><span class="line">        NSLog(@&quot;name: %@&quot;, self.name);</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)dealloc</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;OOPS! ⚠️⚠️⚠️ %s&quot;, __PRETTY_FUNCTION__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在<code>iOS 15</code>以后，我们可以通过拖拽一个控件（<code>UITextField</code>或<code>UITextView</code>）的形式将其内容复制粘贴到另一个<code>UITextView</code>，在拖拽之前，如果<code>UITextView</code>的内容为空，例如：<code>@&quot;&quot;</code>、<code>@&quot;    &quot;（含空格）</code>，在设置代理<code>- (void)textViewDidChange:(UITextView *)textView</code>时，并且在代理中改变<code>UITextView</code>的内容后， 或者  <code>- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text</code>返回<code>NO</code>如果不做特殊处理的话，一定会发生奔溃！</p>
+<p>主要奔溃信息是：<code>NSInternalInconsistencyException: Invalid parameter not satisfying: pos</code>。</p>
+<p>奔溃详情如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CrashDoctor Diagnosis: Application threw exception NSInternalInconsistencyException: Invalid parameter not satisfying: pos</span><br><span class="line">Thread 0 Crashed:</span><br><span class="line">0   CoreFoundation                      0x00000001a8909d78 __exceptionPreprocess</span><br><span class="line">1   libobjc.A.dylib                     0x00000001c156e734 objc_exception_throw</span><br><span class="line">2   Foundation                          0x00000001aa18f1f0 _userInfoForFileAndLine</span><br><span class="line">3   UIKitCore                           0x00000001abe850d4 -[_UITextKitTextPosition compare:]</span><br><span class="line">4   UIKitCore                           0x00000001aad027d0 -[UITextInputController comparePosition:toPosition:]</span><br><span class="line">5   UIKitCore                           0x00000001abe90a9c -[UITextView comparePosition:toPosition:]</span><br><span class="line">6   UIKitCore                           0x00000001abe58dec -[UITextPasteController _clampRange:]</span><br><span class="line">7   UIKitCore                           0x00000001abe595d8 __87-[UITextPasteController _performPasteOfAttributedString:toRange:forSession:completion:]_block_invoke</span><br><span class="line">8   UIKitCore                           0x00000001abe597f0 __87-[UITextPasteController _performPasteOfAttributedString:toRange:forSession:completion:]_block_invoke.177</span><br><span class="line">9   UIKitCore                           0x00000001abe81204 -[UITextInputController _pasteAttributedString:toRange:completion:]</span><br><span class="line">10  UIKitCore                           0x00000001abe59524 -[UITextPasteController _performPasteOfAttributedString:toRange:forSession:completion:]</span><br><span class="line">11  UIKitCore                           0x00000001abe587c4 __49-[UITextPasteController _executePasteForSession:]_block_invoke</span><br><span class="line">12  libdispatch.dylib                   0x00000001a856ee68 _dispatch_call_block_and_release</span><br><span class="line">13  libdispatch.dylib                   0x00000001a8570a2c _dispatch_client_callout</span><br><span class="line">14  libdispatch.dylib                   0x00000001a857ef48 _dispatch_main_queue_drain</span><br><span class="line">15  libdispatch.dylib                   0x00000001a857eb98 _dispatch_main_queue_callback_4CF</span><br><span class="line">....................................................................</span><br></pre></td></tr></table></figure>
 
-<p>在<code>MyObject.h</code>中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">typedef void (^ExecuteBlock)(void);</span><br><span class="line"></span><br><span class="line">@interface MyObject : NSObject</span><br><span class="line"></span><br><span class="line">- (void)start:(ExecuteBlock)block;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<p>虽然这种情况很特殊，很少有用户去这样复制粘贴内容，但是一旦用户量大的话，或者用户总是使用这种方式去复制粘贴的话，奔溃的影响还是很大的。</p>
+<p>例如，我们将第一个<code>UITextView</code>拖拽并复制内容<code>Hello world</code>到另一个<code>UITextView</code>，即发生奔溃，奔溃演示动画: <a href="https://s2.loli.net/2022/06/12/3U8alAPJiugxQYs.gif" target="_blank" rel="noopener">动画演示链接</a> 。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li><code>Xcode 13.2.1</code></li>
+<li><code>iPhone 13 Pro Max</code>（模拟器）</li>
+<li><code>iOS 15.2</code></li>
+<li><code>M1  macOS Monterey 12.2.1</code></li>
+</ul>
+<h2 id="代码重现"><a href="#代码重现" class="headerlink" title="代码重现"></a>代码重现</h2><p>新建一个工程，代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@interface ViewController ()&lt;UITextViewDelegate&gt;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    self.view.backgroundColor = UIColor.whiteColor;</span><br><span class="line">    </span><br><span class="line">    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(50, 100, 120, 50)];</span><br><span class="line">    textView.text = @&quot;Hello world&quot;;</span><br><span class="line">    textView.backgroundColor = UIColor.greenColor;</span><br><span class="line">    textView.font = [UIFont systemFontOfSize:19];</span><br><span class="line">    [self.view addSubview:textView];</span><br><span class="line">    </span><br><span class="line">    UITextView *textView1 = [[UITextView alloc] initWithFrame:CGRectMake(50, 180, 250, 200)];</span><br><span class="line">    textView1.delegate = self;</span><br><span class="line">    textView1.backgroundColor = UIColor.cyanColor;</span><br><span class="line">    [self.view addSubview:textView1];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// MARK: - UITextViewDelegate</span><br><span class="line"></span><br><span class="line">- (void)textViewDidChange:(UITextView *)textView &#123;</span><br><span class="line">    textView.text = @&quot;Hello&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
 
-<p><code>MyObject.m</code>中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;MyObject.h&quot;</span><br><span class="line"></span><br><span class="line">@interface MyObject()</span><br><span class="line">@property (nonatomic, copy) ExecuteBlock myBlock;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation MyObject</span><br><span class="line"></span><br><span class="line">- (instancetype)init</span><br><span class="line">&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">        [self initData];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)initData</span><br><span class="line">&#123;</span><br><span class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        if (self.myBlock) &#123;</span><br><span class="line">            self.myBlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)start:(ExecuteBlock)block</span><br><span class="line">&#123;</span><br><span class="line">    self.myBlock = block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我们拖拽<code>textView</code>并复制其内容<code>Hello world</code>到<code>textView1</code>，并在<code>- (void)textViewDidChange:(UITextView *)textView</code>中设置<code>textView.text = @&quot;Hello&quot;;</code>，即改变<code>textView1</code>的内容。然后，运行项目，拖拽<code>textView</code>到<code>textView1</code>，即发生奔溃。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>目前，可以有<code>2</code>种方案解决。</p>
+<h3 id="方案一（推荐）"><a href="#方案一（推荐）" class="headerlink" title="方案一（推荐）"></a>方案一（推荐）</h3><p>对要复制到的<code>UITextView</code>即<code>textView1</code>设置代理<code>UITextPasteDelegate</code>，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface ViewController ()&lt;UITextViewDelegate, UITextPasteDelegate&gt;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"> </span><br><span class="line">textView1.pasteDelegate = self;</span><br></pre></td></tr></table></figure>
 
-<p>显然，<code>self</code>持有<code>obj</code>，<code>obj</code>持有<code>block</code>    （<code>start</code>方法的参数<code>block</code>）, <code>block</code>又持有<code>self</code>（<code>name</code>是当前<code>self</code>的一个属性），因此造成了显而易见的<strong>循环引用</strong>。</p>
-<p>这种处理起来也是十分简单，一个<code>weak</code>就可以搞定：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">self.obj = [[MyObject alloc] init];</span><br><span class="line">__weak typeof(self) weakSelf = self;</span><br><span class="line">[self.obj start:^&#123;</span><br><span class="line">    NSLog(@&quot;name: %@&quot;, weakSelf.name);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<p>实现代理方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// MARK: - UITextPasteDelegate</span><br><span class="line"></span><br><span class="line">// Fix a crash where app will crash on iOS 15 or later if the user drags the UITextField or UITextView control to copy and paste.</span><br><span class="line">- (UITextRange *)textPasteConfigurationSupporting:(id&lt;UITextPasteConfigurationSupporting&gt;)textPasteConfigurationSupporting</span><br><span class="line">                   performPasteOfAttributedString:(NSAttributedString *)attributedString</span><br><span class="line">                                          toRange:(UITextRange *)textRange &#123;</span><br><span class="line">    if ([textPasteConfigurationSupporting isKindOfClass:[UITextView class]]) &#123;</span><br><span class="line">        [(UITextView *)textPasteConfigurationSupporting replaceRange:textRange withText:attributedString.string];</span><br><span class="line">    &#125;</span><br><span class="line">    return textRange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在这里，我们这样处理，有什么问题吗？答案是<strong>没有任何问题</strong>。</p>
-<p>接着，我们把<code>name</code>换成<code>成员变量</code>，即：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@interface SecondViewController ()</span><br><span class="line">&#123;</span><br><span class="line">    NSString *name;</span><br><span class="line">&#125;</span><br><span class="line">@property (nonatomic, strong) MyObject *obj;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line">self.obj = [[MyObject alloc] init];</span><br><span class="line">__weak typeof(self) weakSelf = self;</span><br><span class="line">[self.obj start:^&#123;</span><br><span class="line">    __strong typeof(weakSelf) strongSelf = weakSelf;</span><br><span class="line">    NSLog(@&quot;name: %@&quot;, strongSelf-&gt;name);</span><br><span class="line">&#125;];</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>在这个复制粘贴代理方法中，我们通过在复制粘贴的时候，对<code>UITextView</code>要复制粘贴的内容进行替换，就可以解决奔溃的问题。</p>
+<h2 id="方案二（不推荐）"><a href="#方案二（不推荐）" class="headerlink" title="方案二（不推荐）"></a>方案二（不推荐）</h2><p>和<strong>方案一</strong>唯一不同的是代理方法中的处理方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (UITextRange *)textPasteConfigurationSupporting:(id&lt;UITextPasteConfigurationSupporting&gt;)textPasteConfigurationSupporting</span><br><span class="line">                   performPasteOfAttributedString:(NSAttributedString *)attributedString</span><br><span class="line">                                          toRange:(UITextRange *)textRange &#123;</span><br><span class="line">    if ([textPasteConfigurationSupporting isKindOfClass:[UITextView class]] &amp;&amp; UIPasteboard.generalPasteboard.hasStrings) &#123; </span><br><span class="line">        [(UITextView *)textPasteConfigurationSupporting insertText:UIPasteboard.generalPasteboard.string ?: @&quot;&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    return textRange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>注意，由于<code>name</code>是<strong>成员变量</strong>，不能使用<code>weakSelf</code>来引用<code>name</code>，因为它是一个<strong>弱指针</strong>。因此这里必须对<code>weakSelf</code>做一次强引用，即使用<code>strongSelf</code>来引用<code>name</code>。</p>
-<p>想一下，当用户进入页面，在<code>10s</code>内返回上一级页面，待<code>block</code>被执行时，会发生什么？<strong>应用程序奔溃！！！</strong></p>
-<h2 id="Crash分析"><a href="#Crash分析" class="headerlink" title="Crash分析"></a>Crash分析</h2><p>奇怪！为什么会发生这个问题呢？感觉没问题了呀，使用<code>weakSelf</code>避免循环引用，使用<code>strongSelf</code>来引用成员变量，怎么就奔溃了呢？当<code>name</code>是属性时，即<code>weakSelf.name</code>时，并不会有任何问题，就只是将<code>name</code>由<strong>属性</strong>变成<strong>成员变量</strong>就不行了？</p>
-<p>实际上，只要理解<code>OC</code>中的<strong>消息发送</strong>机制，你就基本能够知道上面所说的奔溃原因了。在<code>OC</code>中，对<code>nil</code>发送消息是<strong>“合法”</strong>的，因此，当使用<strong>点语法</strong>来访问时，实际上是访问<strong>属性</strong>（这里是<code>name</code>）的<strong>getter</strong>方法，因此不会发生奔溃。</p>
-<p>但是，如果是获取<strong>成员变量</strong>的话，就不是方法了，而是通过<strong>self指针直接访问其内部的成员变量的内存地址</strong>，此时，当页面已经释放时，<code>self</code>已经不存在，<code>strongSelf</code>即为<code>nil</code>，可想而知，对一个不存在的<strong>“对象”</strong>，去访问所谓的<strong>“成员变量”</strong>，即<code>nil -&gt; name</code>，奔溃就是在意料之中了。</p>
-<h2 id="Crash解决"><a href="#Crash解决" class="headerlink" title="Crash解决"></a>Crash解决</h2><h4 id="一-尽量使用属性"><a href="#一-尽量使用属性" class="headerlink" title="一 尽量使用属性"></a>一 尽量使用属性</h4><p>这种方式其实本质上就是基于<code>OC</code>的消息机制，对<code>nil</code>发送消息是允许的。这样即使<code>self</code>被销毁，也不会存在任何的问题，因为你通过<code>strongSelf.name</code>调用的是方法，<code>OC</code>的消息机制允许你这样做。虽然有时候我们出于性能考虑，会直接使用<strong>成员变量</strong>进行获取，因为调用方法是有一定代价的，但是，在大多数情况下，这样的带来的性能考量还是可以接受的，可忽略的。</p>
-<p>因此，要绝对安全，在<code>block</code>内部使用<strong>属性</strong>的方式获取，是一种可行的有效的方式。</p>
-<h4 id="二-依然使用成员变量，对weakSelf做安全检查"><a href="#二-依然使用成员变量，对weakSelf做安全检查" class="headerlink" title="二 依然使用成员变量，对weakSelf做安全检查"></a>二 依然使用成员变量，对<code>weakSelf</code>做安全检查</h4><p>如果你说我就是要使用<code>成员变量</code>来使性能达到最优解，那也无可厚非，这种也是我们开发中很有必要的一种应该必备的思想，但是，你要足够小心，来避免奔溃的发生。解决方式就是对<code>weakSelf</code>做安全检查，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">self.obj = [[MyObject alloc] init];</span><br><span class="line">__weak typeof(self) weakSelf = self;</span><br><span class="line">[self.obj start:^&#123;</span><br><span class="line">    if (!weakSelf) return; // Security-check here.</span><br><span class="line">    __strong typeof(weakSelf) strongSelf = weakSelf;</span><br><span class="line">    NSLog(@&quot;name: %@&quot;, strongSelf-&gt;name);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<p>不推荐方案二的原因是，虽然避免了奔溃，我们无法获取到被拖拽的控件<code>textView</code>中的内容，也就是即使我们拖拽<code>textView</code>到<code>textView1</code>，<code>textView1</code>的内容依旧不会变化。<strong>但是要特别注意</strong>，有一种情况会变化，如果我们在手机中的任何地方已经复制了文本，然后通过拖拽<code>textView</code>到<code>textView1</code>，<code>textView1</code>会获取到已经复制的文本！例如，我们已经在短信中复制了<code>“好的”</code>，然后在应用中拖拽<code>textView</code>到<code>textView1</code>，如果<code>textView</code>的内容为空，<code>textView1</code>的内容就会变成<code>“好的”</code>，如果不为空，例如<code>textView</code>的内容为<code>明白，</code>，那么<code>textView1</code>的内容就会变成<code>“明白，好的”</code>。<em>也就是说，通过方案二，拖拽控件永远只是执行<code>粘贴</code>操作</em>。</p>
+<blockquote>
+<p>注意：方案二需要用真机进行测试。</p>
+</blockquote>
+<p>完整代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">@interface ViewController ()&lt;UITextViewDelegate, UITextPasteDelegate&gt;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    self.view.backgroundColor = UIColor.whiteColor;</span><br><span class="line">    </span><br><span class="line">    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(50, 100, 120, 50)];</span><br><span class="line">    textView.text = @&quot;Hello world&quot;;</span><br><span class="line">    textView.backgroundColor = UIColor.greenColor;</span><br><span class="line">    textView.font = [UIFont systemFontOfSize:19];</span><br><span class="line">    [self.view addSubview:textView];</span><br><span class="line">    </span><br><span class="line">    UITextView *textView1 = [[UITextView alloc] initWithFrame:CGRectMake(50, 180, 250, 200)];</span><br><span class="line">    textView1.delegate = self; </span><br><span class="line">    textView1.pasteDelegate = self;</span><br><span class="line">    textView1.backgroundColor = UIColor.cyanColor;</span><br><span class="line">    [self.view addSubview:textView1];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// MARK: - UITextViewDelegate</span><br><span class="line"></span><br><span class="line">- (void)textViewDidChange:(UITextView *)textView &#123;</span><br><span class="line">    if (textView.text.length &gt; 2) &#123;</span><br><span class="line">        textView.text = [textView.text substringFromIndex:2];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        textView.text = @&quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// MARK: - UITextPasteDelegate</span><br><span class="line"></span><br><span class="line">//// Fix a crash where app will crash on iOS 15 or later if the user drags the UITextField or UITextView control to copy and paste.</span><br><span class="line">- (UITextRange *)textPasteConfigurationSupporting:(id&lt;UITextPasteConfigurationSupporting&gt;)textPasteConfigurationSupporting</span><br><span class="line">                   performPasteOfAttributedString:(NSAttributedString *)attributedString</span><br><span class="line">                                          toRange:(UITextRange *)textRange &#123;</span><br><span class="line">    if ([textPasteConfigurationSupporting isKindOfClass:[UITextView class]]) &#123;</span><br><span class="line">        [(UITextView *)textPasteConfigurationSupporting replaceRange:textRange withText:attributedString.string];</span><br><span class="line">    &#125;</span><br><span class="line">    return textRange;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">- (UITextRange *)textPasteConfigurationSupporting:(id&lt;UITextPasteConfigurationSupporting&gt;)textPasteConfigurationSupporting</span><br><span class="line">                   performPasteOfAttributedString:(NSAttributedString *)attributedString</span><br><span class="line">                                          toRange:(UITextRange *)textRange &#123;</span><br><span class="line">    if ([textPasteConfigurationSupporting isKindOfClass:[UITextView class]] &amp;&amp; UIPasteboard.generalPasteboard.hasStrings) &#123;</span><br><span class="line">        [(UITextView *)textPasteConfigurationSupporting insertText:UIPasteboard.generalPasteboard.string ?: @&quot;&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    return textRange;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
 
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在开发中，一定要避免<strong>循环引用</strong>、<strong>代理</strong>所引起的内存泄漏(<code>memory leak</code>)，当然，相信对于大多数开发者来说，这种基本不需要思考，都可以习以为常的写上相应的关键字来或者中间层来避免这个问题，但是估计也有不少人会出现本文所说的<strong>粗心大意</strong>，导致线上出现奔溃的问题。<code>weak</code>并不是在所有遇到<code>block</code>的情况都需要使用的，比如系统提供的动画<code>API</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[UIView animateWithDuration:1.0 animations:^&#123;</span><br><span class="line">    NSLog(@&quot;name: %@&quot;, self-&gt;name);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-
-<p><strong>过度的不必要的<code>weak</code>使用会使代码变得冗余并且产生不必要的性能问题！</strong></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>拖拽前，如果要复制的<code>UITextView（这里textView1）</code>内容不为空（含空格），如<code>&quot;a&quot;、&quot;123&quot;</code>，无论是在<code>- (void)textViewDidChange:(UITextView *)textView</code>中改变内容或者<code>- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text</code>返回<code>NO</code>，一定不会奔溃。</li>
+<li>拖拽前，如果要复制的<code>UITextView（这里textView1）</code>内容为空（如<code>&quot;&quot;、&quot;   &quot;</code>），无论是在<code>- (void)textViewDidChange:(UITextView *)textView</code>中改变内容或者<code>- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text</code>返回<code>NO</code>，一定会奔溃。</li>
+<li>方案一和方案二都可以解决奔溃的问题，推荐方案一。</li>
+</ul>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><ul>
+<li><a href="https://www.clcoder.com/" target="_blank" rel="noopener">个人博客</a></li>
+<li><a href="https://www.jianshu.com/u/5112193ea52d" target="_blank" rel="noopener">个人简书</a></li>
+</ul>
 
       
     </div>
@@ -424,13 +435,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/weakSelf/" rel="tag"># weakSelf</a>
-          
-            <a href="/tags/strongSelf/" rel="tag"># strongSelf</a>
-          
-            <a href="/tags/循环引用/" rel="tag"># 循环引用</a>
-          
-            <a href="/tags/内存泄漏/" rel="tag"># 内存泄漏</a>
+            <a href="/tags/UITextView/" rel="tag"># UITextView</a>
           
         </div>
       
@@ -443,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/03/12/iOS interactivePopGestureRecognizer卡住&手势滑动监听/" rel="next" title="iOS interactivePopGestureRecognizer卡住&手势滑动监听">
-                <i class="fa fa-chevron-left"></i> iOS interactivePopGestureRecognizer卡住&手势滑动监听
+              <a href="/2022/05/28/iOS dSYM奔溃文件解析/" rel="next" title="iOS dSYM奔溃文件解析">
+                <i class="fa fa-chevron-left"></i> iOS dSYM奔溃文件解析
               </a>
             
           </div>
@@ -452,10 +457,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/04/21/Homebrew error Not a valid ref refs remotes origin master/" rel="prev" title="Homebrew error Not a valid ref refs remotes origin master">
-                Homebrew error Not a valid ref refs remotes origin master <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -589,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Block循环引用"><span class="nav-number">2.</span> <span class="nav-text">Block循环引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crash分析"><span class="nav-number">3.</span> <span class="nav-text">Crash分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Crash解决"><span class="nav-number">4.</span> <span class="nav-text">Crash解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-尽量使用属性"><span class="nav-number">4.0.1.</span> <span class="nav-text">一 尽量使用属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-依然使用成员变量，对weakSelf做安全检查"><span class="nav-number">4.0.2.</span> <span class="nav-text">二 依然使用成员变量，对weakSelf做安全检查</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码重现"><span class="nav-number">3.</span> <span class="nav-text">代码重现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">4.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一（推荐）"><span class="nav-number">4.1.</span> <span class="nav-text">方案一（推荐）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案二（不推荐）"><span class="nav-number">5.</span> <span class="nav-text">方案二（不推荐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-number">7.</span> <span class="nav-text">附录</span></a></li></ol></div>
             
 
           </div>
